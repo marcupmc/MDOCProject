@@ -4,24 +4,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<link rel="stylesheet" href="css/style.css" />
+<jsp:include page="common_lib.jsp" />
+<title>Find your Contact</title>
+
 </head>
 <body>
-	<form method="get" action="FindContactServlet"\>
-		<div class="box">
-			<p>
-				<label for="recherche">Quel est le critère de votre recherche ?</label> 
-				<select name="recherche" id="recheche">
-					<option value="id">Par ID</option>
-					<option value="nom">Par nom</option>
-					<option value=prenom">Par prenom</option>
-					<option value="mail">Par Email</option>
-				</select>
-			</p>
-			<input type="text" name="id" id="id" class="input_text" /> <label
-				class=" validate"><input type="submit" value="Submit"
-				class="button" /> <input type="reset" value="Reset" class="button" /></label>
+
+	<jsp:include page="menu_gauche.jsp" />
+
+	<div class="span9">
+		<div class="hero-unit">
+			<h2>Find your Contact</h2>
 		</div>
-	</form>
+	</div>
 </body>
 </html>

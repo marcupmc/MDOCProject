@@ -54,7 +54,7 @@ public class DAOContact implements IDAOContact{
 			success = stmt.executeUpdate(request);
 			stmt.close();
 			con.close();
-			
+
 		} catch( Exception e ){
 			e.printStackTrace();
 		}
@@ -150,7 +150,7 @@ public class DAOContact implements IDAOContact{
 				contact.setFirstName(rec.getString("firstname"));
 				contact.setLastName(rec.getString("lastname"));
 				contact.setEmail(rec.getString("email")); 
-				
+
 				contacts.add(contact);
 			}
 
@@ -235,7 +235,39 @@ public class DAOContact implements IDAOContact{
 		}
 		return contacts;
 	}
-	
+
+	@Override
+	public ArrayList<Contact> getAllContact() {
+		ArrayList<Contact> contacts = new ArrayList<Contact>();
+
+		ResultSet rec = null;
+		Connection con = null;
+		try{
+			Class.forName(Messages.getString("driver")); 
+			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"), Messages.getString("password")); 
+			Statement stmt = con.createStatement();
+			rec = stmt.executeQuery("SELECT * FROM contacts "); 
+
+			while (rec.next()) {
+				Contact contact = new Contact();
+				contact.setId(Long.parseLong(rec.getString("id"))); 
+				contact.setFirstName(rec.getString("firstname"));
+				contact.setLastName(rec.getString("lastname"));
+				contact.setEmail(rec.getString("email")); 
+
+				contacts.add(contact);
+			}
+			stmt.close();
+			rec.close();
+			con.close();
+
+		} catch( Exception e ){
+			e.printStackTrace();
+		}
+		return contacts;
+	}
+
+
 
 
 }

@@ -4,17 +4,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
+<link rel="stylesheet" href="css/style.css" />
 <title>Menu</title>
 </head>
 <body>
-	<div class="box">
-		<ul>
-			<li><a href="addContact.jsp">Add Contact</a></li>
-			<li><a href="findContact.jsp">Find Contact</a></li>
-			<li><a href="updateContact.jsp">Update Contact</a></li>
-			<li><a href="removeContact.jsp">Delete Contact</a></li>
-		</ul>
-	</div>
+	<div class="alert alert-success" id="message_top">Welcome!</div>
+	
+	
+	<jsp:include page="menu_gauche.jsp"/>
+		
+		<div class="span9">
+          <div class="hero-unit">
+            <h2>Your Contact Manager</h2>
+            <p>Keep in touch with all your friends !</p>
+            
+          </div>
+          </div>
 </body>
 </html>

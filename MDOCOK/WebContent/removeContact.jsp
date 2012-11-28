@@ -4,10 +4,45 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="css/style.css" />
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="DeleteContactServlet">
-		Id : <input type="text" name="id" /> <input type="Submit" />
-	</form>
+	<%@page import="domain.Contact"%>
+	<%@page import="java.util.ArrayList"%>
+	<%
+		ArrayList<Contact> lcontact = (ArrayList<Contact>) request.getAttribute("liste");
+	%>
+
+	<jsp:include page="menu_gauche.jsp"/>
+
+	<div class="span9">
+		<div class="hero-unit">
+			<h2>Delete your Contacts</h2>
+			<table class="table table-hover">
+				<tr>
+					<th>ID</th>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Email</th>
+					<th></th>
+				</tr>
+				<% for(int i =0; i<lcontact.size();i++)
+					{
+					Contact c = lcontact.get(i);
+					%>
+					<tr>
+						<td><%= c.getId() %></td>
+						<td><%= c.getFirstName() %></td>
+						<td><%= c.getLastName() %></td>
+						<td><%= c.getEmail() %></td>
+						<td><a href="DeleteContactServlet?id=<%= c.getId() %>" class="btn btn-danger" type="button">Delete</a></td>
+					<tr>
+					<% 
+					
+					}%>
+			</table>
+		</div>
+	</div>
 </body>
+</html>

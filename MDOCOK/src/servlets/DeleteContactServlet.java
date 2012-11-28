@@ -27,17 +27,17 @@ public class DeleteContactServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		IDAOContact dao = new DAOContact();
+		String id = request.getParameter("id");
+		dao.deleteContact(Long.parseLong(id));
+		request.getRequestDispatcher("PrintAllContactsServlet?action=remove").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IDAOContact dao = new DAOContact();
-		
-		dao.deleteContact(Long.parseLong(request.getParameter("id")));
-		request.getRequestDispatcher("menu.jsp").forward(request, response);
+	
 	}
 
 }

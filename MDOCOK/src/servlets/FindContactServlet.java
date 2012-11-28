@@ -36,7 +36,7 @@ public class FindContactServlet extends HttpServlet {
 		Contact c=dao.getContact(Long.parseLong(request.getParameter("id")));
 		
 		//passer le contact dans la requete
-		request.setAttribute("", arg1)
+		//request.setAttribute("", arg1)
 		//redidriger à la servlet
 	}
 

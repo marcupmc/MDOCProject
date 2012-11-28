@@ -54,4 +54,14 @@
     <servlet-name>UpdateContactServlet</servlet-name>
     <url-pattern>/UpdateContactServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PrintAllContactsServlet</display-name>
+    <servlet-name>PrintAllContactsServlet</servlet-name>
+    <servlet-class>servlets.PrintAllContactsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PrintAllContactsServlet</servlet-name>
+    <url-pattern>/PrintAllContactsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
