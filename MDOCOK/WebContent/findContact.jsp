@@ -10,13 +10,61 @@
 
 </head>
 <body>
-
+	
+	<%@page import="domain.Contact"%>
+	<%@page import="java.util.ArrayList"%>
+	<%
+		ArrayList<Contact> lcontact = new ArrayList<Contact>();
+		if(request.getAttribute("liste") == null){
+		
+		}else{
+			 lcontact = (ArrayList<Contact>) request.getAttribute("liste");
+		}
+	%>
 	<jsp:include page="menu_gauche.jsp" />
 
 	<div class="span9">
 		<div class="hero-unit">
 			<h2>Find your Contact</h2>
-		</div>
+			<form method="get" action="FindContactServlet" class="form-search">
+				<input name="search" type="text" class="input-medium search-query">
+				<select name="type">
+ 					 <option value="id">By ID</option>
+  					 <option value="name">By Name</option>
+  					 <option value="firstname">By Firstname</option>
+ 					 <option value="email">By Email</option>
+				</select>
+				<button type="submit" class="btn">Search</button>
+			</form>
+		
+		
+		<% if(lcontact.size()>0){ %>
+		<table class="table table-hover">
+				<tr>
+					<th>ID</th>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Email</th>
+					<th></th>
+				</tr>
+				<% for(int i =0; i<lcontact.size();i++)
+					{
+					Contact c = lcontact.get(i);
+					%>
+					<tr>
+						<td><%= c.getId() %></td>
+						<td><%= c.getFirstName() %></td>
+						<td><%= c.getLastName() %></td>
+						<td><%= c.getEmail() %></td>
+						<td><button class="btn btn-info" type="button" >Update</button></td>
+					<tr>
+					<% 
+					
+					}%>
+			</table>
+			<% } %>
+			</div>
 	</div>
+	 <jsp:include page="footer.jsp"/>
 </body>
 </html>

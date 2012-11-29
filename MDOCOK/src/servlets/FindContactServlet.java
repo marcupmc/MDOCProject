@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,35 +31,30 @@ public class FindContactServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IDAOContact dao = new DAOContact();
-		//recuperer l'option selctionnée
-		//faire la recherche 
-		Contact c=dao.getContact(Long.parseLong(request.getParameter("id")));
-		
-		//passer le contact dans la requete
-		//request.setAttribute("", arg1)
-		//redidriger à la servlet
+		ArrayList<Contact> lcontact = new ArrayList<Contact>();
+		Contact c;
+		String t = request.getParameter("type");
+		if(t.equals("id")){
+			 c = dao.getContact(Long.parseLong(request.getParameter("search")));
+			 lcontact.add(c);
+		}
+		if(t.equals("name")){
+			lcontact = dao.getContactByLastName(request.getParameter("search"));
+		}
+		if(t.equals("firstname")){
+			lcontact = dao.getContactByFirstName(request.getParameter("search"));
+		}
+		if(t.equals("email")){	
+			lcontact = dao.getContactByEmail(request.getParameter("search"));
+		}
+		request.setAttribute("liste", lcontact);
+		request.getRequestDispatcher("findContact.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IDAOContact dao = new DAOContact();
-		Contact c=dao.getContact(Long.parseLong(request.getParameter("id")));
-		String nom = c.getLastName();
-		String prenom = c.getFirstName();
-		String email = c.getEmail();
-		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		String html = "<html>" +
-				"<body>" +
-				"<h1> Resultat de la recherche </h1><p>"+nom+" "+prenom+ " "+email +"</p>" +
-				"<p><a href=\"menu.jsp\">Return to menu</a></p></body>" +
-				"</html>";
-				
-		out.println(html);
-		out.close();
 		
 	}
 

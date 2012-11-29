@@ -37,7 +37,7 @@
 						<td><%= c.getFirstName() %></td>
 						<td><%= c.getLastName() %></td>
 						<td><%= c.getEmail() %></td>
-						<td><button class="btn btn-info" type="button" >Update</button></td>
+						<td><a href="InitUpdateServlet?id=<%= c.getId() %>" class="btn btn-info" type="button">Update</a></td>
 					<tr>
 					<% 
 					
@@ -45,5 +45,6 @@
 			</table>
 		</div>
 	</div>
+	 <jsp:include page="footer.jsp"/>
 </body>
 </html>

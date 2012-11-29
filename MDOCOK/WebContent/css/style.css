@@ -8,6 +8,10 @@ body {
 	background-color: #65A6D1;
 }
 
+.contenu{
+	margin-top:	50px;
+}
+
 .form-signin {
 	max-width: 300px;
 	padding: 19px 29px 29px;

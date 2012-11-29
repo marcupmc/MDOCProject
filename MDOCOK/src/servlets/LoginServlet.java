@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if((request.getParameter("name").equals(request.getParameter("password")))){
 			request.getRequestDispatcher("menu.jsp").forward(request, response);
+			request.getSession().setAttribute("login", request.getParameter("name"));
 		}else{
 			request.getRequestDispatcher("/").forward(request, response);
 		}

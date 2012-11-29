@@ -27,19 +27,16 @@ public class UpdateContactServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		IDAOContact dao = new DAOContact();
+		dao.modifyContact(Long.parseLong(request.getParameter("id")), request.getParameter("prenom"), request.getParameter("nom"),request.getParameter("email"));
+		request.getRequestDispatcher("PrintAllContactsServlet?action=update").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IDAOContact dao = new DAOContact();
 		
-		dao.modifyContact(Long.parseLong(request.getParameter("id"))
-				, request.getParameter("prenom"), request.getParameter("nom"),
-				request.getParameter("email"));
-		request.getRequestDispatcher("menu.jsp").forward(request, response);
 	}
 
 }

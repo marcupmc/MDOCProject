@@ -64,4 +64,33 @@
     <servlet-name>PrintAllContactsServlet</servlet-name>
     <url-pattern>/PrintAllContactsServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InitUpdateServlet</display-name>
+    <servlet-name>InitUpdateServlet</servlet-name>
+    <servlet-class>servlets.InitUpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InitUpdateServlet</servlet-name>
+    <url-pattern>/InitUpdateServlet</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <display-name>CheckValideFilter</display-name>
+    <filter-name>CheckValideFilter</filter-name>
+    <filter-class>filters.CheckValideFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CheckValideFilter</filter-name>
+    <url-pattern>*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeconnexionServlet</display-name>
+    <servlet-name>DeconnexionServlet</servlet-name>
+    <servlet-class>servlets.DeconnexionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeconnexionServlet</servlet-name>
+    <url-pattern>/DeconnexionServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

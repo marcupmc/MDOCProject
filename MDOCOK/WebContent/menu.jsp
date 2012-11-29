@@ -8,7 +8,6 @@
 <title>Menu</title>
 </head>
 <body>
-	<div class="alert alert-success" id="message_top">Welcome!</div>
 	
 	
 	<jsp:include page="menu_gauche.jsp"/>
@@ -20,5 +19,7 @@
             
           </div>
           </div>
+       
+         <jsp:include page="footer.jsp"/>
 </body>
 </html>
