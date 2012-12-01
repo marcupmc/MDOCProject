@@ -36,8 +36,9 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if((request.getParameter("name").equals(request.getParameter("password")))){
-			request.getRequestDispatcher("menu.jsp").forward(request, response);
 			request.getSession().setAttribute("login", request.getParameter("name"));
+			request.getRequestDispatcher("menu.jsp").forward(request, response);
+			
 		}else{
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
