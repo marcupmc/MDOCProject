@@ -33,7 +33,11 @@ public class CheckValideFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest r = (HttpServletRequest) request;
-		if(r.getServletPath().equals("/LoginServlet"))
+		if(r.getServletPath().equals("/css/style.css")){
+			chain.doFilter(request, response);
+		}
+			
+		else if(r.getServletPath().equals("/LoginServlet"))
 			chain.doFilter(request, response);
 		else{
 			if(r.getSession().getAttribute("login")!=null)
