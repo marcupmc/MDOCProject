@@ -62,8 +62,26 @@ public class DAOPhoneNumber implements IDAOPhoneNumber {
 
 	@Override
 	public boolean modifyPhoneNumber(long id, String phoneKind, String phoneNumber) {
-		// TODO Auto-generated method stub
-		return false;
+		PhoneNumber phone = this.getPhoneNumber(id);
+		
+		Session session=null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+
+			phone.setPhoneKind(phoneKind);
+			phone.setPhoneNumber(phoneNumber);
+			
+			session.save(phone);
+			tx.commit();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+		
 	}
 
 }
