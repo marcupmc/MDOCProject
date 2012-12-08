@@ -5,6 +5,7 @@
 body {
 	
 	background-color: #65A6D1;
+	
 }
 
 #global_index{
@@ -62,6 +63,24 @@ body {
 	margin-bottom: 15px;
 	padding: 7px 9px;
 }
+
+#formulaire_contact{
+	margin:auto;
+}
+
+#formulaire_contact td{
+	
+	vertical-align: top;
+	padding-left: 50px;
+}
+
+#foot{
+	color: white;
+	text-align: center;
+	font-size: small;
+	
+}
+
 
 .center_content{
 	text-algin:center;
