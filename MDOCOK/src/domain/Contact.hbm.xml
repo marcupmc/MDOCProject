@@ -3,11 +3,12 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="domain.Contact" table="CONTACT">
+	<class name="domain.Contact" table="CONTACT" discriminator-value="C">
 		<id name="id">
 			<column name="ID_CONTACT" />
 			<generator class="increment" />
 		</id>
+		<discriminator column="sousclasse" type="character" />
 		<property name="firstName">
 			<column name="FIRSTNAME" />
 		</property>
@@ -15,20 +16,25 @@
 			<column name="LASTNAME" />
 		</property>
 		<property name="email">
-			<column name="EMAIL"/>
+			<column name="EMAIL" />
 		</property>
+		
+		<subclass name="Enterprise" discriminator-value="E">
+			<property name="numSiret" column="SUMSIRET"/>
+		</subclass>
+
 
 		<many-to-one name="add" column="ID_ADDRESS" class="domain.Address" />
 		<set name="phones" inverse="true">
 			<key column="ID_PHONENUMBER" />
 			<one-to-many class="domain.PhoneNumber" />
 		</set>
-	
+
 		<set name="books" table="CONTACT_CONTACTGROUP">
 			<key column="ID_CONTACT" />
-			<many-to-many class="domain.ContactGroup" column="ID_CONTACTGROUP"/>
+			<many-to-many class="domain.ContactGroup" column="ID_CONTACTGROUP" />
 		</set>
-				
+
 
 	</class>
 </hibernate-mapping>
