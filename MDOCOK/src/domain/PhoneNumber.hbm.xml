@@ -4,17 +4,17 @@
 
 <hibernate-mapping>
     <class name="domain.PhoneNumber" table="PHONENUMBER">
-        <id name="id" type="int">
+        <id name="id">
             <column name="ID_PHONENUMBER" />
             <generator class="increment" />
         </id>
-        <property name="phoneKind" type="java.lang.String">
+        <property name="phoneKind">
             <column name="PHONEKIND" />
         </property>
-        <property name="phoneNumber" type="java.lang.String">
+        <property name="phoneNumber">
             <column name="PHONENUMBER" />
         </property>
        
-        <many-to-one name="contact" column="ID_CONTACT" class="domain.Contact"/>
+        <many-to-one name="contact" column="ID_CONTACT" class="domain.Contact" />
     </class>
 </hibernate-mapping>

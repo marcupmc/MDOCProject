@@ -57,9 +57,9 @@ public class NewContactServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		String country = request.getParameter("country");
 		String zip = request.getParameter("zip");
-		String phoneNumber = request.getParameter("phoneNumber");
+		String phoneNumber = request.getParameter("phoneNumber0");
 		String type = request.getParameter("type");
-		String groupName = request.getParameter("groupName");
+		String groupName = request.getParameter("groupName0");
 		
 		Address add = daoAddress.addAddress(city, country, street, zip);
 		PhoneNumber num = daoPhoneNumber.addPhoneNumber(type, phoneNumber);

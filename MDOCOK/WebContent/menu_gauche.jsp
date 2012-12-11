@@ -23,7 +23,7 @@
 	<div class="span3">
 		<div class="well sidebar-nav">
 			<ul class="nav nav-list">
-				<li class="nav-header"><a href="menu.jsp">Menu</a></li>
+				<li class="nav-header"><a href="menu.jsp">Contacts</a></li>
 
 				<li><a href="addContact.jsp" ><i
 						class="icon-user"></i> Add Contact</a></li>
@@ -35,6 +35,12 @@
 						class="icon-trash"></i> Delete Contact</a></li>
 
 			</ul>
+			<ul class="nav nav-list">
+				<li class="nav-header"><a href="menu.jsp">Groups</a></li>
+				<li><a href="findContact.jsp"><i class="icon-book"></i>Contact Group</a></li>
+				
+			</ul>
+			
 		</div>
 		<!--/.well -->
 	</div>

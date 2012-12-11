@@ -108,7 +108,7 @@
 									<label class="control-label" for="phoneNumber">Phone
 										Number</label>
 									<div class="controls">
-										<input type="text" id="phoneNumber" name="phoneNumber"
+										<input type="text" id="phoneNumber0" name="phoneNumber0"
 											placeholder="Phone Number"> <i class="icon-plus"
 											onclick="addTel()"></i>
 									</div>
@@ -125,7 +125,7 @@
 								<div id="g0">
 									<label class="control-label" for="groupName">Group</label>
 									<div class="controls">
-										<input type="text" id="groupName" name="groupName"
+										<input type="text" id="groupName0" name="groupName0"
 											placeholder="Group"> <i class="icon-plus"
 											onclick="addGroupe()"></i>
 									</div>
