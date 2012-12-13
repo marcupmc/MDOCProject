@@ -19,17 +19,18 @@
 			<column name="EMAIL" />
 		</property>
 		
-		<many-to-one name="add" column="ID_ADDRESS" class="domain.Address" />
+		<many-to-one name="add" column="ID_ADDRESS" class="domain.Address" cascade="all" />
 		
-		<set name="phones" inverse="true">
+		<set name="phones" inverse="true" >
 			<key column="ID_PHONENUMBER" />
 			<one-to-many class="domain.PhoneNumber" />
 		</set>
 
-		<set name="books" table="CONTACT_CONTACTGROUP">
+		<set name="books" table="CONTACT_CONTACTGROUP" inverse="true">
 			<key column="ID_CONTACT" />
 			<many-to-many class="domain.ContactGroup" column="ID_CONTACTGROUP" />
 		</set>
+		
 		<subclass name="domain.Enterprise" discriminator-value="E">
 			<property name="numSiret" column="NUMSIRET"/>
 		</subclass>

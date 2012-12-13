@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Address;
+import domain.Contact;
 import domain.ContactGroup;
 import domain.DAOAddress;
 import domain.DAOContact;
@@ -61,17 +62,38 @@ public class NewContactServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		String groupName = request.getParameter("groupName0");
 		
-		Address add = daoAddress.addAddress(city, country, street, zip);
-		PhoneNumber num = daoPhoneNumber.addPhoneNumber(type, phoneNumber);
-		ContactGroup cg = daoContactGroup.addContactGroup(groupName);
+		//Address add = daoAddress.addAddress(city, country, street, zip);
+		PhoneNumber num = new PhoneNumber();//daoPhoneNumber.addPhoneNumber(type, phoneNumber);
+		//ContactGroup cg = daoContactGroup.addContactGroup(groupName);
 		
-		Set<ContactGroup> lgroup= new HashSet<ContactGroup>();
-		lgroup.add(cg);
+		//Set<ContactGroup> lgroup= new HashSet<ContactGroup>();
+		//lgroup.add(cg);
+		
+		Address add = new Address();
+		
+		add.setCity(city);
+		add.setCountry(country);
+		add.setStreet(street);
+		add.setZip(zip);
+		
+		
+
+		num.setPhoneKind(type);
+		num.setPhoneNumber(phoneNumber);
 		
 		Set<PhoneNumber> lphones = new HashSet<PhoneNumber>();
 		lphones.add(num);
 		
-		daoContact.addContact(prenom, nom, email, add, lgroup, lphones);
+		Contact c=new Contact();
+		c.setAdd(add);
+		c.setFirstName(prenom);
+		c.setLastName(nom);
+		c.setEmail(email);
+		c.setPhones(lphones);
+		//c.setBooks(lgroup);
+		
+
+		daoContact.addContact(c);
 		
 		
 //		dao.addContact(Long.parseLong(request.getParameter("id"))

@@ -8,6 +8,8 @@ public interface IDAOContact {
 	
 	public Contact addContact(String firstname, String lastname, String email,Address add, Set<ContactGroup> groupes, Set<PhoneNumber> phones);
 	
+	public Contact addContact(Contact c);
+	
 	public int deleteContact(long id);
 	
 	public Contact getContact(long id);

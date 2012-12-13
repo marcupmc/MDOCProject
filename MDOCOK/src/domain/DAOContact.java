@@ -17,6 +17,7 @@ import org.hibernate.cfg.Configuration;
 
 import tools.HibernateUtil;
 
+
 public class DAOContact implements IDAOContact{
 
 	/**
@@ -268,6 +269,25 @@ public class DAOContact implements IDAOContact{
 		}
 		
 		return new ArrayList<Contact>(contacts);
+	}
+
+	@Override
+	public Contact addContact(Contact c) {
+		Session session = null;
+		
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+			
+			session.save(c);
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return c;
 	}
 
 

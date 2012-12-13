@@ -11,7 +11,7 @@
 		<property name="groupName">
 			<column name="GROUPNAME" />
 		</property>
-		<set name="contacts" table="CONTACT_CONTACTGROUP" inverse="true">
+		<set name="contacts" table="CONTACT_CONTACTGROUP" >
 			<key column="ID_CONTACTGROUP"/>
 			<many-to-many class="domain.Contact" column="ID_CONTACT"/>
 		</set>

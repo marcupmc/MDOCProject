@@ -35,6 +35,7 @@ public class CheckValideFilter implements Filter {
 		HttpServletRequest r = (HttpServletRequest) request;
 		if(r.getServletPath().equals("/css/style.css")){
 			chain.doFilter(request, response);
+			System.out.println();
 		}
 			
 		else if(r.getServletPath().equals("/LoginServlet"))
