@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import tools.HibernateUtil;
 
@@ -76,6 +77,46 @@ public class DAOContactGroup implements IDAOContactGroup {
 		}
 		return true;
 		
+	}
+
+	@Override
+	public ArrayList<ContactGroup> getAllContactGroups() {
+		List<ContactGroup> lgroups =  new ArrayList<ContactGroup>();
+		Session session = null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+			
+			// Requete HQL
+			Query q =session.createQuery("from ContactGroup" );
+			lgroups = q.list();
+			tx.commit();
+			session.close();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}	
+		
+		return (ArrayList<ContactGroup>) lgroups;
+	}
+
+	@Override
+	public ArrayList<ContactGroup> getContactGroups(String search) {
+		List<ContactGroup> lgroups =  new ArrayList<ContactGroup>();
+		Session session = null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+		
+			lgroups = session.createCriteria(ContactGroup.class) .add(Restrictions.like("groupName", search+"%") ).list();
+			tx.commit();
+			session.close();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}	
+		
+		return (ArrayList<ContactGroup>) lgroups;
 	}
 
 }

@@ -64,10 +64,11 @@ public class NewContactServlet extends HttpServlet {
 		
 		//Address add = daoAddress.addAddress(city, country, street, zip);
 		PhoneNumber num = new PhoneNumber();//daoPhoneNumber.addPhoneNumber(type, phoneNumber);
-		//ContactGroup cg = daoContactGroup.addContactGroup(groupName);
 		
-		//Set<ContactGroup> lgroup= new HashSet<ContactGroup>();
-		//lgroup.add(cg);
+		ContactGroup cg = new ContactGroup();//daoContactGroup.addContactGroup(groupName);
+		cg.setGroupName(groupName);
+		Set<ContactGroup> lgroup= new HashSet<ContactGroup>();
+		lgroup.add(cg);
 		
 		Address add = new Address();
 		
@@ -76,13 +77,13 @@ public class NewContactServlet extends HttpServlet {
 		add.setStreet(street);
 		add.setZip(zip);
 		
-		
-
 		num.setPhoneKind(type);
 		num.setPhoneNumber(phoneNumber);
 		
 		Set<PhoneNumber> lphones = new HashSet<PhoneNumber>();
 		lphones.add(num);
+		
+
 		
 		Contact c=new Contact();
 		c.setAdd(add);
@@ -90,10 +91,15 @@ public class NewContactServlet extends HttpServlet {
 		c.setLastName(nom);
 		c.setEmail(email);
 		c.setPhones(lphones);
-		//c.setBooks(lgroup);
+		c.setBooks(lgroup);
+		
+		
+		//num.setContact(c);
+		daoContact.addContact(c);
+		//daoPhoneNumber.addPhoneNumber(num);
 		
 
-		daoContact.addContact(c);
+		
 		
 		
 //		dao.addContact(Long.parseLong(request.getParameter("id"))

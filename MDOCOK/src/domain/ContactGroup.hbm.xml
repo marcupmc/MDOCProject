@@ -11,7 +11,8 @@
 		<property name="groupName">
 			<column name="GROUPNAME" />
 		</property>
-		<set name="contacts" table="CONTACT_CONTACTGROUP" >
+		
+		<set name="contacts" table="CONTACT_CONTACTGROUP" lazy="false" cascade="persist">
 			<key column="ID_CONTACTGROUP"/>
 			<many-to-many class="domain.Contact" column="ID_CONTACT"/>
 		</set>

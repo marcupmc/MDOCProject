@@ -10,7 +10,7 @@
 
 </head>
 <body>
-	
+
 	<%@page import="domain.Contact"%>
 	<%@page import="java.util.ArrayList"%>
 	<%
@@ -28,18 +28,15 @@
 			<h2>Find your Contact</h2>
 			<form method="get" action="FindContactServlet" class="form-search">
 				<input name="search" type="text" class="input-medium search-query">
-				<select name="type">
- 					 <option value="id">By ID</option>
-  					 <option value="name">By Name</option>
-  					 <option value="firstname">By Firstname</option>
- 					 <option value="email">By Email</option>
-				</select>
+				
+				
 				<button type="submit" class="btn">Search</button>
 			</form>
-		
-		
-		<% if(lcontact.size()>0){ %>
-		<table class="table table-hover">
+			<!-- 			+ Ajouter un formulaire pour la recherche multi-critere (Requete by example) -->
+
+
+			<% if(lcontact.size()>0){ %>
+			<table class="table table-hover">
 				<tr>
 					<th>ID</th>
 					<th>Firstname</th>
@@ -51,20 +48,21 @@
 					{
 					Contact c = lcontact.get(i);
 					%>
-					<tr>
-						<td><%= c.getId() %></td>
-						<td><%= c.getFirstName() %></td>
-						<td><%= c.getLastName() %></td>
-						<td><%= c.getEmail() %></td>
-						<td><button class="btn btn-info" type="button" >Update</button></td>
-					<tr>
+				<tr>
+					<td><%= c.getId() %></td>
+					<td><%= c.getFirstName() %></td>
+					<td><%= c.getLastName() %></td>
+					<td><%= c.getEmail() %></td>
+					<td><button class="btn btn-info" type="button">Update</button></td>
+				<tr>
 					<% 
 					
 					}%>
+				
 			</table>
 			<% } %>
-			</div>
+		</div>
 	</div>
-	 <jsp:include page="footer.jsp"/>
+	<jsp:include page="footer.jsp" />
 </body>
 </html>

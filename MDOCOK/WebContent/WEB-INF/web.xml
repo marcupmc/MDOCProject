@@ -93,4 +93,24 @@
     <servlet-name>DeconnexionServlet</servlet-name>
     <url-pattern>/DeconnexionServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PrintAllGroupsServlet</display-name>
+    <servlet-name>PrintAllGroupsServlet</servlet-name>
+    <servlet-class>servlets.PrintAllGroupsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PrintAllGroupsServlet</servlet-name>
+    <url-pattern>/PrintAllGroupsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FindContactGroupServlet</display-name>
+    <servlet-name>FindContactGroupServlet</servlet-name>
+    <servlet-class>servlets.FindContactGroupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindContactGroupServlet</servlet-name>
+    <url-pattern>/FindContactGroupServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

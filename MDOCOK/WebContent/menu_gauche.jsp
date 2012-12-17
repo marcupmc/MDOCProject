@@ -37,7 +37,7 @@
 			</ul>
 			<ul class="nav nav-list">
 				<li class="nav-header"><a href="menu.jsp">Groups</a></li>
-				<li><a href="findContact.jsp"><i class="icon-book"></i>Contact Group</a></li>
+				<li><a href="PrintAllGroupsServlet"><i class="icon-book"></i>Contact Group</a></li>
 				
 			</ul>
 			

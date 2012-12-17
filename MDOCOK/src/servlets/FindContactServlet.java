@@ -30,23 +30,19 @@ public class FindContactServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//ICI On va mettre des requetes Example
 		IDAOContact dao = new DAOContact();
 		ArrayList<Contact> lcontact = new ArrayList<Contact>();
 		Contact c;
 		String t = request.getParameter("type");
-		if(t.equals("id")){
-			 c = dao.getContact(Long.parseLong(request.getParameter("search")));
-			 lcontact.add(c);
-		}
-		if(t.equals("name")){
-			lcontact = dao.getContactByLastName(request.getParameter("search"));
-		}
-		if(t.equals("firstname")){
-			lcontact = dao.getContactByFirstName(request.getParameter("search"));
-		}
-		if(t.equals("email")){	
-			lcontact = dao.getContactByEmail(request.getParameter("search"));
-		}
+		
+			lcontact.addAll(dao.getContactByLastName(request.getParameter("search")));
+		
+			lcontact.addAll( dao.getContactByFirstName(request.getParameter("search")));
+		
+		
+			lcontact.addAll( dao.getContactByEmail(request.getParameter("search")));
+		
 		request.setAttribute("liste", lcontact);
 		request.getRequestDispatcher("findContact.jsp").forward(request, response);
 	}

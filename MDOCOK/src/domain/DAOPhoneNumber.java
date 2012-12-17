@@ -85,4 +85,24 @@ public class DAOPhoneNumber implements IDAOPhoneNumber {
 		
 	}
 
+	@Override
+	public PhoneNumber addPhoneNumber(PhoneNumber n) {
+		Session session=null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+
+			
+			
+			session.save(n);
+			tx.commit();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return null;
+		}
+		return n;
+	}
+
 }

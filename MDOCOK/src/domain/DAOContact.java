@@ -14,6 +14,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Example;
 
 import tools.HibernateUtil;
 
@@ -155,9 +156,13 @@ public class DAOContact implements IDAOContact{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-						
+			// Requete par Exemple
 			Query q =session.createQuery("from Contact as c where c.firstName = '"+firstname+"'");
 			contacts = q.list();
+			Contact c = new Contact(); 
+			c.setFirstName(firstname);
+			
+			contacts = session.createCriteria(Contact.class).add( Example.create(c) ).list();
 			tx.commit();
 			session.close();
 		} 
@@ -258,7 +263,7 @@ public class DAOContact implements IDAOContact{
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
 			
-			
+			// Requete HQL
 			Query q =session.createQuery("from Contact" );
 			contacts = q.list();
 			tx.commit();
@@ -279,6 +284,16 @@ public class DAOContact implements IDAOContact{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
+			
+			Set<PhoneNumber> ln =  c.getPhones();
+			for(PhoneNumber num : ln){
+				num.setContact(c);
+			}
+			
+			Set<ContactGroup> groupes = c.getBooks();
+			for(ContactGroup g : groupes){
+				g.getContacts().add(c);
+			}
 			
 			session.save(c);
 			tx.commit();
