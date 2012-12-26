@@ -53,6 +53,9 @@ public class NewContactServlet extends HttpServlet {
 		//IDAOContact daoContact = new DAOContact();
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 		
+		//JUSTE Un petit test pour ce qu'il y a dans le applicationContext
+		Contact contBean = (Contact)context.getBean("contact");
+		
 		IDAOAddress daoAddress = new DAOAddress();
 		IDAOPhoneNumber daoPhoneNumber = new DAOPhoneNumber();
 		IDAOContactGroup daoContactGroup = new DAOContactGroup();
@@ -102,6 +105,8 @@ public class NewContactServlet extends HttpServlet {
 		//num.setContact(c);
 		daoContact.addContact(c); 
 		
+		//Ajout des beans
+		daoContact.addContact(contBean);
 		
 		//daoPhoneNumber.addPhoneNumber(num);
 		

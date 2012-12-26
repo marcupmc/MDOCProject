@@ -27,7 +27,7 @@
 	</bean>	
 	
 	<bean id ="group1" class="domain.ContactGroup">
-		<property name="groupName" value="TA-2013" />
+		<property name="groupName" value="TA2-2013" />
 		<property name="contacts">
 			<list>
 				<ref bean="contact"/>
