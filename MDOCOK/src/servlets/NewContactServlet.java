@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import domain.Address;
 import domain.Contact;
 import domain.ContactGroup;
 import domain.DAOAddress;
-import domain.DAOContact;
 import domain.DAOContactGroup;
 import domain.DAOPhoneNumber;
 import domain.IDAOAddress;
@@ -47,7 +49,10 @@ public class NewContactServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IDAOContact daoContact = new DAOContact();
+		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		//IDAOContact daoContact = new DAOContact();
+		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
+		
 		IDAOAddress daoAddress = new DAOAddress();
 		IDAOPhoneNumber daoPhoneNumber = new DAOPhoneNumber();
 		IDAOContactGroup daoContactGroup = new DAOContactGroup();
@@ -95,7 +100,9 @@ public class NewContactServlet extends HttpServlet {
 		
 		
 		//num.setContact(c);
-		daoContact.addContact(c);
+		daoContact.addContact(c); 
+		
+		
 		//daoPhoneNumber.addPhoneNumber(num);
 		
 
