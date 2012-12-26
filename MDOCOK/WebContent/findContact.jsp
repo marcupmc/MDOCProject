@@ -43,6 +43,8 @@
 					<th>Lastname</th>
 					<th>Email</th>
 					<th></th>
+					<th></th>
+					<th></th>
 				</tr>
 				<% for(int i =0; i<lcontact.size();i++)
 					{
@@ -53,7 +55,9 @@
 					<td><%= c.getFirstName() %></td>
 					<td><%= c.getLastName() %></td>
 					<td><%= c.getEmail() %></td>
-					<td><button class="btn btn-info" type="button">Update</button></td>
+					<td><a class="btn btn-info" type="buttons">Details</a></td>
+					<td><a href="InitUpdateServlet?id=<%= c.getId() %>" class="btn btn-primary" type="button">Update</a></td>
+					<td><a href="DeleteContactServlet?id=<%= c.getId() %>" class="btn btn-danger" type="buttons">Delete</a></td>
 				<tr>
 					<% 
 					

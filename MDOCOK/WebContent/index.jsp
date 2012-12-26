@@ -36,8 +36,8 @@
 					<div class="control-group">
 						<div class="controls">
 
-							<button type="submit" class="btn">Sign in</button>
-							<button type="reset" value="Reset" class="btn">Reset</button>
+							<button type="submit" class="btn btn-primary">Log In</button>
+							<button  value="Reset" class="btn btn-success">Sign in</button>
 
 						</div>
 					</div>
