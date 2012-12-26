@@ -13,7 +13,19 @@ public class Contact {
 	private Address add;
 	private Set<PhoneNumber> phones=new HashSet<PhoneNumber>();
 	
-
+	public Contact(){
+	
+	}
+	
+	public Contact(String firstName,String lastName, String email, Set<ContactGroup> books, Address add,
+			Set<PhoneNumber> phones){
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.email=email;
+		this.books=books;
+		this.add=add;
+		this.phones=phones;
+	}
 
 	public String getFirstName() {
 		return firstName;

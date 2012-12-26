@@ -32,10 +32,12 @@ public class CheckValideFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
 		HttpServletRequest r = (HttpServletRequest) request;
-		if(r.getServletPath().equals("/css/style.css")){
+		System.out.println("Page : "+r.getServletPath().toString() );
+		if(r.getServletPath().equals("/css/style.css")||r.getServletPath().equals("/city.png")||r.getServletPath().equals("/css/bootstrap-responsive.css")||r.getServletPath().equals("/css/bootstrap.css")){
 			chain.doFilter(request, response);
-			System.out.println();
+			
 		}
 			
 		else if(r.getServletPath().equals("/LoginServlet"))
