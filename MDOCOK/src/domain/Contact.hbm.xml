@@ -34,6 +34,13 @@
 		<subclass name="domain.Enterprise" discriminator-value="E">
 			<property name="numSiret" column="NUMSIRET"/>
 		</subclass>
+		
+<!-- 		ATTENTION AJOUT POUR SOCIAL NETWORK -->
+		<set name="friends" table="Friends">
+			<key column="USER_ID" />
+			<many-to-many class="domain.Contact" column="FRIEND_ID"/>
+		</set>
+		
 
 	</class>
 </hibernate-mapping>

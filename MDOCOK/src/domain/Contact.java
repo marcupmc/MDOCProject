@@ -13,6 +13,9 @@ public class Contact {
 	private Address add;
 	private Set<PhoneNumber> phones=new HashSet<PhoneNumber>();
 	
+	//Ajout pour Social Network
+	private Set<Contact> friends = new HashSet<Contact>();
+	
 	public Contact(){
 	
 	}
@@ -81,6 +84,14 @@ public class Contact {
 
 	public void setPhones(Set<PhoneNumber> phones) {
 		this.phones = phones;
+	}
+
+	public Set<Contact> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(Set<Contact> friends) {
+		this.friends = friends;
 	}
 	
 	
