@@ -47,8 +47,8 @@
 		</div>
 		</div>
 <!-- 		<div id="footer_index"><img alt="" id="footer_index" src="http://storiesof.us/bcmedia/01%20BC%20Logos/BC%20building%20logo%20+%20building%20art/classrooms%20signs/quadcities/chicago%20city.png"></div>	 -->
-			<div id="footer_index"><img alt="" id="footer_index" src="city.png"></div>
-		<div id="under_footer"></div>
+ 			<div id="footer_index"></div> 
+		
 
 
 </body>

@@ -34,7 +34,7 @@ public class CheckValideFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		HttpServletRequest r = (HttpServletRequest) request;
-		System.out.println("Page : "+r.getServletPath().toString() );
+//		System.out.println("Page : "+r.getServletPath().toString() );
 		if(r.getServletPath().equals("/css/style.css")||r.getServletPath().equals("/city.png")||r.getServletPath().equals("/css/bootstrap-responsive.css")||r.getServletPath().equals("/css/bootstrap.css")){
 			chain.doFilter(request, response);
 			

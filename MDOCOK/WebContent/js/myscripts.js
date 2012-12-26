@@ -1,6 +1,24 @@
 var id =1;
 var id_tel = 1;
 
+var isEnterprise = true;
+
+
+function addEnterprise(){
+	if(isEnterprise){
+		document.getElementById("siret").innerHTML+=
+		"<input type=\"text\" id=\"numsiret\" placeholder=\"Num Siret\">";
+		isEnterprise=false;
+	}else{
+		
+		var toDele = document.getElementById("numsiret");
+		var parent = toDele.parentNode;
+		parent.removeChild(toDele);
+		isEnterprise =true;
+	}
+}
+
+
 //Ajoute un groupe
 function addGroupe(){
 
