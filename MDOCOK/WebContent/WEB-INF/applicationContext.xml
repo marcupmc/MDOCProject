@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+	<bean id="daoContact" class="domain.DAOContact" ></bean>
+		
+	<bean id="contact" class="domain.Contact">
+		<property name="firstName" value="Marc"/>
+		<property name="lastName" value="GREGOIRE"/>
+		<property name="email" value="marc@gregoire.fr"/>
+		<property name="books">
+			<list>
+				<ref bean="group1"/>
+			</list>
+		</property>
+		<property name="add" ref="address1"/>
+		<property name="phones">
+			<list>
+				<ref bean="tel1"/>
+			</list>
+		</property>
+	</bean>	
+	
+	<bean id ="group1" class="domain.ContactGroup">
+		<property name="groupName" value="TA-2013" />
+		<property name="contacts">
+			<list>
+				<ref bean="contact"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="address1" class="domain.Address">
+		<property name="street" value="el 5 de la calle de las patatas" />
+		<property name="city" value="Saragosse"/>
+		<property name="zip" value="7559" />
+		<property name="country" value="Spain"/>
+	</bean>
+	
+	<bean id="tel1" class="domain.PhoneNumber">
+		<property name="phoneKind" value="Home"/>
+		<property name="phoneNumber" value="0606"/>
+		<property name="contact" ref="contact"/>
+	</bean>
+
+</beans>
