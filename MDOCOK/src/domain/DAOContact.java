@@ -316,12 +316,13 @@ public class DAOContact implements IDAOContact{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-
-			Set<Contact> myfriends = online.getFriends();
-			myfriends.add(friend);
-			online.setFriends(myfriends);
-
-			session.save(online);
+			
+				
+			online.addContact(friend);
+			System.out.println("nombre d'amis  "+online.getFriends().size());
+			
+			session.update(friend);
+			session.update(online);
 			tx.commit();
 			session.close();
 		} 

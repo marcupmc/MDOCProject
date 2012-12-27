@@ -143,4 +143,14 @@
     <servlet-name>AddFriendServlet</servlet-name>
     <url-pattern>/AddFriendServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyProfileServlet</display-name>
+    <servlet-name>MyProfileServlet</servlet-name>
+    <servlet-class>servlets.MyProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyProfileServlet</servlet-name>
+    <url-pattern>/MyProfileServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

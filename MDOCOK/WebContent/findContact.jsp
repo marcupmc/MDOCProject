@@ -38,7 +38,7 @@
 			<% if(lcontact.size()>0){ %>
 			<table class="table table-hover">
 				<tr>
-					<th>ID</th>
+					
 					<th>Firstname</th>
 					<th>Lastname</th>
 					<th>Email</th>
@@ -51,7 +51,7 @@
 					Contact c = lcontact.get(i);
 					%>
 				<tr>
-					<td><%= c.getId() %></td>
+					
 					<td><%= c.getFirstName() %></td>
 					<td><%= c.getLastName() %></td>
 					<td><%= c.getEmail() %></td>

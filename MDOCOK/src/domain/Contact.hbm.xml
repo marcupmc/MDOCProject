@@ -22,7 +22,7 @@
 			<column name="PASSWORD" />
 		</property>
 		
-		<many-to-one name="add" column="ID_ADDRESS" class="domain.Address" cascade="all" />
+		<many-to-one name="add" column="ID_ADDRESS" lazy="false" class="domain.Address" cascade="all" />
 		
 		<set name="phones" inverse="true" lazy="false" fetch="select" cascade="all">
 			<key column="ID_PHONENUMBER" />

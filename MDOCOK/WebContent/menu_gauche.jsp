@@ -24,8 +24,8 @@
 		<div class="well sidebar-nav">
 			<ul class="nav nav-list">
 				<li class="nav-header"><a href="menu.jsp">Menu</a></li>
-				<li><a href="menu.jsp"><i class="icon-pencil"></i> My
-						Profil</a></li>
+				<li><a href="MyProfileServlet"><i class="icon-pencil"></i> My
+						Profile</a></li>
 				<li><a href="PrintAllContactsServlet"><i class="icon-user"></i>
 						My Contacts</a></li>
 				<li><a href="findContact.jsp"><i class="icon-search"></i>
@@ -33,7 +33,7 @@
 
 
 				<li><a href="PrintAllGroupsServlet"><i class="icon-book"></i>
-						Contact Group</a></li>
+						Contact Groups</a></li>
 
 			</ul>
 

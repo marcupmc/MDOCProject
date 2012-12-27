@@ -31,6 +31,11 @@ public class Contact {
 		this.phones=phones;
 	}
 
+	//Ajout d'un ami
+	public void addContact(Contact c){
+		friends.add(c);
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
