@@ -50,7 +50,7 @@ public class CheckValideFilter implements Filter {
 
 		}
 
-		else if(r.getServletPath().equals("/LoginServlet"))
+		else if(r.getServletPath().equals("/LoginServlet")||r.getServletPath().equals("/SignInServlet"))
 			chain.doFilter(request, response);
 		else{
 			if(r.getSession().getAttribute("login")!=null)

@@ -18,6 +18,9 @@
 		<property name="email">
 			<column name="EMAIL" />
 		</property>
+		<property name="password">
+			<column name="PASSWORD" />
+		</property>
 		
 		<many-to-one name="add" column="ID_ADDRESS" class="domain.Address" cascade="all" />
 		
@@ -31,15 +34,17 @@
 			<many-to-many class="domain.ContactGroup" column="ID_CONTACTGROUP" />
 		</set>
 		
-		<subclass name="domain.Enterprise" discriminator-value="E">
-			<property name="numSiret" column="NUMSIRET"/>
-		</subclass>
-		
-<!-- 		ATTENTION AJOUT POUR SOCIAL NETWORK -->
+		<!-- 		ATTENTION AJOUT POUR SOCIAL NETWORK -->
 		<set name="friends" table="Friends">
 			<key column="USER_ID" />
 			<many-to-many class="domain.Contact" column="FRIEND_ID"/>
 		</set>
+		
+		<subclass name="domain.Enterprise" discriminator-value="E">
+			<property name="numSiret" column="NUMSIRET"/>
+		</subclass>
+		
+
 		
 
 	</class>

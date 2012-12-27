@@ -242,7 +242,7 @@ public class DAOContact implements IDAOContact{
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
 						
-			Query q =session.createQuery("from Contact as c where c.email '"+email+"'");
+			Query q =session.createQuery("from Contact as c where c.email = '"+email+"'");
 			contacts = q.list();
 			tx.commit();
 			session.close();
@@ -290,10 +290,11 @@ public class DAOContact implements IDAOContact{
 				num.setContact(c);
 			}
 			
-			Set<ContactGroup> groupes = c.getBooks();
-			for(ContactGroup g : groupes){
-				g.getContacts().add(c);
-			}
+			
+//			Set<ContactGroup> groupes = c.getBooks();
+//			for(ContactGroup g : groupes){
+//				g.getContacts().add(c);
+//			}
 			
 			session.save(c);
 			tx.commit();

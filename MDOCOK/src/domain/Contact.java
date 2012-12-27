@@ -12,6 +12,7 @@ public class Contact {
 	private Set<ContactGroup> books=new HashSet<ContactGroup>();
 	private Address add;
 	private Set<PhoneNumber> phones=new HashSet<PhoneNumber>();
+	private String password;
 	
 	//Ajout pour Social Network
 	private Set<Contact> friends = new HashSet<Contact>();
@@ -93,7 +94,17 @@ public class Contact {
 	public void setFriends(Set<Contact> friends) {
 		this.friends = friends;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
-	
+	public String toString(){
+		return " Prenom : "+firstName +"\n email : "+ email +"\n password : "+ password; 
+	}
 	
 }
