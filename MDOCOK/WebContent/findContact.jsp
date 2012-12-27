@@ -23,7 +23,7 @@
 	%>
 	<jsp:include page="menu_gauche.jsp" />
 
-	<div class="span9">
+	<div class="container">
 		<div class="hero-unit">
 			<h2>Find your Contact</h2>
 			<form method="get" action="FindContactServlet" class="form-search">
@@ -44,7 +44,7 @@
 					<th>Email</th>
 					<th></th>
 					<th></th>
-					<th></th>
+					
 				</tr>
 				<% for(int i =0; i<lcontact.size();i++)
 					{
@@ -56,8 +56,8 @@
 					<td><%= c.getLastName() %></td>
 					<td><%= c.getEmail() %></td>
 					<td><a class="btn btn-info" type="buttons">Details</a></td>
-					<td><a href="InitUpdateServlet?id=<%= c.getId() %>" class="btn btn-primary" type="button">Update</a></td>
-					<td><a href="DeleteContactServlet?id=<%= c.getId() %>" class="btn btn-danger" type="buttons">Delete</a></td>
+					<td><a href="AddFriendServlet?id=<%= c.getId() %>" class="btn btn-primary" type="button">Add to my Contacts</a></td>
+					
 				<tr>
 					<% 
 					

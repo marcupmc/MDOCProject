@@ -133,4 +133,14 @@
     <servlet-name>SignInServlet</servlet-name>
     <url-pattern>/SignInServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddFriendServlet</display-name>
+    <servlet-name>AddFriendServlet</servlet-name>
+    <servlet-class>servlets.AddFriendServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddFriendServlet</servlet-name>
+    <url-pattern>/AddFriendServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

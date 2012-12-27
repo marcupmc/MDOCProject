@@ -36,7 +36,7 @@ public class DAOContact implements IDAOContact{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-			
+
 			contact = new Contact();
 			contact.setAdd(add);
 			contact.setEmail(email);
@@ -44,7 +44,7 @@ public class DAOContact implements IDAOContact{
 			contact.setLastName(lastname);
 			contact.setBooks(groupes);
 			contact.setPhones(phones);
-			
+
 			session.save(contact);
 			tx.commit();
 			session.close();
@@ -94,7 +94,7 @@ public class DAOContact implements IDAOContact{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-						
+
 			Query q =session.createQuery("from Contact as c where c.id = '"+id+"'");
 			contacts = q.list();
 			tx.commit();
@@ -103,7 +103,7 @@ public class DAOContact implements IDAOContact{
 		catch(Exception e){
 			System.out.println(e.getMessage());
 		}
-		
+
 		return new ArrayList<Contact>(contacts).get(0);
 	}
 
@@ -118,20 +118,20 @@ public class DAOContact implements IDAOContact{
 	public boolean modifyContact(long id, String firstname, String lastname, String email,
 			Address add, Set<ContactGroup> books, Set<PhoneNumber> phones){
 		Contact toModify = this.getContact(id);
-		
+
 		Session session=null;
 		try{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-						
+
 			toModify.setAdd(add);
 			toModify.setBooks(books);
 			toModify.setEmail(email);
 			toModify.setLastName(lastname);
 			toModify.setFirstName(firstname);
 			toModify.setPhones(phones);
-			
+
 			tx.commit();
 			session.close();
 		} 
@@ -161,7 +161,7 @@ public class DAOContact implements IDAOContact{
 			contacts = q.list();
 			Contact c = new Contact(); 
 			c.setFirstName(firstname);
-			
+
 			contacts = session.createCriteria(Contact.class).add( Example.create(c) ).list();
 			tx.commit();
 			session.close();
@@ -169,7 +169,7 @@ public class DAOContact implements IDAOContact{
 		catch(Exception e){
 			System.out.println(e.getMessage());
 		}
-		
+
 		return new ArrayList<Contact>(contacts);
 	}
 
@@ -187,7 +187,7 @@ public class DAOContact implements IDAOContact{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-						
+
 			Query q =session.createQuery("from Contact as c where c.id = '"+id+"'");
 			contacts = q.list();
 			tx.commit();
@@ -196,11 +196,11 @@ public class DAOContact implements IDAOContact{
 		catch(Exception e){
 			System.out.println(e.getMessage());
 		}
-		
+
 		return new ArrayList<Contact>(contacts).get(0);
 	}
 
-	
+
 	/**
 	 * Renvoit la liste des contacts correspondant au nom lastname
 	 * @param lastname
@@ -215,7 +215,7 @@ public class DAOContact implements IDAOContact{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-						
+
 			Query q =session.createQuery("from Contact as c where c.lastName = '"+lastname+"'");
 			contacts = q.list();
 			tx.commit();
@@ -224,7 +224,7 @@ public class DAOContact implements IDAOContact{
 		catch(Exception e){
 			System.out.println(e.getMessage());
 		}
-		
+
 		return new ArrayList<Contact>(contacts);
 	}
 
@@ -241,7 +241,7 @@ public class DAOContact implements IDAOContact{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-						
+
 			Query q =session.createQuery("from Contact as c where c.email = '"+email+"'");
 			contacts = q.list();
 			tx.commit();
@@ -250,7 +250,7 @@ public class DAOContact implements IDAOContact{
 		catch(Exception e){
 			System.out.println(e.getMessage());
 		}
-		
+
 		return new ArrayList<Contact>(contacts);
 	}
 
@@ -262,7 +262,7 @@ public class DAOContact implements IDAOContact{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-			
+
 			// Requete HQL
 			Query q =session.createQuery("from Contact" );
 			contacts = q.list();
@@ -272,30 +272,30 @@ public class DAOContact implements IDAOContact{
 		catch(Exception e){
 			System.out.println(e.getMessage());
 		}
-		
+
 		return new ArrayList<Contact>(contacts);
 	}
 
 	@Override
 	public Contact addContact(Contact c) {
 		Session session = null;
-		
+
 		try{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-			
+
 			Set<PhoneNumber> ln =  c.getPhones();
 			for(PhoneNumber num : ln){
 				num.setContact(c);
 			}
-			
-			
-//			Set<ContactGroup> groupes = c.getBooks();
-//			for(ContactGroup g : groupes){
-//				g.getContacts().add(c);
-//			}
-			
+
+
+			//			Set<ContactGroup> groupes = c.getBooks();
+			//			for(ContactGroup g : groupes){
+			//				g.getContacts().add(c);
+			//			}
+
 			session.save(c);
 			tx.commit();
 			session.close();
@@ -304,6 +304,32 @@ public class DAOContact implements IDAOContact{
 			System.out.println(e.getMessage());
 		}
 		return c;
+	}
+
+	/**
+	 * 
+	 */
+	public boolean addFriend(Contact online, Contact friend) {
+		Session session = null;
+
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+
+			Set<Contact> myfriends = online.getFriends();
+			myfriends.add(friend);
+			online.setFriends(myfriends);
+
+			session.save(online);
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 

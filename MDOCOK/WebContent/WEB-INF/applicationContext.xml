@@ -8,6 +8,7 @@
 
 
 	<bean id="daoContact" class="domain.DAOContact"></bean>
+	<bean id="daoContactGroup" class="domain.DAOContactGroup"></bean>
 
 	<!-- SETTERS WAY -->
 	<bean id="contact" class="domain.Contact">

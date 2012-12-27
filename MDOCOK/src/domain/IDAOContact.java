@@ -24,4 +24,6 @@ public interface IDAOContact {
 	
 	public ArrayList<Contact> getAllContact();
 	
+	public boolean addFriend(Contact online, Contact friend);
+	
 }

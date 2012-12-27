@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
+	/** 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,6 +50,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("passwordLog");
 		String passHash=null;
 		String name = null;
+		long id =0;
 		try {
 			 passHash = CryptoTool.getEncodedPassword(password);
 		} catch (NoSuchAlgorithmException e) {
@@ -66,6 +67,7 @@ public class LoginServlet extends HttpServlet {
 			System.out.println(c1);
 			System.out.println(" password2: "+passHash);
 			name = c1.getFirstName();
+			id =c1.getId();
 			if(!c1.getPassword().equals(passHash)){
 				ok=false;
 				System.out.println("Le mot de passe n'est pas bon");
@@ -77,6 +79,7 @@ public class LoginServlet extends HttpServlet {
 		//On renvoit vers l'acceuil ou la connexion en fonction de ok
 		if(ok){
 			request.getSession().setAttribute("login", name);
+			request.getSession().setAttribute("id",id);
 			request.getRequestDispatcher("menu.jsp").forward(request, response);
 		}else{
 			request.setAttribute("failConnexion",true );

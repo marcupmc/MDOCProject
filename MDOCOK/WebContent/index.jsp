@@ -44,27 +44,30 @@
 				
 					<%
 						if (password) {
+							password =false;
 					%><div class="alert alert-error">
-						Wrong password confirmation
+						Wrong password confirmation or email adress
 					</div>
-					<% password =false;
+					<% 
 						}
 					%>
 					<%
 						if (failConnexion) {
+							failConnexion=false;
 					%><div class="alert alert-error">
 						Authentification has failed
 					</div>
 					<%
-						failConnexion=false;}
+						}
 					%>
 						<%
 						if (signok) {
+							signok=false;
 					%><div class=" alert-success"">
-						Wrong password confirmation
+						Registration has succeed !
 					</div>
 					<%
-						signok=false;}
+						}
 					%>
 					<div class="control-group">
 						<label class="control-label" for="emailLog">Email</label>

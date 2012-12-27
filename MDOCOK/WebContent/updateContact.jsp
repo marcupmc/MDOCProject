@@ -17,7 +17,7 @@
 <jsp:include page="menu_gauche.jsp"/>
 
 
-	<div class="span9">
+	<div class="container">
 		<div class="hero-unit">
 			<h2>Update your Contacts</h2>
 			<table class="table table-hover">
@@ -40,7 +40,7 @@
 						<td><%= c.getLastName() %></td>
 						<td><%= c.getEmail() %></td>
 						<td><a class="btn btn-info" type="buttons">Details</a></td>
-						<td><a href="InitUpdateServlet?id=<%= c.getId() %>" class="btn btn-primary" type="button">Update</a></td>
+						<td><a href="InitUpdateServlet?id=<%= c.getId() %>" class="btn btn-primary" type="button">Add to Groups</a></td>
 						<td><a href="DeleteContactServlet?id=<%= c.getId() %>" class="btn btn-danger" type="buttons">Delete</a></td>
 						
 					<tr>

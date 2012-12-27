@@ -35,7 +35,7 @@
 		</set>
 		
 		<!-- 		ATTENTION AJOUT POUR SOCIAL NETWORK -->
-		<set name="friends" table="Friends">
+		<set name="friends" table="Friends" lazy="false"  cascade="all" inverse="true" fetch="select">
 			<key column="USER_ID" />
 			<many-to-many class="domain.Contact" column="FRIEND_ID"/>
 		</set>

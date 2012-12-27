@@ -12,7 +12,7 @@
 	
 	<jsp:include page="menu_gauche.jsp"/>
 		
-		<div class="span9">
+		<div class="container">
           <div class="hero-unit">
             <h2>Your Contact Manager</h2>
             <p>Keep in touch with all your friends !</p>

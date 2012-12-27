@@ -25,6 +25,7 @@ public class DeconnexionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().setAttribute("login", null);
+		request.getSession().setAttribute("email", null);
 		request.getRequestDispatcher("/").forward(request, response);
 	}
 

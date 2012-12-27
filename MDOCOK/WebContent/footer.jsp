@@ -1,7 +1,7 @@
 </div>
 <!-- TODO mettre un footer -->
 
-<footer id="foot" class="span12">
+<footer id="foot" class="container">
 	<p>Marc GREGOIRE | Matthieu DELGADO</p>
 </footer>
 

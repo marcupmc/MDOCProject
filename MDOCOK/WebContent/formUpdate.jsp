@@ -19,7 +19,7 @@
 
 	<jsp:include page="menu_gauche.jsp"/>
 
-	<div class="span9">
+	<div class="container">
 	
 	<div class="hero-unit">
 	

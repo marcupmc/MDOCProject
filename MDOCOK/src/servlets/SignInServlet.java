@@ -47,6 +47,8 @@ public class SignInServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 		String firstname =  request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
 		String email = request.getParameter("email");
@@ -62,10 +64,12 @@ public class SignInServlet extends HttpServlet {
 		if(!password.equals(repassword)){
 			
 			request.setAttribute("password", true);
-		}else{
+		}else if(daoContact.getContactByEmail(email).size()>0){
+			request.setAttribute("password", true);
+		}
+		else{
 			//ici on ajoute le contact à la base !
-			ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-			IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
+			
 			
 			PhoneNumber num = new PhoneNumber();
 			num.setPhoneKind(typePhone);
