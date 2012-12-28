@@ -66,6 +66,7 @@ public class DAOAddress implements IDAOAddress {
 	public boolean modifyAddress(long id, String city, String country, String street,
 			String zip) {
 	
+		
 		Address toModify = this.getAddress(id);
 		
 		Session session=null;
@@ -78,6 +79,7 @@ public class DAOAddress implements IDAOAddress {
 			toModify.setCountry(country);
 			toModify.setStreet(street);
 			
+			session.update(toModify);
 			tx.commit();
 			session.close();
 		} 

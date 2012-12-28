@@ -46,7 +46,7 @@
 						if (password) {
 							password =false;
 					%><div class="alert alert-error">
-						Wrong password confirmation or email adress
+						Wrong password or email adress
 					</div>
 					<% 
 						}
@@ -55,7 +55,7 @@
 						if (failConnexion) {
 							failConnexion=false;
 					%><div class="alert alert-error">
-						Authentification has failed
+						Wrong password or email adress
 					</div>
 					<%
 						}

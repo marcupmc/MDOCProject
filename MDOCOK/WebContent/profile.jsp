@@ -52,7 +52,7 @@
 				
 				
 			</table>
-			<button class="btn btn-large btn-primary" href="InitUpdateServlet?id=<%= contact.getId() %>" type="button">Update</button>
+			<a class="btn btn-large btn-primary" href="InitUpdateServlet?id=<%= contact.getId() %>" type="button">Update</a>
 		</div>
 	</div>
 	<jsp:include page="footer.jsp" />

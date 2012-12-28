@@ -12,6 +12,7 @@
 </head>
 <body>
 	<%@page import="domain.Contact"%>
+	<%@page import="domain.PhoneNumber"%>
 	<%@page import="java.util.ArrayList"%>
 	<%
 		Contact contact =  (Contact)request.getAttribute("Contact");
@@ -27,6 +28,8 @@
 		<form  method="get" action="UpdateContactServlet">
 			<h2 class="form-signin-heading">Update a Contact</h2>
 			<input type="hidden" name="id" value="<%=contact.getId() %>">
+			<input type="hidden" name="idAddress" value="<%=contact.getAdd().getId() %>">
+			<input type="hidden" name="nbPhones" value="<%=contact.getPhones().size()%>">
 			<div class="control-group">
 				<label class="control-label" for="prenom">Firstname</label>
 				<div class="controls">
@@ -46,10 +49,35 @@
 					<input type="email" id="email" name="email" placeholder="<%= contact.getEmail() %>"/>
 				</div>
 			</div>
-			<% for(ContactGroup group : contact.getBooks() ){
-				
-				
-				}%>
+			
+			<div class="control-group">
+				<label class="control-label" for="street">Street</label>
+				<div class="controls">
+					<input type="text" id="street" name="street" placeholder="<%= contact.getAdd().getStreet() %>"/>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="city">City</label>
+				<div class="controls">
+					<input type="text" id="city" name="city" placeholder="<%= contact.getAdd().getCity() %>"/>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="zip">ZIP</label>
+				<div class="controls">
+					<input type="text" id="zip" name="zip" placeholder="<%= contact.getAdd().getZip() %>"/>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="country">Country</label>
+				<div class="controls">
+					<input type="text" id="country" name="country" placeholder="<%= contact.getAdd().getCountry() %>"/>
+				</div>
+			</div>
+			
 			
 			
 			<div class="control-group">

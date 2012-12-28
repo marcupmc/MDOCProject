@@ -9,6 +9,8 @@
 
 	<bean id="daoContact" class="dao.DAOContact"></bean>
 	<bean id="daoContactGroup" class="dao.DAOContactGroup"></bean>
+	<bean id="daoPhoneNumber" class="dao.DAOPhoneNumber"></bean>
+	<bean id="daoAddress" class="dao.DAOAddress"></bean>
 
 	<!-- SETTERS WAY -->
 	<bean id="contact" class="domain.Contact">

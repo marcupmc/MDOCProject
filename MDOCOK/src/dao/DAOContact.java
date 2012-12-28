@@ -121,23 +121,21 @@ public class DAOContact implements IDAOContact{
 	 * @param email
 	 * @return
 	 */
-	public boolean modifyContact(long id, String firstname, String lastname, String email,
-			Address add, Set<ContactGroup> books, Set<PhoneNumber> phones){
+	public boolean modifyContact(long id, String firstname, String lastname, String email){
 		Contact toModify = this.getContact(id);
-
+		
+		
 		Session session=null;
 		try{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
 
-			toModify.setAdd(add);
-			toModify.setBooks(books);
 			toModify.setEmail(email);
 			toModify.setLastName(lastname);
 			toModify.setFirstName(firstname);
-			toModify.setPhones(phones);
-
+			
+			session.update(toModify);
 			tx.commit();
 			session.close();
 		} 
@@ -148,6 +146,7 @@ public class DAOContact implements IDAOContact{
 		return true;
 	}
 
+	
 	/**
 	 * Renvoit la liste des contacts correspondant au prenom firrstname
 	 * @param firstname
