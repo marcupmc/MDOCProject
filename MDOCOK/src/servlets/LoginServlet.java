@@ -16,8 +16,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import tools.CryptoTool;
 
+import dao.IDAOContact;
 import domain.Contact;
-import domain.IDAOContact;
 
 /**
  * Servlet implementation class HelloServlet

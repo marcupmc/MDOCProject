@@ -1,4 +1,6 @@
-package domain;
+package dao;
+
+import domain.PhoneNumber;
 
 
 public interface IDAOPhoneNumber {

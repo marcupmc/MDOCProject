@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import dao.IDAOContact;
 import domain.Contact;
-import domain.IDAOContact;
 
 /**
  * Servlet implementation class MyProfileServlet

@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import dao.DAOContact;
+import dao.DAOContactGroup;
+import dao.IDAOContact;
+import dao.IDAOContactGroup;
 import domain.Contact;
 import domain.ContactGroup;
-import domain.DAOContact;
-import domain.DAOContactGroup;
-import domain.IDAOContact;
-import domain.IDAOContactGroup;
 
 /**
  * Servlet implementation class PrintAllContactsServlet

@@ -55,7 +55,7 @@
 					<td><%= c.getFirstName() %></td>
 					<td><%= c.getLastName() %></td>
 					<td><%= c.getEmail() %></td>
-					<td><a class="btn btn-info" type="buttons">Details</a></td>
+					<td><a href="DetailsFriendServlet?id=<%= c.getId() %>" class="btn btn-info" type="buttons">Details</a></td>
 					<td><a href="AddFriendServlet?id=<%= c.getId() %>" class="btn btn-primary" type="button">Add to my Contacts</a></td>
 					
 				<tr>
@@ -67,6 +67,9 @@
 			<% } %>
 		</div>
 	</div>
+	
+	
+	
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

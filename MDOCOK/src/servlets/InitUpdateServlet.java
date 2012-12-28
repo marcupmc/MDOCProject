@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DAOContact;
+import dao.IDAOContact;
 import domain.Contact;
-import domain.DAOContact;
-import domain.IDAOContact;
 
 /**
  * Servlet implementation class InitUpdateServlet

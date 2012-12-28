@@ -1,4 +1,4 @@
-package domain;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,6 +15,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
+
+import domain.Address;
+import domain.Contact;
+import domain.ContactGroup;
+import domain.Messages;
+import domain.PhoneNumber;
 
 import tools.HibernateUtil;
 

@@ -1,6 +1,8 @@
-package domain;
+package dao;
 
 import java.util.ArrayList;
+
+import domain.ContactGroup;
 
 public interface IDAOContactGroup {
 	public ContactGroup addContactGroup(String groupName);

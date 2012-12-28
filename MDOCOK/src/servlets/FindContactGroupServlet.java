@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DAOContactGroup;
+import dao.IDAOContactGroup;
 import domain.ContactGroup;
-import domain.DAOContactGroup;
-import domain.IDAOContactGroup;
 
 /**
  * Servlet implementation class FindContactGroupServlet

@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DAOAddress;
+import dao.DAOContact;
+import dao.DAOContactGroup;
+import dao.DAOPhoneNumber;
+import dao.IDAOAddress;
+import dao.IDAOContact;
+import dao.IDAOContactGroup;
+import dao.IDAOPhoneNumber;
 import domain.Address;
 import domain.ContactGroup;
-import domain.DAOAddress;
-import domain.DAOContact;
-import domain.DAOContactGroup;
-import domain.DAOPhoneNumber;
-import domain.IDAOAddress;
-import domain.IDAOContact;
-import domain.IDAOContactGroup;
-import domain.IDAOPhoneNumber;
 import domain.PhoneNumber;
 
 /**

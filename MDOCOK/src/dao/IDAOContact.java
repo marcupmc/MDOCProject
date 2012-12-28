@@ -1,7 +1,12 @@
-package domain;
+package dao;
 
 import java.util.ArrayList;
 import java.util.Set;
+
+import domain.Address;
+import domain.Contact;
+import domain.ContactGroup;
+import domain.PhoneNumber;
 
 public interface IDAOContact {
 

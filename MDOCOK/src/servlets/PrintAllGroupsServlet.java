@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.DAOContactGroup;
-import domain.IDAOContactGroup;
+import dao.DAOContactGroup;
+import dao.IDAOContactGroup;
 import domain.ContactGroup;
 
 /**

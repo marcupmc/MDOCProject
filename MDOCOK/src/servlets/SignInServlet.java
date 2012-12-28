@@ -16,9 +16,9 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import tools.CryptoTool;
 
+import dao.IDAOContact;
 import domain.Address;
 import domain.Contact;
-import domain.IDAOContact;
 import domain.PhoneNumber;
 
 /**

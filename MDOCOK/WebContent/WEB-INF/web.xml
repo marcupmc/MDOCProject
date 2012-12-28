@@ -153,4 +153,14 @@
     <servlet-name>MyProfileServlet</servlet-name>
     <url-pattern>/MyProfileServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DetailsFriendServlet</display-name>
+    <servlet-name>DetailsFriendServlet</servlet-name>
+    <servlet-class>servlets.DetailsFriendServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailsFriendServlet</servlet-name>
+    <url-pattern>/DetailsFriendServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

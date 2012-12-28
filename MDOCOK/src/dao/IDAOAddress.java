@@ -1,6 +1,8 @@
-package domain;
+package dao;
 
 import java.util.Set;
+
+import domain.Address;
 
 public interface IDAOAddress {
 

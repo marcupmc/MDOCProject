@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import dao.DAOAddress;
+import dao.DAOContactGroup;
+import dao.DAOPhoneNumber;
+import dao.IDAOAddress;
+import dao.IDAOContact;
+import dao.IDAOContactGroup;
+import dao.IDAOPhoneNumber;
 import domain.Address;
 import domain.Contact;
 import domain.ContactGroup;
-import domain.DAOAddress;
-import domain.DAOContactGroup;
-import domain.DAOPhoneNumber;
-import domain.IDAOAddress;
-import domain.IDAOContact;
-import domain.IDAOContactGroup;
-import domain.IDAOPhoneNumber;
 import domain.PhoneNumber;
 
 /**

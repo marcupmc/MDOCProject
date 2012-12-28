@@ -6,19 +6,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.DAOContact;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import dao.IDAOContact;
+import dao.IDAOContactGroup;
+import domain.Contact;
 
 /**
- * Servlet implementation class DeleteContactServlet
+ * Servlet implementation class DetailsFriendServlet
  */
-public class DeleteContactServlet extends HttpServlet {
+public class DetailsFriendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteContactServlet() {
+    public DetailsFriendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,17 +31,20 @@ public class DeleteContactServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IDAOContact dao = new DAOContact();
-		String id = request.getParameter("id");
-		dao.deleteContact(Long.parseLong(id));
-		request.getRequestDispatcher("PrintAllContactsServlet?action=remove").forward(request, response);
+		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		
+		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
+		Contact c = daoContact.getContact(Long.parseLong(request.getParameter("id")));
+		
+		request.setAttribute("contact", c);
+		request.getRequestDispatcher("details.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		// TODO Auto-generated method stub
 	}
 
 }
