@@ -86,7 +86,7 @@
 						<div class="controls">
 
 							<button type="submit" class="btn btn-primary">Log In</button>
-							<a href="#myModal" data-toggle="modal" value="Reset"
+							<a href="#myModal" data-toggle="modal" 
 								class="btn btn-success">Sign in</a>
 
 						</div>

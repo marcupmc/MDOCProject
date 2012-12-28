@@ -163,4 +163,24 @@
     <servlet-name>DetailsFriendServlet</servlet-name>
     <url-pattern>/DetailsFriendServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewContactGroupServlet</display-name>
+    <servlet-name>NewContactGroupServlet</servlet-name>
+    <servlet-class>servlets.NewContactGroupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewContactGroupServlet</servlet-name>
+    <url-pattern>/NewContactGroupServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManageContactGroupServlet</display-name>
+    <servlet-name>ManageContactGroupServlet</servlet-name>
+    <servlet-class>servlets.ManageContactGroupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManageContactGroupServlet</servlet-name>
+    <url-pattern>/ManageContactGroupServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

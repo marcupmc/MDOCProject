@@ -11,9 +11,8 @@
 	<%@page import="domain.ContactGroup"%>
 	<%@page import="java.util.ArrayList"%>
 	<%
-		ArrayList<ContactGroup> lcontact = (ArrayList<ContactGroup>) request.getAttribute("liste");
-		
-		
+		ArrayList<ContactGroup> lcontact = (ArrayList<ContactGroup>) request
+				.getAttribute("liste");
 	%>
 
 	<jsp:include page="menu_gauche.jsp" />
@@ -21,14 +20,11 @@
 
 	<div class="container">
 		<div class="hero-unit">
+			<p>
 			<h2>Your Contact Groups</h2>
-			<!-- 			Formulaire de recherche  -->
-			<form method="get" action="FindContactGroupServlet"
-				class="form-search">
-				<input name="search" id="search" type="text"
-					class="input-medium search-query">
-					 <input type="submit" class="btn" value="Search" />
-			</form>
+			<a href="#myModal2" data-toggle="modal"
+				class="btn btn-large btn-primary" type="button">Create a Group</a>
+			</p>
 
 			<table class="table table-hover">
 				<tr>
@@ -37,24 +33,68 @@
 					<th>Number of Members</th>
 
 					<th></th>
+					<th></th>
 				</tr>
-				<% for(int i =0; i<lcontact.size();i++)
-					{
-					ContactGroup c = lcontact.get(i);
-					%>
+				<%
+					for (int i = 0; i < lcontact.size(); i++) {
+						ContactGroup c = lcontact.get(i);
+				%>
 				<tr>
-					<td><%= c.getGroupId() %></td>
-					<td><%= c.getGroupName() %></td>
-					<td><%= c.getContacts().size() %></td>
+					<td><%=c.getGroupId()%></td>
+					<td><%=c.getGroupName()%></td>
+					<td><%=c.getContacts().size()%></td>
 
-					<td><a class="btn btn-info" type="submit">Update</a></td>
-				<tr>
-					<% 
+					<td><a href="ManageContactGroupServlet?id<%=c.getGroupId()%>" class="btn btn-info" type="submit">Manage</a></td>
 					
-					}%>
+				<tr>
+					<%
+						}
+					%>
 				
 			</table>
 		</div>
+	</div>
+
+
+
+	<!-- Modal -->
+	<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<form method="post" action="NewContactGroupServlet"
+			id="addContactForm">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h3>New Contact Group</h3>
+			</div>
+
+
+			<div class="modal-body">
+				<tr>
+					<div class="control-group">
+						<label class="control-label" for="name">Name</label>
+						<div class="controls">
+							<input type="text" id="name" name="name"
+								placeholder="Name of the group">
+						</div>
+					</div>
+
+				</tr>
+			</div>
+			</table>
+			<div class="modal-footer">
+
+				<input type="submit" class="btn btn-primary" value="Add Group Contact" />
+				<a class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+
+
+
+			</div>
+
+
+
+		</form>
 	</div>
 
 
