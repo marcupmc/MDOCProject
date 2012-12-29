@@ -162,8 +162,8 @@ public class DAOContact implements IDAOContact{
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
 			// Requete par Exemple
-			Query q =session.createQuery("from Contact as c where c.firstName = '"+firstname+"'");
-			contacts = q.list();
+			//Query q =session.createQuery("from Contact as c where c.firstName = '"+firstname+"'");
+			//contacts = q.list();
 			Contact c = new Contact(); 
 			c.setFirstName(firstname);
 
@@ -310,7 +310,30 @@ public class DAOContact implements IDAOContact{
 		}
 		return c;
 	}
+	
+	@Override
+	public Contact addContactGroup(Contact c ,ContactGroup g) {
+		Session session = null;
 
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+
+			c.getBooks().add(g);
+			
+			session.saveOrUpdate(c);
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return c;
+	}
+
+	
+	
 	/**
 	 * 
 	 */
@@ -324,12 +347,35 @@ public class DAOContact implements IDAOContact{
 			
 				
 			online.getFriends().add(friend);
-			System.out.println("nombre d'amis  "+online.getFriends().size());
 			
-			session.saveOrUpdate(friend);
+			
+			//session.saveOrUpdate(friend);
 			session.saveOrUpdate(online);
+			
 			tx.commit();
 			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean deleteFriend(Contact online, Contact friend){
+		Session session = null;
+
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+			
+			online.getFriends().remove(friend);			
+			
+			session.update(online);
+			tx.commit();
+			session.close();
+			
 		} 
 		catch(Exception e){
 			System.out.println(e.getMessage());

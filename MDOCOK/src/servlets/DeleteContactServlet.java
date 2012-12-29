@@ -6,8 +6,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import dao.DAOContact;
 import dao.IDAOContact;
+import domain.Contact;
 
 /**
  * Servlet implementation class DeleteContactServlet
@@ -27,10 +31,16 @@ public class DeleteContactServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IDAOContact dao = new DAOContact();
-		String id = request.getParameter("id");
-		dao.deleteContact(Long.parseLong(id));
-		request.getRequestDispatcher("PrintAllContactsServlet?action=remove").forward(request, response);
+		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
+		long idFriend = Long.parseLong(request.getParameter("id"));
+		long idOnline = Long.parseLong(request.getSession().getAttribute("id").toString());
+		System.out.println("Id du contact en ligne "+idOnline);
+		
+		Contact friend = daoContact.getContact(idFriend);
+		Contact online = daoContact.getContact(idOnline);
+		daoContact.addFriend(online, friend);
+		request.getRequestDispatcher("PrintAllContactsServlet").forward(request, response);
 	}
 
 	/**

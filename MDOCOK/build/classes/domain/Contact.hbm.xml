@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="domain.Contact" table="CONTACT" discriminator-value="C">
+		<id name="id">
+			<column name="ID_CONTACT" />
+			<generator class="increment" />
+		</id>
+		<discriminator column="sousclasse" type="character" />
+		<property name="firstName">
+			<column name="FIRSTNAME" />
+		</property>
+		<property name="lastName">
+			<column name="LASTNAME" />
+		</property>
+		<property name="email">
+			<column name="EMAIL" />
+		</property>
+		<property name="password">
+			<column name="PASSWORD" />
+		</property>
+
+		<many-to-one name="add" column="ID_ADDRESS" lazy="false"
+			class="domain.Address" cascade="all" />
+
+		<set name="phones" inverse="true" lazy="false" fetch="select"
+			cascade="all">
+			<key column="ID_PHONENUMBER" />
+			<one-to-many class="domain.PhoneNumber" />
+		</set>
+
+		<set name="books" table="CONTACT_CONTACTGROUP" lazy="false"
+			cascade="all" inverse="true" fetch="select">
+			<key column="ID_CONTACT" />
+			<many-to-many class="domain.ContactGroup" column="ID_CONTACTGROUP" />
+		</set>
+
+		<!-- ATTENTION AJOUT POUR SOCIAL NETWORK -->
+		<set name="persons" table="friends" cascade="none" lazy="false">
+			<key column="person_id" />
+			<many-to-many column="friend_id" class="domain.Contact" />
+		</set>
+		<set name="friends" table="friends" cascade="none" lazy="false">
+			<key column="friend_id" />
+			<many-to-many column="person_id" class="domain.Contact" />
+		</set>
+
+
+		<subclass name="domain.Enterprise" discriminator-value="E">
+			<property name="numSiret" column="NUMSIRET" />
+		</subclass>
+
+
+
+
+	</class>
+</hibernate-mapping>

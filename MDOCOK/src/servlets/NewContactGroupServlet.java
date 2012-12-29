@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +13,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import dao.IDAOContact;
 import dao.IDAOContactGroup;
+import domain.Contact;
+import domain.ContactGroup;
 
 /**
  * Servlet implementation class NewContactGroupServlet
@@ -40,9 +44,18 @@ public class NewContactGroupServlet extends HttpServlet {
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		
 		IDAOContactGroup dao = (IDAOContactGroup)context.getBean("daoContactGroup");
+		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 		
 		String name = request.getParameter("name");
-		dao.addContactGroup(name);
+		ContactGroup g = dao.addContactGroup(name);
+		
+		long idOnline = Long.parseLong(request.getSession().getAttribute("id").toString());
+		Contact online = daoContact.getContact(idOnline);
+		daoContact.addContactGroup(online, g);
+		
+		ArrayList<ContactGroup> lgroupes = new ArrayList<ContactGroup>(online.getBooks());
+		request.setAttribute("liste", lgroupes);
+		
 		request.getRequestDispatcher("contactGroups.jsp").forward(request, response);
 		
 	}

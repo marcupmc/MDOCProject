@@ -11,8 +11,7 @@
 	<%@page import="domain.ContactGroup"%>
 	<%@page import="java.util.ArrayList"%>
 	<%
-		ArrayList<ContactGroup> lcontact = (ArrayList<ContactGroup>) request
-				.getAttribute("liste");
+		ArrayList<ContactGroup> lcontact = (ArrayList<ContactGroup>) request.getAttribute("liste");
 	%>
 
 	<jsp:include page="menu_gauche.jsp" />
@@ -46,7 +45,7 @@
 
 					<td><a href="ManageContactGroupServlet?id<%=c.getGroupId()%>" class="btn btn-info" type="submit">Manage</a></td>
 					
-				<tr>
+				</tr>
 					<%
 						}
 					%>

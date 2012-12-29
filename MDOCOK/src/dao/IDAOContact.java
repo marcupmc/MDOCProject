@@ -31,4 +31,7 @@ public interface IDAOContact {
 	
 	public boolean addFriend(Contact online, Contact friend);
 	
+	public boolean deleteFriend(Contact online, Contact friend);
+	
+	public Contact addContactGroup(Contact c ,ContactGroup g);
 }

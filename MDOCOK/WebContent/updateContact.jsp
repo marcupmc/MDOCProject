@@ -19,10 +19,10 @@
 
 	<div class="container">
 		<div class="hero-unit">
-			<h2>Update your Contacts</h2>
+			<h2>Your Friends</h2>
 			<table class="table table-hover">
 				<tr>
-					<th>ID</th>
+					
 					<th>Firstname</th>
 					<th>Lastname</th>
 					<th>Email</th>
@@ -35,11 +35,11 @@
 					Contact c = lcontact.get(i);
 					%>
 					<tr>
-						<td><%= c.getId() %></td>
+						
 						<td><%= c.getFirstName() %></td>
 						<td><%= c.getLastName() %></td>
 						<td><%= c.getEmail() %></td>
-						<td><a class="btn btn-info" type="buttons">Details</a></td>
+						<td><a href="DetailsFriendServlet?id=<%= c.getId() %>" class="btn btn-info" type="buttons">Details</a></td>
 						<td><a href="InitUpdateServlet?id=<%= c.getId() %>" class="btn btn-primary" type="button">Add to Groups</a></td>
 						<td><a href="DeleteContactServlet?id=<%= c.getId() %>" class="btn btn-danger" type="buttons">Delete</a></td>
 						

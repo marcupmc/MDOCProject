@@ -8,8 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import dao.DAOContactGroup;
+import dao.IDAOContact;
 import dao.IDAOContactGroup;
+import domain.Contact;
 import domain.ContactGroup;
 
 /**
@@ -30,9 +35,14 @@ public class PrintAllGroupsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IDAOContactGroup dao = new DAOContactGroup();
-		ArrayList<ContactGroup> lgroupes = new ArrayList<ContactGroup>();
-		lgroupes = dao.getAllContactGroups();
+		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
+		
+		long idOnline = Long.parseLong(request.getSession().getAttribute("id").toString());
+		Contact online = daoContact.getContact(idOnline);
+		
+		ArrayList<ContactGroup> lgroupes = new ArrayList<ContactGroup>(online.getBooks());
+		
 		request.setAttribute("liste", lgroupes);
 		request.getRequestDispatcher("contactGroups.jsp").forward(request, response);
 	}
