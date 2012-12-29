@@ -323,11 +323,11 @@ public class DAOContact implements IDAOContact{
 			org.hibernate.Transaction tx = session.beginTransaction();
 			
 				
-			online.addContact(friend);
+			online.getFriends().add(friend);
 			System.out.println("nombre d'amis  "+online.getFriends().size());
 			
-			session.update(friend);
-			session.update(online);
+			session.saveOrUpdate(friend);
+			session.saveOrUpdate(online);
 			tx.commit();
 			session.close();
 		} 

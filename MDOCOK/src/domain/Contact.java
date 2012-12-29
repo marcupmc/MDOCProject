@@ -15,7 +15,8 @@ public class Contact {
 	private String password;
 	
 	//Ajout pour Social Network
-	private Set<Contact> friends = new HashSet<Contact>();
+	private Set<Contact> persons = new HashSet<Contact>();
+    private Set<Contact> friends = new HashSet<Contact>();
 	
 	public Contact(){
 	
@@ -31,10 +32,7 @@ public class Contact {
 		this.phones=phones;
 	}
 
-	//Ajout d'un ami
-	public void addContact(Contact c){
-		friends.add(c);
-	}
+	
 	
 	public String getFirstName() {
 		return firstName;
@@ -92,13 +90,6 @@ public class Contact {
 		this.phones = phones;
 	}
 
-	public Set<Contact> getFriends() {
-		return friends;
-	}
-
-	public void setFriends(Set<Contact> friends) {
-		this.friends = friends;
-	}
 
 	public String getPassword() {
 		return password;
@@ -111,5 +102,23 @@ public class Contact {
 	public String toString(){
 		return " Prenom : "+firstName +"\n email : "+ email +"\n password : "+ password; 
 	}
+
+	public Set<Contact> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(Set<Contact> friends) {
+		this.friends = friends;
+	}
+
+	public Set<Contact> getPersons() {
+		return persons;
+	}
+
+	public void setPersons(Set<Contact> persons) {
+		this.persons = persons;
+	}
+
+
 	
 }
