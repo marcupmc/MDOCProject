@@ -36,12 +36,12 @@ public class PrintAllGroupsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
+		IDAOContactGroup daoContactGroup = (IDAOContactGroup)context.getBean("daoContactGroup");
 		
 		long idOnline = Long.parseLong(request.getSession().getAttribute("id").toString());
-		Contact online = daoContact.getContact(idOnline);
 		
-		ArrayList<ContactGroup> lgroupes = new ArrayList<ContactGroup>(online.getBooks());
+		
+		ArrayList<ContactGroup> lgroupes = new ArrayList<ContactGroup>(daoContactGroup.getContactGroupByOwner(idOnline));
 		
 		request.setAttribute("liste", lgroupes);
 		request.getRequestDispatcher("contactGroups.jsp").forward(request, response);

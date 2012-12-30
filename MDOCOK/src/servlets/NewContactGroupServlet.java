@@ -46,14 +46,16 @@ public class NewContactGroupServlet extends HttpServlet {
 		IDAOContactGroup dao = (IDAOContactGroup)context.getBean("daoContactGroup");
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 		
-		String name = request.getParameter("name");
-		ContactGroup g = dao.addContactGroup(name);
-		
 		long idOnline = Long.parseLong(request.getSession().getAttribute("id").toString());
+		
+		String name = request.getParameter("name");
+		ContactGroup g = dao.addContactGroup(name,idOnline);
+		
 		Contact online = daoContact.getContact(idOnline);
 		daoContact.addContactGroup(online, g);
 		
-		ArrayList<ContactGroup> lgroupes = new ArrayList<ContactGroup>(online.getBooks());
+		ArrayList<ContactGroup> lgroupes = new ArrayList<ContactGroup>(dao.getContactGroupByOwner(idOnline));
+		
 		request.setAttribute("liste", lgroupes);
 		
 		request.getRequestDispatcher("contactGroups.jsp").forward(request, response);

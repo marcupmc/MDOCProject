@@ -5,6 +5,7 @@ import java.util.Set;
 
 public class ContactGroup {
 	private long groupId;
+	private long idOwner;
 	private String groupName;
 	private Set<Contact> contacts= new HashSet<Contact>();	;
 	
@@ -34,6 +35,14 @@ public class ContactGroup {
 
 	public void setContacts(Set<Contact> contacts) {
 		this.contacts = contacts;
+	}
+
+	public long getIdOwner() {
+		return idOwner;
+	}
+
+	public void setIdOwner(long idOwner) {
+		this.idOwner = idOwner;
 	}
 
 }

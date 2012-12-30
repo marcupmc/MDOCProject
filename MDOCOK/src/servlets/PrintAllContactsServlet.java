@@ -42,7 +42,6 @@ public class PrintAllContactsServlet extends HttpServlet {
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 
 		//On charge tout les groupes pour pouvoir ajouter les contacts a des groupes
-		// FAUX!
 		ArrayList<ContactGroup> lgroupes = new ArrayList<ContactGroup>();
 		lgroupes = daoG.getAllContactGroups();
 		request.setAttribute("listeGroupes", lgroupes);

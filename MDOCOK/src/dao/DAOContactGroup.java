@@ -16,7 +16,7 @@ import tools.HibernateUtil;
 public class DAOContactGroup implements IDAOContactGroup {
 
 	@Override
-	public ContactGroup addContactGroup(String groupName) {
+	public ContactGroup addContactGroup(String groupName,long idOwner) {
 		ContactGroup group = null;
 		Session session=null;
 		try{
@@ -25,6 +25,7 @@ public class DAOContactGroup implements IDAOContactGroup {
 			org.hibernate.Transaction tx = session.beginTransaction();
 
 			group = new ContactGroup();
+			group.setIdOwner(idOwner);
 			group.setGroupName(groupName);
 			
 			session.persist(group);
@@ -120,6 +121,28 @@ public class DAOContactGroup implements IDAOContactGroup {
 		}	
 		
 		return (ArrayList<ContactGroup>) lgroups;
+	}
+
+	@Override
+	public ArrayList<ContactGroup> getContactGroupByOwner(long id) {
+		List<ContactGroup> groupe = new ArrayList<ContactGroup>();
+
+		Session session=null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+						
+			Query q =session.createQuery("from ContactGroup as c where c.idOwner = '"+id+"'");
+			groupe = q.list();
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+		return new ArrayList<ContactGroup>(groupe);
 	}
 
 }

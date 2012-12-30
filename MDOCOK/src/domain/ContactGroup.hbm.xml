@@ -11,6 +11,9 @@
 		<property name="groupName">
 			<column name="GROUPNAME" />
 		</property>
+		<property name="idOwner">
+			<column name="IDOWNER" />
+		</property>
 		
 		<set name="contacts" table="CONTACT_CONTACTGROUP" lazy="false" cascade="persist">
 			<key column="ID_CONTACTGROUP"/>
