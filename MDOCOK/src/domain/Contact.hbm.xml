@@ -32,17 +32,17 @@
 		</set>
 
 		<set name="books" table="CONTACT_CONTACTGROUP" lazy="false"
-			cascade="all" inverse="true" fetch="select">
+			cascade="all" inverse="true">
 			<key column="ID_CONTACT" />
 			<many-to-many class="domain.ContactGroup" column="ID_CONTACTGROUP" />
 		</set>
 
 		<!-- ATTENTION AJOUT POUR SOCIAL NETWORK -->
-		<set name="persons" table="friends" cascade="none" lazy="false">
+		<set name="persons" table="friends" cascade="all" lazy="false">
 			<key column="person_id" />
 			<many-to-many column="friend_id" class="domain.Contact" />
 		</set>
-		<set name="friends" table="friends" cascade="none" lazy="false">
+		<set name="friends" table="friends" cascade="all" lazy="false">
 			<key column="friend_id" />
 			<many-to-many column="person_id" class="domain.Contact" />
 		</set>

@@ -27,7 +27,7 @@ public class DAOContactGroup implements IDAOContactGroup {
 			group = new ContactGroup();
 			group.setGroupName(groupName);
 			
-			session.save(group);
+			session.persist(group);
 			tx.commit();
 			session.close();
 		} 

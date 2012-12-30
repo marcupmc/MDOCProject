@@ -2,27 +2,23 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 
+import tools.HibernateUtil;
 import domain.Address;
 import domain.Contact;
 import domain.ContactGroup;
 import domain.Messages;
 import domain.PhoneNumber;
-
-import tools.HibernateUtil;
 
 
 public class DAOContact implements IDAOContact{
@@ -322,7 +318,8 @@ public class DAOContact implements IDAOContact{
 
 			c.getBooks().add(g);
 			
-			session.saveOrUpdate(c);
+			session.saveOrUpdate(g);
+			session.saveOrUpdate(c);  
 			tx.commit();
 			session.close();
 		} 
@@ -345,12 +342,10 @@ public class DAOContact implements IDAOContact{
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
 			
-				
 			online.getFriends().add(friend);
 			
-			
-			//session.saveOrUpdate(friend);
-			session.saveOrUpdate(online);
+			session.update(friend);
+			session.update(online);
 			
 			tx.commit();
 			session.close();
@@ -364,18 +359,20 @@ public class DAOContact implements IDAOContact{
 	
 	public boolean deleteFriend(Contact online, Contact friend){
 		Session session = null;
-
 		try{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-			
-			online.getFriends().remove(friend);			
-			
+			Iterator<Contact> iterator = online.getFriends().iterator();
+			while (iterator.hasNext()) {
+			    Contact ami = iterator.next();
+			    if (ami.getId()==friend.getId()) {
+			        iterator.remove();
+			    }
+			}
 			session.update(online);
 			tx.commit();
 			session.close();
-			
 		} 
 		catch(Exception e){
 			System.out.println(e.getMessage());

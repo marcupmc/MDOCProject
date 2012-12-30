@@ -39,7 +39,7 @@ public class DeleteContactServlet extends HttpServlet {
 		
 		Contact friend = daoContact.getContact(idFriend);
 		Contact online = daoContact.getContact(idOnline);
-		daoContact.addFriend(online, friend);
+		daoContact.deleteFriend(online, friend);
 		request.getRequestDispatcher("PrintAllContactsServlet").forward(request, response);
 	}
 
