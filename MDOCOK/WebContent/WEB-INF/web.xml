@@ -203,4 +203,24 @@
     <servlet-name>AddContactToGroupsServlet</servlet-name>
     <url-pattern>/AddContactToGroupsServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddContactToAGroupServlet</display-name>
+    <servlet-name>AddContactToAGroupServlet</servlet-name>
+    <servlet-class>servlets.AddContactToAGroupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddContactToAGroupServlet</servlet-name>
+    <url-pattern>/AddContactToAGroupServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteContactFromAGroupServlet</display-name>
+    <servlet-name>DeleteContactFromAGroupServlet</servlet-name>
+    <servlet-class>servlets.DeleteContactFromAGroupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteContactFromAGroupServlet</servlet-name>
+    <url-pattern>/DeleteContactFromAGroupServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

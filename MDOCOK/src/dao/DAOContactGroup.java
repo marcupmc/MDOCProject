@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -157,6 +158,33 @@ public class DAOContactGroup implements IDAOContactGroup {
 			g.getContacts().add(c);
 			
 			session.update(g);
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean removeContact(ContactGroup groupe, Contact contact) {
+		Session session=null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+
+			Iterator<Contact> iterator = groupe.getContacts().iterator();
+			while (iterator.hasNext()) {
+			    Contact ami = iterator.next();
+			    if (ami.getId()==contact.getId()) {
+			        iterator.remove();
+			    }
+			}
+			
+			session.update(groupe);
 			tx.commit();
 			session.close();
 		} 

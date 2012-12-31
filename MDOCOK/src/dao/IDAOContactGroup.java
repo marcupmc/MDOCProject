@@ -17,5 +17,7 @@ public interface IDAOContactGroup {
 	
 	public ArrayList<ContactGroup> getContactGroups(String search);
 	public boolean addContactToGroup(ContactGroup g, Contact c);
+	
+	public boolean removeContact(ContactGroup groupe,Contact contact);
 
 }

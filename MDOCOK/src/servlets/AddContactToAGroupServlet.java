@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,15 +15,15 @@ import domain.Contact;
 import domain.ContactGroup;
 
 /**
- * Servlet implementation class AddContactToGroupsServlet
+ * Servlet implementation class AddContactToAGroupServlet
  */
-public class AddContactToGroupsServlet extends HttpServlet {
+public class AddContactToAGroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AddContactToGroupsServlet() {
+	public AddContactToAGroupServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -33,7 +32,7 @@ public class AddContactToGroupsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -44,22 +43,18 @@ public class AddContactToGroupsServlet extends HttpServlet {
 		IDAOContactGroup daoContactGroup = (IDAOContactGroup)context.getBean("daoContactGroup");
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 
-		//On recupere le contact a ajouter
-		Contact c = daoContact.getContact(Long.parseLong(request.getParameter("idFriend").toString()));
+		ContactGroup group = daoContactGroup.getContactGroup(Long.parseLong(request.getParameter("groupeId")));
+		int nbFriend = Integer.parseInt(request.getParameter("nbFriend").toString());
 
-		//on recupere le nombre de groupes affiché
-		int nbGroupes = Integer.parseInt(request.getParameter("nb").toString());
-
-		//Pour chaque champs checkbox, on verifie si la variable existe
-		// si oui, ca veut dire que le champs est coché
-		for(int i = 0; i<nbGroupes;i++){
+		for(int i = 0; i<nbFriend;i++){
 			if(!(request.getParameter(""+i)==null)){
-				long idG =Long.parseLong(request.getParameter("G"+i));
-				ContactGroup g = daoContactGroup.getContactGroup(idG);
-				daoContactGroup.addContactToGroup(g, c);
+				long idF =Long.parseLong(request.getParameter("F"+i));
+				Contact c = daoContact.getContact(idF);
+				daoContactGroup.addContactToGroup(group, c);
 			}
 		}
-		request.getRequestDispatcher("menu.jsp").forward(request, response);
+		
+		response.sendRedirect("ManageContactGroupServlet?id="+group.getGroupId());
 	}
 
 }

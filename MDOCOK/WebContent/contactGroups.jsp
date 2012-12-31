@@ -43,7 +43,7 @@
 					<td><%=c.getGroupName()%></td>
 					<td><%=c.getContacts().size()%></td>
 
-					<td><a href="ManageContactGroupServlet?id<%=c.getGroupId()%>" class="btn btn-info" type="submit">Manage</a></td>
+					<td><a href="ManageContactGroupServlet?id=<%=c.getGroupId()%>" class="btn btn-info" type="submit">Manage</a></td>
 					
 				</tr>
 					<%
