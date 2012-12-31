@@ -223,4 +223,14 @@
     <servlet-name>DeleteContactFromAGroupServlet</servlet-name>
     <url-pattern>/DeleteContactFromAGroupServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteGroupServlet</display-name>
+    <servlet-name>DeleteGroupServlet</servlet-name>
+    <servlet-class>servlets.DeleteGroupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteGroupServlet</servlet-name>
+    <url-pattern>/DeleteGroupServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

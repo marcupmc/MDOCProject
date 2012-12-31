@@ -8,6 +8,8 @@ import domain.ContactGroup;
 public interface IDAOContactGroup {
 	public ContactGroup addContactGroup(String groupName,long idOwner);
 	
+	public boolean deleteContactGroup(ContactGroup g);
+	
 	public ContactGroup getContactGroup(long id);
 	public ArrayList<ContactGroup> getContactGroupByOwner(long id);
 	

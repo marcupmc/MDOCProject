@@ -57,7 +57,7 @@
 						class="btn btn-primary" type="button">Add Contacts</a></td>
 					<td></td>
 					<td></td>
-					<td><a href="" class="btn btn-danger" type="button">Delete
+					<td><a href="DeleteGroupServlet?idGroupe=<%=groupe.getGroupId() %>" class="btn btn-danger" type="button">Delete
 							This Group</a></td>
 				</tr>
 

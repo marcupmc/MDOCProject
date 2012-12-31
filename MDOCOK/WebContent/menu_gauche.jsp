@@ -6,7 +6,7 @@
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="brand" href="menu.jsp">Welcome <%=request.getSession().getAttribute("login")%>!
+			<a class="brand" href="menu.jsp">Welcome <%=request.getSession().getAttribute("login")%> !
 			</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">

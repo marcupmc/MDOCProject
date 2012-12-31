@@ -27,7 +27,7 @@
 
 			<table class="table table-hover">
 				<tr>
-					<th>ID</th>
+					
 					<th>Name</th>
 					<th>Number of Members</th>
 
@@ -39,7 +39,7 @@
 						ContactGroup c = lcontact.get(i);
 				%>
 				<tr>
-					<td><%=c.getGroupId()%></td>
+					
 					<td><%=c.getGroupName()%></td>
 					<td><%=c.getContacts().size()%></td>
 

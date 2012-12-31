@@ -59,7 +59,7 @@ public class AddContactToGroupsServlet extends HttpServlet {
 				daoContactGroup.addContactToGroup(g, c);
 			}
 		}
-		request.getRequestDispatcher("menu.jsp").forward(request, response);
+		response.sendRedirect("PrintAllGroupsServlet");
 	}
 
 }

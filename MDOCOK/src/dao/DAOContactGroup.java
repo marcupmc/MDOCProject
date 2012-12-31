@@ -1,5 +1,8 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +14,7 @@ import org.hibernate.criterion.Restrictions;
 
 import domain.Contact;
 import domain.ContactGroup;
+import domain.Messages;
 
 import tools.HibernateUtil;
 
@@ -192,6 +196,29 @@ public class DAOContactGroup implements IDAOContactGroup {
 			System.out.println(e.getMessage());
 			return false;
 		}
+		return true;
+	}
+
+	@Override
+	public boolean deleteContactGroup(ContactGroup g) {
+		
+		
+		Session session=null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+						
+			session.createQuery("delete ContactGroup as c where c.groupId = '"+g.getGroupId()+"'").executeUpdate();
+			
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		
 		return true;
 	}
 

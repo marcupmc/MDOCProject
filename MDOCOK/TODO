@@ -6,7 +6,7 @@ Prioritaire :
 [DONE]- faire une recherche parmis les AUTRES contacts et enlever les doublons
 [DONE]- ajouter des amis
 [DONE]- affecter des amis a des groupes, les supprimer ...etc
-- Gestion des groupes (creation, suppression)
+- Gestion des groupes (creation, suppression, modification)
 - integrer spring
 - integrer strust
 - Gerer entreprise
