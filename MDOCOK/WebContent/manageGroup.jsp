@@ -17,8 +17,7 @@
 	<%@page import="java.util.Iterator"%>
 	<%
 		ContactGroup groupe = (ContactGroup) request.getAttribute("groupe");
-		ArrayList<Contact> friends = (ArrayList<Contact>) request
-				.getAttribute("friends");
+		ArrayList<Contact> friends = (ArrayList<Contact>) request.getAttribute("friends");
 	%>
 	<jsp:include page="menu_gauche.jsp" />
 
@@ -27,6 +26,8 @@
 			<h2>
 				Group :
 				<%=groupe.getGroupName()%></h2>
+				<p><a href="#myModal5" data-toggle="modal"
+						class="btn btn-info" type="button">Rename this group</a></p>
 			<table class="table table-hover">
 				<tr>
 					<th>Firstname</th>
@@ -82,8 +83,6 @@
 					<%=groupe.getGroupName()%>'s group
 				</h3>
 			</div>
-
-
 			<div class="modal-body">
 				<table class="table table-hover">
 					<tr>
@@ -92,7 +91,6 @@
 						<th>Email</th>
 						<th></th>
 					</tr>
-
 					<%
 						int i = 0;
 						for (Contact friend : friends) {
@@ -105,26 +103,52 @@
 						<input type="hidden" name="F<%=i %>" value="<%=friend.getId() %>">
 
 					</tr>
-
 					<%
 						i++;
 						}
 					%>
 				</table>
 			</div>
-
 			<div class="modal-footer">
 
 				<input type="submit" class="btn btn-primary"
 					value="Add to <%=groupe.getGroupName()%>" /> <a class="btn"
 					data-dismiss="modal" aria-hidden="true">Close</a>
-
-
-
 			</div>
+		</form>
+	</div>
+	
+	<!-- Modal Changement de nom du groupe -->
+	<div id="myModal5" class="modal hide fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<form method="post" action="RenameGroupServlet"
+			id="addContactForm">
+			
+			<input type="hidden" name="groupeId" value="<%=groupe.getGroupId()%>" />
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h3>
+					Rename 
+					<%=groupe.getGroupName()%>'s group
+				</h3>
+			</div>
+			<div class="modal-body">
+				<div class="control-group">
+						<label class="control-label" for="name">New Name</label>
+						<div class="controls">
+							<input type="text" id="name" name="name"
+								placeholder="New Name of the group">
+						</div>
+					</div>
+					
+			</div>
+			<div class="modal-footer">
 
-
-
+				<input type="submit" class="btn btn-primary"
+					value="Rename" /> <a class="btn"
+					data-dismiss="modal" aria-hidden="true">Close</a>
+			</div>
 		</form>
 	</div>
 

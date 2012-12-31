@@ -78,8 +78,9 @@ public class DAOContactGroup implements IDAOContactGroup {
 
 			groupe.setGroupName(groupename);
 			
-			session.save(groupe);
+			session.update(groupe);
 			tx.commit();
+			session.close();
 		} 
 		catch(Exception e){
 			System.out.println(e.getMessage());

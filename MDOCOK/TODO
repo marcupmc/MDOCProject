@@ -6,7 +6,7 @@ Prioritaire :
 [DONE]- faire une recherche parmis les AUTRES contacts et enlever les doublons
 [DONE]- ajouter des amis
 [DONE]- affecter des amis a des groupes, les supprimer ...etc
-- Gestion des groupes (creation, suppression, modification)
+[DONE]- Gestion des groupes (creation, suppression, modification)
 - integrer spring
 - integrer strust
 - Gerer entreprise
@@ -25,4 +25,5 @@ Non prioritaire :
 Liste des bugs : 
 - supression de contact
 - doublons dans la recherche
+- Mauvais messages d'erreur sur la page d'accueil (lors de l'inscription et de la connexion)
 [FIXED] les groupes ne se lient pas au contact qui l'a crŽŽ
