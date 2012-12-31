@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +13,9 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import dao.DAOContact;
 import dao.IDAOContact;
+import dao.IDAOContactGroup;
 import domain.Contact;
+import domain.ContactGroup;
 
 /**
  * Servlet implementation class DeleteContactServlet
@@ -33,14 +37,27 @@ public class DeleteContactServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
+		IDAOContactGroup daoContactGroup = (IDAOContactGroup)context.getBean("daoContactGroup");
+		
 		long idFriend = Long.parseLong(request.getParameter("id"));
 		long idOnline = Long.parseLong(request.getSession().getAttribute("id").toString());
-		System.out.println("Id du contact en ligne "+idOnline);
 		
 		Contact friend = daoContact.getContact(idFriend);
 		Contact online = daoContact.getContact(idOnline);
+		
+		//on supprime le contact de tout les groupes de online où il est present
+		ArrayList<ContactGroup> mesgroupes = daoContactGroup.getContactGroupByOwner(idOnline);	
+		for(ContactGroup g : mesgroupes){
+			for(Contact c : g.getContacts()){
+				if(c.getId()==idFriend){
+					daoContactGroup.removeContact(g, c);
+				}
+			}
+				
+		}
+		
 		daoContact.deleteFriend(online, friend);
-		request.getRequestDispatcher("PrintAllContactsServlet").forward(request, response);
+		response.sendRedirect("PrintAllContactsServlet");
 	}
 
 	/**

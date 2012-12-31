@@ -12,7 +12,7 @@ Prioritaire :
 - Gerer entreprise
 [DONE]- mettre tout les dao dans un package (pour aspectJ)
 - Refaire Update Du contact en ligne (ok sauf pour tel)
-- ATTENTION LORS DE LA SUPPRESSION D'un CONTACT, le supprimer de tout les groupes où il apparait!
+[DONE]- ATTENTION LORS DE LA SUPPRESSION D'un ami, le supprimer de tout les groupes où il apparait!
 
 Non prioritaire : 
 
@@ -21,9 +21,10 @@ Non prioritaire :
 - ameliorer le design
 - systeme de messageries
 - Jeux de donnée par setters
+- se désinscrire du site.
 
 Liste des bugs : 
-- supression de contact
+[DONE]- supression de contact
 - doublons dans la recherche
 - Mauvais messages d'erreur sur la page d'accueil (lors de l'inscription et de la connexion)
 [FIXED] les groupes ne se lient pas au contact qui l'a créé
