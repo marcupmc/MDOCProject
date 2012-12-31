@@ -51,9 +51,6 @@ public class NewContactGroupServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		ContactGroup g = dao.addContactGroup(name,idOnline);
 		
-		Contact online = daoContact.getContact(idOnline);
-		daoContact.addContactGroup(online, g);
-		
 		ArrayList<ContactGroup> lgroupes = new ArrayList<ContactGroup>(dao.getContactGroupByOwner(idOnline));
 		
 		request.setAttribute("liste", lgroupes);

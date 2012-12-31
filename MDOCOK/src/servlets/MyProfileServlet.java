@@ -42,11 +42,11 @@ public class MyProfileServlet extends HttpServlet {
 		long idOnline = Long.parseLong(request.getSession().getAttribute("id").toString());
 		ArrayList<ContactGroup> lgroupes = new ArrayList<ContactGroup>(daoContactGroup.getContactGroupByOwner(idOnline));
 
-		System.out.println("nbGroupes : "+lgroupes.size());
-		
 		request.setAttribute("liste", lgroupes);
+		request.setAttribute("nbGroup", lgroupes.size());
 		
 		Contact c = daoContact.getContact(idOnline);
+		
 		request.setAttribute("contact", c);
 		
 		request.getRequestDispatcher("profile.jsp").forward(request, response);

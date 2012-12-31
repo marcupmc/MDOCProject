@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
+import domain.Contact;
 import domain.ContactGroup;
 
 import tools.HibernateUtil;
@@ -143,6 +144,27 @@ public class DAOContactGroup implements IDAOContactGroup {
 		}
 		
 		return new ArrayList<ContactGroup>(groupe);
+	}
+
+	@Override
+	public boolean addContactToGroup(ContactGroup g, Contact c) {
+		Session session=null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+
+			g.getContacts().add(c);
+			
+			session.update(g);
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 }

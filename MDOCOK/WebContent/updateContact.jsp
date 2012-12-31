@@ -40,7 +40,7 @@
 						<td><%= c.getLastName() %></td>
 						<td><%= c.getEmail() %></td>
 						<td><a href="DetailsFriendServlet?id=<%= c.getId() %>" class="btn btn-info" type="buttons">Details</a></td>
-						<td><a href="InitUpdateServlet?id=<%= c.getId() %>" class="btn btn-primary" type="button">Add to Groups</a></td>
+						<td><a href="AvailableGroups?idFriend=<%= c.getId() %>" class="btn btn-primary" type="button">Add to Groups</a></td>
 						<td><a href="DeleteContactServlet?id=<%= c.getId() %>" class="btn btn-danger" type="buttons">Delete</a></td>
 						
 					<tr>

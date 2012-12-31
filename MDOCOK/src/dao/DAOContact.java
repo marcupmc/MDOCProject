@@ -307,27 +307,28 @@ public class DAOContact implements IDAOContact{
 		return c;
 	}
 	
-	@Override
-	public Contact addContactGroup(Contact c ,ContactGroup g) {
-		Session session = null;
-
-		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-
-			c.getBooks().add(g);
-			
-			session.saveOrUpdate(g);
-			session.saveOrUpdate(c);  
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-		return c;
-	}
+//	@Override
+//	public Contact addContactGroup(Contact c ,ContactGroup g) {
+//		Session session = null;
+//
+//		try{
+//			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//			session = sessionFactory.openSession(); 
+//			org.hibernate.Transaction tx = session.beginTransaction();
+//
+//			c.getBooks().add(g);
+//			
+//			
+//			session.update(c);
+//			System.out.println("J'ai maintenant nb groupe = "+c.getBooks().size());
+//			tx.commit();
+//			session.close();
+//		} 
+//		catch(Exception e){
+//			System.out.println(e.getMessage());
+//		}
+//		return c;
+//	}
 
 	
 	

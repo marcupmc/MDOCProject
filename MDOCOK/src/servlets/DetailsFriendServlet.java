@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import dao.IDAOContact;
 import dao.IDAOContactGroup;
 import domain.Contact;
+import domain.ContactGroup;
 
 /**
  * Servlet implementation class DetailsFriendServlet
@@ -32,10 +35,13 @@ public class DetailsFriendServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		
+		IDAOContactGroup daoContactGroup = (IDAOContactGroup)context.getBean("daoContactGroup");
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
-		Contact c = daoContact.getContact(Long.parseLong(request.getParameter("id")));
 		
+		Contact c = daoContact.getContact(Long.parseLong(request.getParameter("id")));
+		ArrayList<ContactGroup> lgroupes = new ArrayList<ContactGroup>(daoContactGroup.getContactGroupByOwner(c.getId()));
+		
+		request.setAttribute("liste", lgroupes);
 		request.setAttribute("contact", c);
 		request.getRequestDispatcher("details.jsp").forward(request, response);
 	}

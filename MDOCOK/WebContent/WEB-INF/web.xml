@@ -183,4 +183,24 @@
     <servlet-name>ManageContactGroupServlet</servlet-name>
     <url-pattern>/ManageContactGroupServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AvailableGroups</display-name>
+    <servlet-name>AvailableGroups</servlet-name>
+    <servlet-class>servlets.AvailableGroups</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AvailableGroups</servlet-name>
+    <url-pattern>/AvailableGroups</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddContactToGroupsServlet</display-name>
+    <servlet-name>AddContactToGroupsServlet</servlet-name>
+    <servlet-class>servlets.AddContactToGroupsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddContactToGroupsServlet</servlet-name>
+    <url-pattern>/AddContactToGroupsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

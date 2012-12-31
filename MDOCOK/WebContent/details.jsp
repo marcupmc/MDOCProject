@@ -16,7 +16,8 @@
 	<%@page import="java.util.ArrayList"%>
 	<%
 	Contact contact  = (Contact) request.getAttribute("contact");
-	ArrayList<ContactGroup> lgroup = new ArrayList<ContactGroup>( (ArrayList<ContactGroup>)request.getAttribute("liste"));
+	 ArrayList<ContactGroup> lgroup = (ArrayList<ContactGroup>)request.getAttribute("liste");
+	
 		
 	%>
 	<jsp:include page="menu_gauche.jsp" />
@@ -46,7 +47,7 @@
 					<td>
 					<ul class="unstyled">
 							<li><strong>Number of Contacts : </strong><%= contact.getFriends().size()  %></li>
-							<li><strong>Number of Contact Groups : </strong><%= lgroup.size()  %></li>
+							<li><strong>Number of Contact Groups : </strong><%=lgroup.size() %></li>
 							
 						</ul>
 					</td>

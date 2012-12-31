@@ -2,6 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 
+import domain.Contact;
 import domain.ContactGroup;
 
 public interface IDAOContactGroup {
@@ -15,5 +16,6 @@ public interface IDAOContactGroup {
 	public ArrayList<ContactGroup> getAllContactGroups();
 	
 	public ArrayList<ContactGroup> getContactGroups(String search);
+	public boolean addContactToGroup(ContactGroup g, Contact c);
 
 }
