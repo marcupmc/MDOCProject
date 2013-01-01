@@ -72,14 +72,14 @@
 					<div class="control-group">
 						<label class="control-label" for="emailLog">Email</label>
 						<div class="controls">
-							<input type="email" id="emailLog" name="emailLog" placeholder="Your e-mail">
+							<input type="email" id="emailLog" name="emailLog" placeholder="Your e-mail" required="required">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="passwordLog">Password</label>
 						<div class="controls">
 							<input type="password" id="passwordLog" name="passwordLog"
-								placeholder="Password">
+								placeholder="Password" required="required">
 						</div>
 					</div>
 					<div class="control-group">

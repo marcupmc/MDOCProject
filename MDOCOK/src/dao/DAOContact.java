@@ -382,6 +382,27 @@ public class DAOContact implements IDAOContact{
 		return true;
 	}
 
+	@Override
+	public boolean modifyPicture(Contact online, String pathPic) {
+		Session session = null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+			
+			online.setImagePerso(pathPic);
+			
+			session.update(online);
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+
 
 
 

@@ -24,15 +24,27 @@
 	<div class="container">
 		<div class="hero-unit">
 			<h2>My Informations</h2>
-			
-			<!-- 			+ Ajouter un formulaire pour la recherche multi-critere (Requete by example) -->
 
-
-			
 			<table class="table">
 				<tr>
 					<td>
+					<div>
+					
+					<img src="<%=contact.getImagePerso() %>" class="img-rounded"><br/>
+					<form method="post" action="AddPictureServlet" enctype="multipart/form-data">
+					<input type="file" name="file" required="required"/><br/>
+					<input type="submit" class="btn btn-info" value="Change Picture"/>
+					</form>
+					</div>
 						<ul class="unstyled">
+							<li><strong>Number of Contacts : </strong><%= contact.getFriends().size()  %></li>
+							<li><strong>Number of Contact Groups : </strong><%= lgroup.size()  %></li>
+
+						</ul>
+					</td>
+					<td>
+						<ul class="unstyled">
+
 							<li><strong>Firstname :</strong> <%= contact.getFirstName()  %></li>
 							<li><strong>Lastname :</strong> <%= contact.getLastName()  %></li>
 							<li><strong>Email :</strong> <%= contact.getEmail()  %></li>
@@ -40,21 +52,15 @@
 							<li><strong>City :</strong> <%= contact.getAdd().getCity()  %></li>
 							<li><strong>Zip :</strong> <%= contact.getAdd().getZip()  %></li>
 							<li><strong>Country :</strong> <%= contact.getAdd().getCountry()  %></li>
-							
-						</ul>
-					</td>
-					<td>
-					<ul class="unstyled">
-							<li><strong>Number of Contacts : </strong><%= contact.getFriends().size()  %></li>
-							<li><strong>Number of Contact Groups : </strong><%= lgroup.size()  %></li>
-							
+
 						</ul>
 					</td>
 				</tr>
-				
-				
+
+
 			</table>
-			<a class="btn btn-large btn-primary" href="InitUpdateServlet?id=<%= contact.getId() %>" type="button">Update</a>
+			<a class="btn btn-large btn-primary"
+				href="InitUpdateServlet?id=<%= contact.getId() %>" type="button">Update</a>
 		</div>
 	</div>
 	<jsp:include page="footer.jsp" />

@@ -13,6 +13,7 @@ public class Contact {
 	private Address add;
 	private Set<PhoneNumber> phones=new HashSet<PhoneNumber>();
 	private String password;
+	private String imagePerso="images_perso/default_perso.png";
 	
 	//Ajout pour Social Network
 	private Set<Contact> persons = new HashSet<Contact>();
@@ -117,6 +118,14 @@ public class Contact {
 
 	public void setPersons(Set<Contact> persons) {
 		this.persons = persons;
+	}
+
+	public String getImagePerso() {
+		return imagePerso;
+	}
+
+	public void setImagePerso(String imagePerso) {
+		this.imagePerso = imagePerso;
 	}
 
 

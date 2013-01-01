@@ -33,5 +33,7 @@ public interface IDAOContact {
 	
 	public boolean deleteFriend(Contact online, Contact friend);
 	
+	public boolean modifyPicture(Contact online, String pathPic);
+	
 	//public Contact addContactGroup(Contact c ,ContactGroup g);
 }

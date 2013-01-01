@@ -34,47 +34,47 @@
 				<label class="control-label" for="prenom">Firstname</label>
 				<div class="controls">
 					<input type="text" id="prenom" name="prenom"
-						placeholder="<%= contact.getFirstName() %>"/>
+						value="<%= contact.getFirstName() %>"/>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="nom">Lastname</label>
 				<div class="controls">
-					<input type="text" id="nom" name="nom" placeholder="<%= contact.getLastName() %>"/>
+					<input type="text" id="nom" name="nom" value="<%= contact.getLastName() %>"/>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="email">Email</label>
 				<div class="controls">
-					<input type="email" id="email" name="email" placeholder="<%= contact.getEmail() %>"/>
+					<input type="email" id="email" name="email" value="<%= contact.getEmail() %>"/>
 				</div>
 			</div>
 			
 			<div class="control-group">
 				<label class="control-label" for="street">Street</label>
 				<div class="controls">
-					<input type="text" id="street" name="street" placeholder="<%= contact.getAdd().getStreet() %>"/>
+					<input type="text" id="street" name="street" value="<%= contact.getAdd().getStreet() %>"/>
 				</div>
 			</div>
 			
 			<div class="control-group">
 				<label class="control-label" for="city">City</label>
 				<div class="controls">
-					<input type="text" id="city" name="city" placeholder="<%= contact.getAdd().getCity() %>"/>
+					<input type="text" id="city" name="city" value="<%= contact.getAdd().getCity() %>"/>
 				</div>
 			</div>
 			
 			<div class="control-group">
 				<label class="control-label" for="zip">ZIP</label>
 				<div class="controls">
-					<input type="text" id="zip" name="zip" placeholder="<%= contact.getAdd().getZip() %>"/>
+					<input type="text" id="zip" name="zip" value="<%= contact.getAdd().getZip() %>"/>
 				</div>
 			</div>
 			
 			<div class="control-group">
 				<label class="control-label" for="country">Country</label>
 				<div class="controls">
-					<input type="text" id="country" name="country" placeholder="<%= contact.getAdd().getCountry() %>"/>
+					<input type="text" id="country" name="country" value="<%= contact.getAdd().getCountry() %>"/>
 				</div>
 			</div>
 			

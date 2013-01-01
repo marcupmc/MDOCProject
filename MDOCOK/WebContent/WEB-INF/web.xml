@@ -243,4 +243,14 @@
     <servlet-name>RenameGroupServlet</servlet-name>
     <url-pattern>/RenameGroupServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddPictureServlet</display-name>
+    <servlet-name>AddPictureServlet</servlet-name>
+    <servlet-class>servlets.AddPictureServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddPictureServlet</servlet-name>
+    <url-pattern>/AddPictureServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
