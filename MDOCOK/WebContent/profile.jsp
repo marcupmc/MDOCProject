@@ -14,6 +14,7 @@
 	<%@page import="domain.Contact"%>
 	<%@page import="domain.ContactGroup"%>
 	<%@page import="java.util.ArrayList"%>
+	<%@page import="domain.PhoneNumber" %>
 	<%
 	Contact contact  = (Contact) request.getAttribute("contact");
 	ArrayList<ContactGroup> lgroup = (ArrayList<ContactGroup>)request.getAttribute("liste");
@@ -24,7 +25,8 @@
 	<div class="container">
 		<div class="hero-unit">
 			<h2>My Informations</h2>
-
+			<p><a class="btn btn-large btn-primary"
+				href="InitUpdateServlet?id=<%= contact.getId() %>" type="button">Update</a></p>
 			<table class="table">
 				<tr>
 					<td>
@@ -41,6 +43,7 @@
 							<li><strong>Number of Contact Groups : </strong><%= lgroup.size()  %></li>
 
 						</ul>
+						
 					</td>
 					<td>
 						<ul class="unstyled">
@@ -52,15 +55,23 @@
 							<li><strong>City :</strong> <%= contact.getAdd().getCity()  %></li>
 							<li><strong>Zip :</strong> <%= contact.getAdd().getZip()  %></li>
 							<li><strong>Country :</strong> <%= contact.getAdd().getCountry()  %></li>
-
+							<li><strong>Phone Numbers :</strong>
+							<ul >
+							<%for(PhoneNumber p : contact.getPhones()){
+								%>
+								<li><strong><%=p.getPhoneKind() %> : </strong><%=p.getPhoneNumber() %></li>
+								
+							<% }%>
+							</ul>
+							</li>
+							<a href="" class="btn btn-success">Add Phone Number</a>
 						</ul>
 					</td>
 				</tr>
 
 
 			</table>
-			<a class="btn btn-large btn-primary"
-				href="InitUpdateServlet?id=<%= contact.getId() %>" type="button">Update</a>
+			
 		</div>
 	</div>
 	<jsp:include page="footer.jsp" />
