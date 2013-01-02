@@ -78,6 +78,19 @@
 				</div>
 			</div>
 			
+			<input type="hidden" id="nbTel" name="nbTel" value = "<%=contact.getPhones().size() %>" />
+			<% int i =0;
+			for(PhoneNumber p : contact.getPhones()){
+				%>
+				<div class="control-group">
+				<label class="control-label" for="country"><%=p.getPhoneKind() %></label>
+				<div class="controls">
+					<input type="text" id="tel<%=i%>" name="tel<%=i%>" value="<%= p.getPhoneNumber() %>"/>
+				</div>
+			</div>
+				
+			<%i++;
+			} %>
 			
 			
 			<div class="control-group">

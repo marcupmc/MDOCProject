@@ -30,7 +30,7 @@
 
 		<set name="phones" inverse="true" lazy="false" 
 			cascade="all">
-			<key column="ID_PHONENUMBER" not-null="true" />
+			<key column="ID_CONTACT"  />
 			<one-to-many class="domain.PhoneNumber" />
 		</set>
 

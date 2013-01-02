@@ -1,8 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import dao.DAOAddress;
-import dao.DAOContact;
-import dao.DAOContactGroup;
-import dao.DAOPhoneNumber;
-import dao.IDAOAddress;
 import dao.IDAOContact;
-import dao.IDAOContactGroup;
-import dao.IDAOPhoneNumber;
-import domain.Address;
-import domain.ContactGroup;
+import domain.Contact;
 import domain.PhoneNumber;
 
 /**
@@ -45,9 +36,6 @@ public class UpdateContactServlet extends HttpServlet {
 		//DAO
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
-		IDAOAddress daoAddress = (IDAOAddress)context.getBean("daoAddress");
-		IDAOPhoneNumber daoPhoneNumber = (IDAOPhoneNumber)context.getBean("daoPhoneNumber");
-		IDAOContactGroup daoContactGroup = (IDAOContactGroup)context.getBean("daoContactGroup");
 		
 		//Recuperation des données formulaire
 		String prenom = request.getParameter("prenom");
@@ -57,28 +45,25 @@ public class UpdateContactServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		String country = request.getParameter("country");
 		String zip = request.getParameter("zip");
-//		String phoneNumber = request.getParameter("phoneNumber");
-//		String type = request.getParameter("type");
-//		String groupName = request.getParameter("groupName");
-//		long idGroup = Long.parseLong(request.getParameter("idGroup"));
+		int nbTel = Integer.parseInt(request.getParameter("nbTel"));
+		
 		long idContact = Long.parseLong(request.getParameter("id"));
-		long idAddress  = Long.parseLong(request.getParameter("idAddress"));
-//		long idPhone = Long.parseLong(request.getParameter("idPhone"));
 		
-
-		//Modification de Address, PhoneNumber et ContactGroup
-		daoAddress.modifyAddress(idAddress, city, country, street, zip);
-//		daoPhoneNumber.modifyPhoneNumber(idPhone,type, phoneNumber);
-//		daoContactGroup.modifyContactGroup(idGroup,groupName);
+		Contact c = daoContact.getContact(idContact);
+		c.setFirstName(prenom);
+		c.setLastName(nom);
+		c.setEmail(email);
+		c.getAdd().setCity(city);
+		c.getAdd().setCountry(country);
+		c.getAdd().setStreet(street);
+		c.getAdd().setZip(zip);
 		
-		//Set des parametre de modifyContact
-//		Set<ContactGroup> lgroup= new HashSet<ContactGroup>();
-//		lgroup.add(daoContactGroup.getContactGroup(idGroup));
-//		Set<PhoneNumber> lphones = new HashSet<PhoneNumber>();
-//		lphones.add(daoPhoneNumber.getPhoneNumber(idPhone));
-//		Address add = daoAddress.getAddress(idAddress);
+		ArrayList<PhoneNumber> nums = new ArrayList<PhoneNumber>(c.getPhones());
+		for(int i = 0; i <nbTel;i++){
+			nums.get(i).setPhoneNumber(request.getParameter("tel"+i));
+		}
 		
-		daoContact.modifyContact(idContact, prenom, nom,email);
+		daoContact.update(c);
 		
 		request.getRequestDispatcher("MyProfileServlet").forward(request, response);
 	}

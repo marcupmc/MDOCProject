@@ -15,4 +15,6 @@ public interface IDAOPhoneNumber {
 		public boolean modifyPhoneNumber(long id, String phoneKind, String phoneNumber);
 		
 		public PhoneNumber addPhoneNumber(PhoneNumber num, Contact c);
+		
+		public boolean addPhoneNumber(Contact c);
 }

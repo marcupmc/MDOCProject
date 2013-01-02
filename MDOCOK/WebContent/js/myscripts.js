@@ -33,10 +33,10 @@ function addTel(){
 	" <i class=\"icon-minus\""+
 	"onclick=\"deleteTel("+id_tel+")\"></i>"+
 	"</div>"+
-	"<select name=\"type\""+id_tel+">"+
-	"<option value\"home\">Home</option>"+
-	"<option value=\"work\">Work</option>"+
-	"<option value=\"mobile\">Mobile Phone</option>"+
+	"<select name=\"type"+id_tel+"\">"+
+	"<option value\"Home\">Home</option>"+
+	"<option value=\"Work\">Work</option>"+
+	"<option value=\"Mobil\">Mobile Phone</option>"+
 	"</select></div>";
 	
 	id_tel++;

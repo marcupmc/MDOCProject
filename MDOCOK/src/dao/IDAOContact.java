@@ -15,7 +15,7 @@ public interface IDAOContact {
 	
 	public Contact addContact(Contact c);
 	
-	public int deleteContact(long id);
+	public boolean deleteContact(long id);
 	
 	public Contact getContact(long id);
 	
@@ -35,7 +35,9 @@ public interface IDAOContact {
 	
 	public boolean modifyPicture(Contact online, String pathPic);
 	
-	public boolean addPhoneNumber(Contact online);
+	public boolean update(Contact online);
+	
+	public boolean deletePhone(Contact online,long id);
 	
 	//public Contact addContactGroup(Contact c ,ContactGroup g);
 }

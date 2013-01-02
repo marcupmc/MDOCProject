@@ -63,23 +63,25 @@ public class DAOContact implements IDAOContact{
 	 * @param id
 	 * @return vrai si la suppression a bien ete effectuee
 	 */
-	public int deleteContact(long id){
-		int success=0;
-		Connection con = null;
+	public boolean deleteContact(long id){
+
+		Session session=null;
 		try{
-			Class.forName(Messages.getString("driver")); 
-			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"), Messages.getString("password")); 
-			Statement stmt = con.createStatement();
-			String request = "DELETE FROM contacts WHERE id = "+id; 
-			success = stmt.executeUpdate(request);
-			stmt.close();
-			con.close();
-
-		} catch( Exception e ){
-			e.printStackTrace();
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+						
+			session.createQuery("delete Contact as c where c.id = '"+id+"'").executeUpdate();
+			
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
 		}
-
-		return success;
+		
+		return true;
 	}
 
 	/**
@@ -286,16 +288,12 @@ public class DAOContact implements IDAOContact{
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
 
-			Set<PhoneNumber> ln =  c.getPhones();
-			for(PhoneNumber num : ln){
-				num.setContact(c);
-			}
-
-
-			//			Set<ContactGroup> groupes = c.getBooks();
-			//			for(ContactGroup g : groupes){
-			//				g.getContacts().add(c);
-			//			}
+//			Set<PhoneNumber> ln =  c.getPhones();
+//			
+//			for(PhoneNumber num : ln){
+//				num.setContact(c);
+//				session.save(num);
+//			}
 
 			session.save(c);
 			tx.commit();
@@ -381,22 +379,44 @@ public class DAOContact implements IDAOContact{
 	}
 
 	@Override
-	public boolean addPhoneNumber(Contact online) {
-		Contact c = this.getContact(online.getId());
+	public boolean update(Contact online) {
+		
 		Session session = null;
 		try{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
 
-			for(PhoneNumber num : c.getPhones()){
-				num.setContact(c);
-				session.saveOrUpdate(num);
-				
+			
+			session.saveOrUpdate(online);
+
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean deletePhone(Contact online,long id) {
+		Session session = null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+			Iterator<PhoneNumber> iterator = online.getPhones().iterator();
+			while (iterator.hasNext()) {
+				PhoneNumber num = iterator.next();
+				if (num.getId()==id) {
+					System.out.println("Trouvé je delete");
+					iterator.remove();
+				}
 			}
 			
-			session.update(c);
-
+			session.saveOrUpdate(online);
 			tx.commit();
 			session.close();
 		} 

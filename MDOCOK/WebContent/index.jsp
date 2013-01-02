@@ -203,9 +203,9 @@
 											onclick="addTel()"></i>
 									</div>
 									<select name="type0">
-										<option value="home">Home</option>
-										<option value="work">Work</option>
-										<option value="mobile">Mobile Phone</option>
+										<option value="Home">Home</option>
+										<option value="Work">Work</option>
+										<option value="Mobile">Mobile Phone</option>
 									</select>
 								</div>
 							</div>

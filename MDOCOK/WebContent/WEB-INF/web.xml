@@ -263,4 +263,24 @@
     <servlet-name>AddNewPhoneServlet</servlet-name>
     <url-pattern>/AddNewPhoneServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteAccountServlet</display-name>
+    <servlet-name>DeleteAccountServlet</servlet-name>
+    <servlet-class>servlets.DeleteAccountServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteAccountServlet</servlet-name>
+    <url-pattern>/DeleteAccountServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeletePhoneServlet</display-name>
+    <servlet-name>DeletePhoneServlet</servlet-name>
+    <servlet-class>servlets.DeletePhoneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeletePhoneServlet</servlet-name>
+    <url-pattern>/DeletePhoneServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

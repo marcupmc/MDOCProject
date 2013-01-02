@@ -47,9 +47,11 @@ public class DAOPhoneNumber implements IDAOPhoneNumber {
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
 			
+			c.getPhones().add(num);
 			num.setContact(c);
 			
-			session.save(num);
+			
+			session.update(c);
 			
 			tx.commit();
 			session.close();
@@ -126,6 +128,30 @@ public class DAOPhoneNumber implements IDAOPhoneNumber {
 			return null;
 		}
 		return n;
+	}
+
+	@Override
+	public boolean addPhoneNumber(Contact c) {
+		Session session=null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+
+			
+			for(PhoneNumber n : c.getPhones()){
+				n.setContact(c);
+				session.save(n);
+			}
+			
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 }
