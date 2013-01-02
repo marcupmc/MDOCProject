@@ -7,9 +7,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import domain.PhoneNumber;
-
 import tools.HibernateUtil;
+import domain.Contact;
+import domain.PhoneNumber;
 
 
 
@@ -27,6 +27,27 @@ public class DAOPhoneNumber implements IDAOPhoneNumber {
 			num = new PhoneNumber();
 			num.setPhoneKind(phoneKind);
 			num.setPhoneNumber(phoneNumber);
+			
+			session.save(num);
+			
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return num;
+	}
+	
+	public PhoneNumber addPhoneNumber(PhoneNumber num, Contact c) {
+		
+		Session session =null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+			
+			num.setContact(c);
 			
 			session.save(num);
 			

@@ -119,8 +119,8 @@ public class DAOContact implements IDAOContact{
 	 */
 	public boolean modifyContact(long id, String firstname, String lastname, String email){
 		Contact toModify = this.getContact(id);
-		
-		
+
+
 		Session session=null;
 		try{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -130,7 +130,7 @@ public class DAOContact implements IDAOContact{
 			toModify.setEmail(email);
 			toModify.setLastName(lastname);
 			toModify.setFirstName(firstname);
-			
+
 			session.update(toModify);
 			tx.commit();
 			session.close();
@@ -142,7 +142,7 @@ public class DAOContact implements IDAOContact{
 		return true;
 	}
 
-	
+
 	/**
 	 * Renvoit la liste des contacts correspondant au prenom firrstname
 	 * @param firstname
@@ -306,32 +306,9 @@ public class DAOContact implements IDAOContact{
 		}
 		return c;
 	}
-	
-//	@Override
-//	public Contact addContactGroup(Contact c ,ContactGroup g) {
-//		Session session = null;
-//
-//		try{
-//			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//			session = sessionFactory.openSession(); 
-//			org.hibernate.Transaction tx = session.beginTransaction();
-//
-//			c.getBooks().add(g);
-//			
-//			
-//			session.update(c);
-//			System.out.println("J'ai maintenant nb groupe = "+c.getBooks().size());
-//			tx.commit();
-//			session.close();
-//		} 
-//		catch(Exception e){
-//			System.out.println(e.getMessage());
-//		}
-//		return c;
-//	}
 
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -342,12 +319,12 @@ public class DAOContact implements IDAOContact{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-			
+
 			online.getFriends().add(friend);
-			
+
 			session.update(friend);
 			session.update(online);
-			
+
 			tx.commit();
 			session.close();
 		} 
@@ -357,7 +334,7 @@ public class DAOContact implements IDAOContact{
 		}
 		return true;
 	}
-	
+
 	public boolean deleteFriend(Contact online, Contact friend){
 		Session session = null;
 		try{
@@ -366,10 +343,10 @@ public class DAOContact implements IDAOContact{
 			org.hibernate.Transaction tx = session.beginTransaction();
 			Iterator<Contact> iterator = online.getFriends().iterator();
 			while (iterator.hasNext()) {
-			    Contact ami = iterator.next();
-			    if (ami.getId()==friend.getId()) {
-			        iterator.remove();
-			    }
+				Contact ami = iterator.next();
+				if (ami.getId()==friend.getId()) {
+					iterator.remove();
+				}
 			}
 			session.update(online);
 			tx.commit();
@@ -389,9 +366,9 @@ public class DAOContact implements IDAOContact{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-			
+
 			online.setImagePerso(pathPic);
-			
+
 			session.update(online);
 			tx.commit();
 			session.close();
@@ -403,6 +380,32 @@ public class DAOContact implements IDAOContact{
 		return true;
 	}
 
+	@Override
+	public boolean addPhoneNumber(Contact online) {
+		Contact c = this.getContact(online.getId());
+		Session session = null;
+		try{
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			session = sessionFactory.openSession(); 
+			org.hibernate.Transaction tx = session.beginTransaction();
+
+			for(PhoneNumber num : c.getPhones()){
+				num.setContact(c);
+				session.saveOrUpdate(num);
+				
+			}
+			
+			session.update(c);
+
+			tx.commit();
+			session.close();
+		} 
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
 
 
 

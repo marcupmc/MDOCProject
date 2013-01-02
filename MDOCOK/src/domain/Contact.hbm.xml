@@ -28,9 +28,9 @@
 		<many-to-one name="add" column="ID_ADDRESS" lazy="false"
 			class="domain.Address" cascade="all" />
 
-		<set name="phones" inverse="true" lazy="false" fetch="select"
+		<set name="phones" inverse="true" lazy="false" 
 			cascade="all">
-			<key column="ID_PHONENUMBER" />
+			<key column="ID_PHONENUMBER" not-null="true" />
 			<one-to-many class="domain.PhoneNumber" />
 		</set>
 

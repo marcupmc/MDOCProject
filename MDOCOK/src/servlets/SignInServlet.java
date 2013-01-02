@@ -46,7 +46,7 @@ public class SignInServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 		String firstname =  request.getParameter("firstname");
@@ -56,10 +56,11 @@ public class SignInServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		String country = request.getParameter("country");
 		String zip = request.getParameter("zip");
-		String phoneNumber = request.getParameter("phoneNumber0");
-		String typePhone = request.getParameter("type");
+		String phoneNumber ;
+		String typePhone;
 		String password = request.getParameter("password");
 		String repassword = request.getParameter("repassword");
+		int nbTel = Integer.parseInt(request.getParameter("nbTel"));
 			
 		if(!password.equals(repassword)){
 			
@@ -71,9 +72,9 @@ public class SignInServlet extends HttpServlet {
 			//ici on ajoute le contact à la base !
 			
 			
-			PhoneNumber num = new PhoneNumber();
-			num.setPhoneKind(typePhone);
-			num.setPhoneNumber(phoneNumber);
+//			PhoneNumber num = new PhoneNumber();
+//			num.setPhoneKind(typePhone);
+//			num.setPhoneNumber(phoneNumber);
 			Address add = new Address();
 			
 			add.setCity(city);
@@ -82,7 +83,17 @@ public class SignInServlet extends HttpServlet {
 			add.setZip(zip);
 			
 			Set<PhoneNumber> lphones = new HashSet<PhoneNumber>();
-			lphones.add(num);
+			for(int i = 0; i<nbTel;i++){
+				phoneNumber = request.getParameter("phoneNumber"+i);
+				typePhone = request.getParameter("type"+i);
+				PhoneNumber num = new PhoneNumber();
+				num.setPhoneNumber(phoneNumber);
+				num.setPhoneKind(typePhone);
+				lphones.add(num);
+				
+			}
+			
+			//lphones.add(num);
 		
 			Contact c=new Contact();
 			c.setAdd(add);

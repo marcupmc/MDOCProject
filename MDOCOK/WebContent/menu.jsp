@@ -21,7 +21,7 @@
             <ul class="thumbnails">
               <li class="span4">
                 <div class="thumbnail">
-                  <img data-src="holder.js/300x200" alt="">
+                  
                   <div class="caption">
                     <h3>Edit Your Profil</h3>
                     <p>Everyone can see your profil on this network, so make sure the information you give are ok !</p>
@@ -31,7 +31,7 @@
               </li>
               <li class="span4">
                 <div class="thumbnail">
-                  <img data-src="holder.js/300x200" alt="">
+                  
                   <div class="caption">
                     <h3>Find Contact</h3>
                     <p>There is many poeple in Contact Manager. Find people you know, and them in your Contact's list.</p>

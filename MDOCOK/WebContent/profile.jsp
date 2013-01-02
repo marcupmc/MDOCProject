@@ -64,7 +64,7 @@
 							<% }%>
 							</ul>
 							</li>
-							<a href="" class="btn btn-success">Add Phone Number</a>
+							<a href="#myModal6" data-toggle="modal" class="btn btn-success">Add Phone Number</a>
 						</ul>
 					</td>
 				</tr>
@@ -74,6 +74,53 @@
 			
 		</div>
 	</div>
+	
+	<!-- Modal -->
+	<div id="myModal6" class="modal hide fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<form method="post" action="AddNewPhoneServlet"
+			id="addContactForm">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h3>Add a Phone Number</h3>
+			</div>
+
+
+			<div class="modal-body">
+				<tr>
+					<div class="control-group">
+						<label class="control-label" for="name">Phone number</label>
+						<div class="controls">
+							<input type="tel" id="phone" name="phone"
+								placeholder="Telephone Number">
+						</div>
+						<select name="type">
+										<option value="home">Home</option>
+										<option value="work">Work</option>
+										<option value="mobile">Mobile Phone</option>
+									</select>
+					</div>
+
+				</tr>
+			</div>
+			</table>
+			<div class="modal-footer">
+
+				<input type="submit" class="btn btn-primary" value="Add Phone Number" />
+				<a class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+
+
+
+			</div>
+
+
+
+		</form>
+	</div>
+	
+	
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

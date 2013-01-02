@@ -101,7 +101,7 @@
 	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<form method="post" action="SignInServlet" id="addContactForm">
-
+			<input type="hidden" id="nbTel" name="nbTel" value="1" />
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
@@ -198,11 +198,11 @@
 									<label class="control-label" for="phoneNumber">Phone
 										Number</label>
 									<div class="controls">
-										<input type="text" id="phoneNumber0" name="phoneNumber0"
+										<input type="tel" id="phoneNumber0" name="phoneNumber0"
 											placeholder="Phone Number" required="required"> <i class="icon-plus"
 											onclick="addTel()"></i>
 									</div>
-									<select name="type">
+									<select name="type0">
 										<option value="home">Home</option>
 										<option value="work">Work</option>
 										<option value="mobile">Mobile Phone</option>

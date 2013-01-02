@@ -35,5 +35,7 @@ public interface IDAOContact {
 	
 	public boolean modifyPicture(Contact online, String pathPic);
 	
+	public boolean addPhoneNumber(Contact online);
+	
 	//public Contact addContactGroup(Contact c ,ContactGroup g);
 }

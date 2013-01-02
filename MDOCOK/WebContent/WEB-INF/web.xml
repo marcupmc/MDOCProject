@@ -253,4 +253,14 @@
     <servlet-name>AddPictureServlet</servlet-name>
     <url-pattern>/AddPictureServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddNewPhoneServlet</display-name>
+    <servlet-name>AddNewPhoneServlet</servlet-name>
+    <servlet-class>servlets.AddNewPhoneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddNewPhoneServlet</servlet-name>
+    <url-pattern>/AddNewPhoneServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

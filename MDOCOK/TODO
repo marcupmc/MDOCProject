@@ -13,18 +13,20 @@ Prioritaire :
 [DONE]- mettre tout les dao dans un package (pour aspectJ)
 - Refaire Update Du contact en ligne (ok sauf pour tel)
 [DONE]- ATTENTION LORS DE LA SUPPRESSION D'un ami, le supprimer de tout les groupes où il apparait!
+- se désinscrire du site.
 
 Non prioritaire : 
 
 - ajouter des photos
 - recherche multi critere
-- ameliorer le design
+[DONE] ameliorer le design
 - systeme de messageries
 - Jeux de donnée par setters
-- se désinscrire du site.
+
 
 Liste des bugs : 
 [DONE]- supression de contact
 - doublons dans la recherche
 - Mauvais messages d'erreur sur la page d'accueil (lors de l'inscription et de la connexion)
 [FIXED] les groupes ne se lient pas au contact qui l'a créé
+-Impossible d'ajouter plusieurs numéros de telephone

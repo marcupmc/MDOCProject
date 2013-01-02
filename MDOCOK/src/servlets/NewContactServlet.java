@@ -57,6 +57,7 @@ public class NewContactServlet extends HttpServlet {
 		Contact contBean = (Contact)context.getBean("contact");
 		
 		
+		
 		IDAOAddress daoAddress = new DAOAddress();
 		IDAOPhoneNumber daoPhoneNumber = new DAOPhoneNumber();
 		IDAOContactGroup daoContactGroup = new DAOContactGroup();
@@ -92,7 +93,6 @@ public class NewContactServlet extends HttpServlet {
 		Set<PhoneNumber> lphones = new HashSet<PhoneNumber>();
 		lphones.add(num);
 		
-
 		
 		Contact c=new Contact();
 		c.setAdd(add);
@@ -111,11 +111,7 @@ public class NewContactServlet extends HttpServlet {
 		
 		
 		//daoPhoneNumber.addPhoneNumber(num);
-		
 
-		
-		
-		
 //		dao.addContact(Long.parseLong(request.getParameter("id"))
 //				, request.getParameter("prenom"), request.getParameter("nom"),
 //				request.getParameter("email"));
