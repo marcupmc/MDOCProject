@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import dao.IDAOContact;
 import dao.IDAOContactGroup;
+import domain.Contact;
+import domain.ContactGroup;
 
 /**
  * Servlet implementation class DeleteAccountServlet
@@ -40,8 +43,14 @@ public class DeleteAccountServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
+		IDAOContactGroup daoContactGroup = (IDAOContactGroup)context.getBean("daoContactGroup");
 		
 		long idOnline = Long.parseLong(request.getSession().getAttribute("id").toString());
+		
+		
+		for(ContactGroup g : daoContactGroup.getContactGroupByOwner(idOnline)){
+			daoContactGroup.deleteContactGroup(g);
+		}
 		
 		daoContact.deleteContact(idOnline);
 		

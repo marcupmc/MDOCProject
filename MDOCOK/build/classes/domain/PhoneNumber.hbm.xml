@@ -15,6 +15,6 @@
             <column name="PHONENUMBER" />
         </property>
        
-        <many-to-one name="contact" column="ID_CONTACT" class="domain.Contact" unique="false" />
+        <many-to-one name="contact" column="ID_CONTACT" class="domain.Contact"  unique="false" />
     </class>
 </hibernate-mapping>

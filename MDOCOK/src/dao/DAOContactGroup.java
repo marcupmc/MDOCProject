@@ -210,8 +210,8 @@ public class DAOContactGroup implements IDAOContactGroup {
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
 						
-			session.createQuery("delete ContactGroup as c where c.groupId = '"+g.getGroupId()+"'").executeUpdate();
-			
+			//session.createQuery("delete ContactGroup as c where c.groupId = '"+g.getGroupId()+"'").executeUpdate();
+			session.delete(g);
 			tx.commit();
 			session.close();
 		} 

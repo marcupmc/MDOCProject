@@ -64,15 +64,14 @@ public class DAOContact implements IDAOContact{
 	 * @return vrai si la suppression a bien ete effectuee
 	 */
 	public boolean deleteContact(long id){
-
+		Contact c = this.getContact(id);
 		Session session=null;
 		try{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
-						
-			session.createQuery("delete Contact as c where c.id = '"+id+"'").executeUpdate();
-			
+			//session.createQuery("delete Contact as c where c.id = '"+id+"'").executeUpdate();
+			session.delete(c);
 			tx.commit();
 			session.close();
 		} 
@@ -407,16 +406,18 @@ public class DAOContact implements IDAOContact{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
 			org.hibernate.Transaction tx = session.beginTransaction();
+			
 			Iterator<PhoneNumber> iterator = online.getPhones().iterator();
 			while (iterator.hasNext()) {
 				PhoneNumber num = iterator.next();
 				if (num.getId()==id) {
 					System.out.println("Trouvé je delete");
 					iterator.remove();
+					session.delete(num);
 				}
 			}
-			
-			session.saveOrUpdate(online);
+			System.out.println("Nb tel "+online.getPhones().size());
+			session.update(online);
 			tx.commit();
 			session.close();
 		} 
