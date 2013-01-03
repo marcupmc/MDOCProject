@@ -50,7 +50,6 @@ public class NewContactServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		//IDAOContact daoContact = new DAOContact();
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 		
 		//JUSTE Un petit test pour ce qu'il y a dans le applicationContext

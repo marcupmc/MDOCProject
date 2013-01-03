@@ -35,7 +35,7 @@
 						<div>
 
 							<img src="<%=contact.getImagePerso()%>" class="img-rounded"><br />
-							<form method="post" action="AddPictureServlet"
+							<form method="post" action=""
 								enctype="multipart/form-data">
 								<input type="file" name="file" required="required" /><br /> <input
 									type="submit" class="btn btn-info" value="Change Picture" />

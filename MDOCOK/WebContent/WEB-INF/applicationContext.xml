@@ -7,14 +7,13 @@
 						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
+
 	<bean id="daoContact" class="dao.DAOContact"></bean>
 	<bean id="daoContactGroup" class="dao.DAOContactGroup"></bean>
 	<bean id="daoPhoneNumber" class="dao.DAOPhoneNumber"></bean>
 	<bean id="daoAddress" class="dao.DAOAddress"></bean>
 
 	
-
-
 	<!-- SETTERS WAY -->
 	<bean id="contact" class="domain.Contact">
 		<property name="firstName" value="Marc" />
@@ -92,13 +91,14 @@
 
 
 	<!-- AOP -->
-<!-- 	<aop:config> -->
-<!-- 		<aop:aspect id="myLoggerBean" ref=" myLogger "> -->
-<!-- 			<aop:before -->
-<!-- 				pointcut="execution(* setFirstName(String)) and args(chaine)" -->
-<!-- 				method="logSetterFirstName" arg-names="chaine" /> -->
-<!-- 		</aop:aspect> -->
-<!-- 	</aop:config> -->
-<!-- 	<bean id="myLogger" class="aop.MyLogger" /> -->
+	<aop:config>
+		<aop:pointcut expression="execution (* deletePhone(..))" id="firstAspect"/>
+		<aop:aspect id="myLoggerBean" ref="myLogger">
+			<aop:before
+				pointcut-ref="firstAspect"
+				method="logDeletePhone"/>
+		</aop:aspect>
+	</aop:config>
+	<bean id="myLogger" class="domain.MyLogger" />
 
 </beans>

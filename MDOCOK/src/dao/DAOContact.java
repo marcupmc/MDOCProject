@@ -411,12 +411,11 @@ public class DAOContact implements IDAOContact{
 			while (iterator.hasNext()) {
 				PhoneNumber num = iterator.next();
 				if (num.getId()==id) {
-					System.out.println("Trouvé je delete");
 					iterator.remove();
 					session.delete(num);
 				}
 			}
-			System.out.println("Nb tel "+online.getPhones().size());
+			
 			session.update(online);
 			tx.commit();
 			session.close();
