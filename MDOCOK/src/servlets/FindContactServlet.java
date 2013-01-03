@@ -42,7 +42,6 @@ public class FindContactServlet extends HttpServlet {
 		IDAOContact dao = (IDAOContact)context.getBean("daoContact");
 
 		Set<Contact> lcontact = new HashSet<Contact>();
-		Contact c;
 		String t = request.getParameter("type");
 
 		lcontact.addAll(dao.getContactByLastName(request.getParameter("search")));

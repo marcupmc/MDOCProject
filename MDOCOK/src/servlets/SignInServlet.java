@@ -49,6 +49,9 @@ public class SignInServlet extends HttpServlet {
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 		IDAOPhoneNumber daoPhoneNumber = (IDAOPhoneNumber)context.getBean("daoPhoneNumber");
+		Contact c = (Contact)context.getBean("contact_default");
+		//Address add = (Address)context.getBean("address_default");
+		Address add= new Address();
 		
 		String firstname =  request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
@@ -62,7 +65,7 @@ public class SignInServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String repassword = request.getParameter("repassword");
 		int nbTel = Integer.parseInt(request.getParameter("nbTel"));
-			
+			 
 		if(!password.equals(repassword)){
 			
 			request.setAttribute("password", true);
@@ -71,14 +74,11 @@ public class SignInServlet extends HttpServlet {
 		}
 		else{
 
-			Address add = new Address();
-			
 			add.setCity(city);
 			add.setCountry(country);
 			add.setStreet(street);
 			add.setZip(zip);
 			
-			Contact c=new Contact();
 			c.setAdd(add);
 			c.setFirstName(firstname);
 			c.setLastName(lastname);
@@ -94,7 +94,7 @@ public class SignInServlet extends HttpServlet {
 			for(int i = 0; i<nbTel;i++){
 				phoneNumber = request.getParameter("phoneNumber"+i);
 				typePhone = request.getParameter("type"+i);
-				PhoneNumber num = new PhoneNumber();
+				PhoneNumber num = (PhoneNumber)context.getBean("phonenumber_default");
 				num.setPhoneNumber(phoneNumber);
 				num.setPhoneKind(typePhone);
 				num.setContact(c);

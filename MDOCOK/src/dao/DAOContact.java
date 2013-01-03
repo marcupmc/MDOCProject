@@ -8,10 +8,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Example;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import tools.HibernateUtil;
 import domain.Address;
@@ -21,7 +25,14 @@ import domain.Messages;
 import domain.PhoneNumber;
 
 
-public class DAOContact implements IDAOContact{
+public class DAOContact extends HibernateDaoSupport implements IDAOContact{
+
+	private HibernateTemplate hibernateTemplate; 
+
+	public void setHibernateTemplate(SessionFactory sessionFactory){
+		this.hibernateTemplate = new HibernateTemplate(sessionFactory);
+	}
+
 
 	/**
 	 * Rajoute un contact dans la base de donnees.
@@ -31,30 +42,18 @@ public class DAOContact implements IDAOContact{
 	 * @return renvoit le nouveau contact
 	 */
 	public Contact addContact(String firstname, String lastname, String email,Address add, Set<ContactGroup> groupes, Set<PhoneNumber> phones){
-
-		Contact contact=null;
-		Session session=null;
+		Contact	contact = new Contact();
+		contact.setAdd(add);
+		contact.setEmail(email);
+		contact.setFirstName(firstname);
+		contact.setLastName(lastname);
+		contact.setBooks(groupes);
+		contact.setPhones(phones);
 		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-
-			contact = new Contact();
-			contact.setAdd(add);
-			contact.setEmail(email);
-			contact.setFirstName(firstname);
-			contact.setLastName(lastname);
-			contact.setBooks(groupes);
-			contact.setPhones(phones);
-
-			session.save(contact);
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
+			getHibernateTemplate().save(contact);
+		}catch(Exception e){
+			return null;
 		}
-		//return contact;
 		return contact;
 	}
 
@@ -65,51 +64,72 @@ public class DAOContact implements IDAOContact{
 	 */
 	public boolean deleteContact(long id){
 		Contact c = this.getContact(id);
-		Session session=null;
 		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-			//session.createQuery("delete Contact as c where c.id = '"+id+"'").executeUpdate();
-			session.delete(c);
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
+			getHibernateTemplate().delete(c);
+		}catch(Exception e){
 			return false;
 		}
-		
 		return true;
 	}
+	//		Session session=null;
+	//		try{
+	//			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	//			session = sessionFactory.openSession(); 
+	//			org.hibernate.Transaction tx = session.beginTransaction();
+	//
+	//			session.delete(c);
+	//			tx.commit();
+	//			session.close();
+	//		} 
+	//		catch(Exception e){
+	//			System.out.println(e.getMessage());
+	//			return false;
+	//		}
 
+
+	//ok
 	/**
 	 * Recuperation d'un contact a partir de son identifiant
 	 * @param id
 	 * @return
 	 */
 	public Contact getContact(long id){
-
-		List<Contact> contacts = new ArrayList<Contact>();
-
-		Session session=null;
 		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-
-			Query q =session.createQuery("from Contact as c where c.id = '"+id+"'");
-			contacts = q.list();
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
+			return (Contact)getHibernateTemplate().find("from Contact as c where c.id =?",id).get(0);
+		}catch(Exception e){
+			return null;
 		}
-
-		return new ArrayList<Contact>(contacts).get(0);
 	}
 
+	//ok
+	//	/**
+	//	 * Recuperation d'un contact a partir de son identifiant
+	//	 * @param id
+	//	 * @return
+	//	 */
+	//	public Contact getContact_old(long id){
+	//
+	//		List<Contact> contacts = new ArrayList<Contact>();
+	//
+	//		Session session=null;
+	//		try{
+	//			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	//			session = sessionFactory.openSession(); 
+	//			org.hibernate.Transaction tx = session.beginTransaction();
+	//
+	//			Query q =session.createQuery("from Contact as c where c.id = '"+id+"'");
+	//			contacts = q.list();
+	//			tx.commit();
+	//			session.close();
+	//		} 
+	//		catch(Exception e){
+	//			System.out.println(e.getMessage());
+	//		}
+	//
+	//		return new ArrayList<Contact>(contacts).get(0);
+	//	}
+
+	//unused
 	/**
 	 * Methode qui modifie les coordonees d'un contact
 	 * @param id
@@ -120,22 +140,12 @@ public class DAOContact implements IDAOContact{
 	 */
 	public boolean modifyContact(long id, String firstname, String lastname, String email){
 		Contact toModify = this.getContact(id);
-
-
-		Session session=null;
+		toModify.setEmail(email);
+		toModify.setLastName(lastname);
+		toModify.setFirstName(firstname);
 		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-
-			toModify.setEmail(email);
-			toModify.setLastName(lastname);
-			toModify.setFirstName(firstname);
-
-			session.update(toModify);
-			tx.commit();
-			session.close();
-		} 
+			getHibernateTemplate().update(toModify);
+		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
 			return false;
@@ -144,6 +154,7 @@ public class DAOContact implements IDAOContact{
 	}
 
 
+	//ok
 	/**
 	 * Renvoit la liste des contacts correspondant au prenom firrstname
 	 * @param firstname
@@ -152,57 +163,36 @@ public class DAOContact implements IDAOContact{
 	public ArrayList<Contact> getContactByFirstName(String firstname){
 
 		List<Contact> contacts = new ArrayList<Contact>();
-
-		Session session=null;
+		Contact c = new Contact();
+		c.setFirstName(firstname);
 		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-			// Requete par Exemple
-			//Query q =session.createQuery("from Contact as c where c.firstName = '"+firstname+"'");
-			//contacts = q.list();
-			Contact c = new Contact(); 
-			c.setFirstName(firstname);
-
-			contacts = session.createCriteria(Contact.class).add( Example.create(c) ).list();
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
+			contacts = getHibernateTemplate().findByCriteria(DetachedCriteria.forClass(Contact.class).add(Example.create(c)));
+		}catch(Exception e){
+			return null;
 		}
-
 		return new ArrayList<Contact>(contacts);
 	}
-
-	/**
-	 * Renvoit la liste des contacts correspondant au prenom firrstname
-	 * @param firstname
-	 * @return
-	 */
-	public Contact getContactById(long id){
-
-		List<Contact> contacts = new ArrayList<Contact>();
-
-		Session session=null;
-		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-
-			Query q =session.createQuery("from Contact as c where c.id = '"+id+"'");
-			contacts = q.list();
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-
-		return new ArrayList<Contact>(contacts).get(0);
-	}
+	//		Session session=null;
+	//		try{
+	//			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	//			session = sessionFactory.openSession(); 
+	//			org.hibernate.Transaction tx = session.beginTransaction();
+	//
+	//			Contact c = new Contact(); 
+	//			c.setFirstName(firstname);
+	//
+	//			contacts = session.createCriteria(Contact.class).add( Example.create(c) ).list();
+	//			tx.commit();
+	//			session.close();
+	//		} 
+	//		catch(Exception e){
+	//			System.out.println(e.getMessage());
+	//		}
 
 
+
+
+	//ok
 	/**
 	 * Renvoit la liste des contacts correspondant au nom lastname
 	 * @param lastname
@@ -211,25 +201,31 @@ public class DAOContact implements IDAOContact{
 	public ArrayList<Contact> getContactByLastName(String lastname){
 
 		List<Contact> contacts = new ArrayList<Contact>();
-
-		Session session=null;
 		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-
-			Query q =session.createQuery("from Contact as c where c.lastName = '"+lastname+"'");
-			contacts = q.list();
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
+			contacts = getHibernateTemplate().find("from Contact as c where c.lastName = '"+lastname+"'");
+		}catch(Exception e){
+			return null;
 		}
-
 		return new ArrayList<Contact>(contacts);
 	}
+	//		Session session=null;
+	//		try{
+	//			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	//			session = sessionFactory.openSession(); 
+	//			org.hibernate.Transaction tx = session.beginTransaction();
+	//
+	//			Query q =session.createQuery("from Contact as c where c.lastName = '"+lastname+"'");
+	//			contacts = q.list();
+	//			tx.commit();
+	//			session.close();
+	//		} 
+	//		catch(Exception e){
+	//			System.out.println(e.getMessage());
+	//		}
 
+
+
+	//ok
 	/**
 	 * Renvoit la liste des contacts correspondant a l'email email
 	 * @param email
@@ -237,26 +233,31 @@ public class DAOContact implements IDAOContact{
 	 */
 	public ArrayList<Contact> getContactByEmail(String email){
 		List<Contact> contacts = new ArrayList<Contact>();
-
-		Session session=null;
 		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-
-			Query q =session.createQuery("from Contact as c where c.email = '"+email+"'");
-			contacts = q.list();
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
+			contacts = getHibernateTemplate().find("from Contact as c where c.email = '"+email+"'");
+		}catch(Exception e){
+			return null;
 		}
-
 		return new ArrayList<Contact>(contacts);
 	}
+	//		Session session=null;
+	//		try{
+	//			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	//			session = sessionFactory.openSession(); 
+	//			org.hibernate.Transaction tx = session.beginTransaction();
+	//
+	//			Query q =session.createQuery("from Contact as c where c.email = '"+email+"'");
+	//			contacts = q.list();
+	//			tx.commit();
+	//			session.close();
+	//		} 
+	//		catch(Exception e){
+	//			System.out.println(e.getMessage());
+	//		}
 
-	@Override
+
+
+	//ok
 	public ArrayList<Contact> getAllContact() {
 		List<Contact> contacts = new ArrayList<Contact>();
 		Session session=null;
@@ -278,84 +279,94 @@ public class DAOContact implements IDAOContact{
 		return new ArrayList<Contact>(contacts);
 	}
 
-	@Override
+
+	//ok
 	public Contact addContact(Contact c) {
-		Session session = null;
-
 		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-
-//			Set<PhoneNumber> ln =  c.getPhones();
-//			
-//			for(PhoneNumber num : ln){
-//				num.setContact(c);
-//				session.save(num);
-//			}
-
-			session.save(c);
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
+			getHibernateTemplate().save(c);
+		}catch(Exception e){
+			return null;
 		}
 		return c;
+
 	}
 
 
 
-	/**
-	 * 
-	 */
+	//A Modifier
 	public boolean addFriend(Contact online, Contact friend) {
-		Session session = null;
-
+		online.getFriends().add(friend);
 		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-
-			online.getFriends().add(friend);
-
-			session.update(friend);
-			session.update(online);
-
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
+			getHibernateTemplate().update(friend);
+			getHibernateTemplate().update(online);
+		}catch(Exception e){
+			System.out.println("[ERROR] : pb ajout d'ami "+e.getMessage());
 			return false;
 		}
 		return true;
+
+		//		Session session = null;
+		//
+		//		try{
+		//			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		//			session = sessionFactory.openSession(); 
+		//			org.hibernate.Transaction tx = session.beginTransaction();
+		//
+		//			online.getFriends().add(friend);
+		//
+		//			session.update(friend);
+		//			session.update(online);
+		//
+		//			tx.commit();
+		//			session.close();
+		//		} 
+		//		catch(Exception e){
+		//			System.out.println(e.getMessage());
+		//			return false;
+		//		}
+		//		return true;
 	}
 
+	//Ok
 	public boolean deleteFriend(Contact online, Contact friend){
-		Session session = null;
-		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-			Iterator<Contact> iterator = online.getFriends().iterator();
-			while (iterator.hasNext()) {
-				Contact ami = iterator.next();
-				if (ami.getId()==friend.getId()) {
-					iterator.remove();
-				}
+		Iterator<Contact> iterator = online.getFriends().iterator();
+		while (iterator.hasNext()) {
+			Contact ami = iterator.next();
+			if (ami.getId()==friend.getId()) {
+				iterator.remove();
 			}
-			session.update(online);
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
+		}
+		try{
+			getHibernateTemplate().update(online);
+		}catch(Exception e){
 			return false;
 		}
 		return true;
 	}
+	//		Session session = null;
+	//		try{
+	//			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	//			session = sessionFactory.openSession(); 
+	//			org.hibernate.Transaction tx = session.beginTransaction();
+	//			Iterator<Contact> iterator = online.getFriends().iterator();
+	//			while (iterator.hasNext()) {
+	//				Contact ami = iterator.next();
+	//				if (ami.getId()==friend.getId()) {
+	//					iterator.remove();
+	//				}
+	//			}
+	//			session.update(online);
+	//			tx.commit();
+	//			session.close();
+	//		} 
+	//		catch(Exception e){
+	//			System.out.println(e.getMessage());
+	//			return false;
+	//		}
+	//		return true;
+	//	}
 
+	//A utiliser si on ajoute des images
 	@Override
 	public boolean modifyPicture(Contact online, String pathPic) {
 		Session session = null;
@@ -377,55 +388,79 @@ public class DAOContact implements IDAOContact{
 		return true;
 	}
 
+	//OK
 	@Override
 	public boolean update(Contact online) {
-		
-		Session session = null;
 		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-
-			
-			session.saveOrUpdate(online);
-
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
+			getHibernateTemplate().update(online);
+		}catch(Exception e){
 			return false;
 		}
 		return true;
 	}
+	//		Session session = null;
+	//		try{
+	//			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	//			session = sessionFactory.openSession(); 
+	//			org.hibernate.Transaction tx = session.beginTransaction();
+	//
+	//
+	//			session.saveOrUpdate(online);
+	//
+	//			tx.commit();
+	//			session.close();
+	//		} 
+	//		catch(Exception e){
+	//			System.out.println(e.getMessage());
+	//			return false;
+	//		}
+	//		return true;
+	//	}
 
+	//OK
 	@Override
 	public boolean deletePhone(Contact online,long id) {
-		Session session = null;
-		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
-			
-			Iterator<PhoneNumber> iterator = online.getPhones().iterator();
-			while (iterator.hasNext()) {
-				PhoneNumber num = iterator.next();
-				if (num.getId()==id) {
-					iterator.remove();
-					session.delete(num);
+		Iterator<PhoneNumber> iterator = online.getPhones().iterator();
+		while (iterator.hasNext()) {
+			PhoneNumber num = iterator.next();
+			if (num.getId()==id) {
+				iterator.remove();
+				try{
+					getHibernateTemplate().delete(num);
+				}catch(Exception e){
+					return false;
 				}
 			}
-			
-			session.update(online);
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
-			return false;
 		}
 		return true;
 	}
+
+
+	//		Session session = null;
+	//		try{
+	//			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	//			session = sessionFactory.openSession(); 
+	//			org.hibernate.Transaction tx = session.beginTransaction();
+	//
+	//			Iterator<PhoneNumber> iterator = online.getPhones().iterator();
+	//			while (iterator.hasNext()) {
+	//				PhoneNumber num = iterator.next();
+	//				if (num.getId()==id) {
+	//					iterator.remove();
+	//					session.delete(num);
+	//				}
+	//			}
+	//
+	//			session.update(online);
+	//			tx.commit();
+	//			session.close();
+	//		} 
+	//		catch(Exception e){
+	//			System.out.println(e.getMessage());
+	//			return false;
+	//		}
+	//		return true;
+	//	}
 
 
 

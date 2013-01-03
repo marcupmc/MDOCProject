@@ -55,7 +55,6 @@ public class DeleteContactServlet extends HttpServlet {
 			}
 				
 		}
-		
 		daoContact.deleteFriend(online, friend);
 		response.sendRedirect("PrintAllContactsServlet");
 	}

@@ -36,11 +36,14 @@ public class AddFriendServlet extends HttpServlet {
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 		long idFriend = Long.parseLong(request.getParameter("id"));
 		long idOnline = Long.parseLong(request.getSession().getAttribute("id").toString());
-		System.out.println("Id du contact en ligne "+idOnline);
 		
 		Contact friend = daoContact.getContact(idFriend);
 		Contact online = daoContact.getContact(idOnline);
-		daoContact.addFriend(online, friend);
+		
+		online.getFriends().add(friend);
+		daoContact.update(online);
+		
+		//daoContact.addFriend(online, friend);
 		
 		request.getRequestDispatcher("PrintAllContactsServlet").forward(request, response);
 		

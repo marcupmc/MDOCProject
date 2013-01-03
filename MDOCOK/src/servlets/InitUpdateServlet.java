@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import dao.DAOContact;
 import dao.IDAOContact;
 import domain.Contact;
@@ -30,11 +33,11 @@ public class InitUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IDAOContact dao = new DAOContact();
+		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		IDAOContact dao = (IDAOContact)context.getBean("daoContact");
 		
-		Contact c;
 		String t = request.getParameter("id");
-		c = dao.getContact(Long.parseLong(t));
+		Contact c = dao.getContact(Long.parseLong(t));
 	   
 		request.setAttribute("Contact", c);
 		request.getRequestDispatcher("formUpdate.jsp").forward(request, response);

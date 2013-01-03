@@ -34,7 +34,7 @@ public class AddNewPhoneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	}
+	} 
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -51,6 +51,7 @@ public class AddNewPhoneServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		
 		PhoneNumber p = new PhoneNumber();
+		//PhoneNumber p = (PhoneNumber)context.getBean("phonenumber_default");
 		p.setPhoneNumber(num);
 		p.setPhoneKind(type);
 		p.setContact(c);

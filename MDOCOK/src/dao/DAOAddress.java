@@ -14,6 +14,7 @@ import tools.HibernateUtil;
 
 public class DAOAddress implements IDAOAddress {
 
+	//Unused
 	@Override
 	public Address addAddress(String city, String country, String street, String zip) {
 		Address add=null;
@@ -62,6 +63,7 @@ public class DAOAddress implements IDAOAddress {
 		return new ArrayList<Address>(address).get(0);
 	}
 
+	//Unused
 	@Override
 	public boolean modifyAddress(long id, String city, String country, String street,
 			String zip) {

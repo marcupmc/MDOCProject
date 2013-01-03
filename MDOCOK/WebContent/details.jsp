@@ -12,6 +12,7 @@
 <body>
 
 	<%@page import="domain.Contact"%>
+	<%@page import="domain.PhoneNumber"%>
 	<%@page import="domain.ContactGroup"%>
 	<%@page import="java.util.ArrayList"%>
 	<%
@@ -41,7 +42,10 @@
 							<li><strong>City :</strong> <%= contact.getAdd().getCity()  %></li>
 							<li><strong>Zip :</strong> <%= contact.getAdd().getZip()  %></li>
 							<li><strong>Country :</strong> <%= contact.getAdd().getCountry()  %></li>
-							
+							<%for(PhoneNumber p : contact.getPhones()){
+								%>
+								<li><strong><%=p.getPhoneKind() %> :</strong> <%= p.getPhoneNumber()  %></li>
+							<%} %>
 						</ul>
 					</td>
 					<td>

@@ -52,7 +52,7 @@ public class NewContactServlet extends HttpServlet {
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 		
-		//JUSTE Un petit test pour ce qu'il y a dans le applicationContext
+		
 		Contact contBean = (Contact)context.getBean("contact");
 		
 		
@@ -71,10 +71,10 @@ public class NewContactServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		String groupName = request.getParameter("groupName0");
 		
-		//Address add = daoAddress.addAddress(city, country, street, zip);
-		PhoneNumber num = new PhoneNumber();//daoPhoneNumber.addPhoneNumber(type, phoneNumber);
 		
-		ContactGroup cg = new ContactGroup();//daoContactGroup.addContactGroup(groupName);
+		PhoneNumber num = new PhoneNumber();
+		
+		ContactGroup cg = new ContactGroup();
 		cg.setGroupName(groupName);
 		Set<ContactGroup> lgroup= new HashSet<ContactGroup>();
 		lgroup.add(cg);

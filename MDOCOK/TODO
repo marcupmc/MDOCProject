@@ -7,7 +7,7 @@ Prioritaire :
 [DONE]- ajouter des amis
 [DONE]- affecter des amis a des groupes, les supprimer ...etc
 [DONE]- Gestion des groupes (creation, suppression, modification)
-- integrer spring
+[DONE]- integrer spring
 - integrer strust
 - Gerer entreprise
 [DONE]- mettre tout les dao dans un package (pour aspectJ)
@@ -15,7 +15,7 @@ Prioritaire :
 [DONE]- pb lors de la suppression d'un telephone
 [DONE]- ATTENTION LORS DE LA SUPPRESSION D'un ami, le supprimer de tout les groupes où il apparait!
 [DONE]- se désinscrire du site.
-- Details des contacts (ajouter tel ...etc)
+[DONE]- Details des contacts (ajouter tel ...etc)
 - Nettoyer les DAO de certaines fonctions inutiles
 
 Non prioritaire : 
