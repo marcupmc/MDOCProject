@@ -11,11 +11,12 @@ Prioritaire :
 - integrer strust
 - Gerer entreprise
 [DONE]- mettre tout les dao dans un package (pour aspectJ)
-[DONE] Refaire Update Du contact en ligne (ok sauf pour tel)
+[DONE]- Refaire Update Du contact en ligne (ok sauf pour tel)
 [DONE]- pb lors de la suppression d'un telephone
 [DONE]- ATTENTION LORS DE LA SUPPRESSION D'un ami, le supprimer de tout les groupes où il apparait!
 [DONE]- se désinscrire du site.
 - Details des contacts (ajouter tel ...etc)
+- Nettoyer les DAO de certaines fonctions inutiles
 
 Non prioritaire : 
 

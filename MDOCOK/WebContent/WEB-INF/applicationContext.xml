@@ -12,6 +12,9 @@
 	<bean id="daoPhoneNumber" class="dao.DAOPhoneNumber"></bean>
 	<bean id="daoAddress" class="dao.DAOAddress"></bean>
 
+	
+
+
 	<!-- SETTERS WAY -->
 	<bean id="contact" class="domain.Contact">
 		<property name="firstName" value="Marc" />
@@ -53,38 +56,49 @@
 	</bean>
 
 	<!-- CONSTUCTOR WAY -->
-	
-<!-- 	<bean id="contact2" class="domain.Contact"> -->
-<!-- 		<constructor-arg type="String"><value>Baptiste</value></constructor-arg> -->
-<!-- 		<constructor-arg type="String"><value>OLIVIER</value></constructor-arg> -->
-<!-- 		<constructor-arg type="String"><value>baptiste@toto.fr</value></constructor-arg> -->
-<!-- 		<constructor-arg><ref bean="group2"/></constructor-arg> -->
-		
-<!-- 		<constructor-arg><ref bean="address2"/></constructor-arg> -->
-<!-- 		<constructor-arg><ref bean="tel2"/></constructor-arg> -->
-		
-<!-- 	</bean> -->
-	
-<!-- 	<bean id="group2" class="domain.ContactGroup"> -->
-<!-- 		<property name="groupName" value="TACONS-2013" /> -->
-<!-- 		<property name="contacts"> -->
-<!-- 			<list> -->
-<!-- 				<ref bean="contact2" /> --> 
-<!-- 			</list> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
 
-<!-- 	<bean id="address2" class="domain.Address"> -->
-<!-- 		<property name="street" value="el 5 de la calle de las patatas" /> -->
-<!-- 		<property name="city" value="Saragossa" /> -->
-<!-- 		<property name="zip" value="7559" /> -->
-<!-- 		<property name="country" value="Spain" /> -->
-<!-- 	</bean> -->
+	<!-- <bean id="contact2" class="domain.Contact"> -->
+	<!-- <constructor-arg type="String"><value>Baptiste</value></constructor-arg> -->
+	<!-- <constructor-arg type="String"><value>OLIVIER</value></constructor-arg> -->
+	<!-- <constructor-arg type="String"><value>baptiste@toto.fr</value></constructor-arg> -->
+	<!-- <constructor-arg><ref bean="group2"/></constructor-arg> -->
 
-<!-- 	<bean id="tel2" class="domain.PhoneNumber"> -->
-<!-- 		<property name="phoneKind" value="Home" /> -->
-<!-- 		<property name="phoneNumber" value="0606" /> -->
- <!-- 		<property name="contact" ref="contact2" /> --> 
-<!-- 	</bean> -->
-	
+	<!-- <constructor-arg><ref bean="address2"/></constructor-arg> -->
+	<!-- <constructor-arg><ref bean="tel2"/></constructor-arg> -->
+
+	<!-- </bean> -->
+
+	<!-- <bean id="group2" class="domain.ContactGroup"> -->
+	<!-- <property name="groupName" value="TACONS-2013" /> -->
+	<!-- <property name="contacts"> -->
+	<!-- <list> -->
+	<!-- <ref bean="contact2" /> -->
+	<!-- </list> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="address2" class="domain.Address"> -->
+	<!-- <property name="street" value="el 5 de la calle de las patatas" /> -->
+	<!-- <property name="city" value="Saragossa" /> -->
+	<!-- <property name="zip" value="7559" /> -->
+	<!-- <property name="country" value="Spain" /> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="tel2" class="domain.PhoneNumber"> -->
+	<!-- <property name="phoneKind" value="Home" /> -->
+	<!-- <property name="phoneNumber" value="0606" /> -->
+	<!-- <property name="contact" ref="contact2" /> -->
+	<!-- </bean> -->
+
+
+	<!-- AOP -->
+<!-- 	<aop:config> -->
+<!-- 		<aop:aspect id="myLoggerBean" ref=" myLogger "> -->
+<!-- 			<aop:before -->
+<!-- 				pointcut="execution(* setFirstName(String)) and args(chaine)" -->
+<!-- 				method="logSetterFirstName" arg-names="chaine" /> -->
+<!-- 		</aop:aspect> -->
+<!-- 	</aop:config> -->
+<!-- 	<bean id="myLogger" class="aop.MyLogger" /> -->
+
 </beans>
