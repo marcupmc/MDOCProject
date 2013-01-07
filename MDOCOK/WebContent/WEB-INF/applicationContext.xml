@@ -27,7 +27,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost/db" />
 		<property name="username" value="root" />
-		<property name="password" value="ADMIN" />
+		<property name="password" value="admin" />
 	</bean>
 
 	<!-- Session Factory -->
@@ -45,6 +45,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
 	</bean>
