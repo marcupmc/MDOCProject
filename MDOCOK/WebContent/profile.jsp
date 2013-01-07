@@ -24,7 +24,17 @@
 
 	<div class="container">
 		<div class="hero-unit">
+			<%
+				if(request.getAttribute("numSiret") == null){
+			%>
 			<h2>My Informations</h2>
+						<%
+				} else {
+			%>
+			<h2>My Enterprise's Informations</h2>
+			<%
+				}
+			%>
 			<p>
 				<a class="btn btn-large btn-primary"
 					href="InitUpdateServlet?id=<%=contact.getId()%>" type="button">Update</a>
@@ -35,8 +45,7 @@
 						<div>
 
 							<img src="<%=contact.getImagePerso()%>" class="img-rounded"><br />
-							<form method="post" action=""
-								enctype="multipart/form-data">
+							<form method="post" action="" enctype="multipart/form-data">
 								<input type="file" name="file" required="required" /><br /> <input
 									type="submit" class="btn btn-info" value="Change Picture" />
 							</form>
@@ -51,7 +60,16 @@
 					</td>
 					<td>
 						<ul class="unstyled">
+							<%
+								
+								if(request.getAttribute("numSiret") != null){
+									Integer numSiret = (Integer) request.getAttribute("numSiret");
+							%>
+							<li><strong>NumSiret :</strong> <%=numSiret%></li>
 
+							<%
+								}
+							%>
 							<li><strong>Firstname :</strong> <%=contact.getFirstName()%></li>
 							<li><strong>Lastname :</strong> <%=contact.getLastName()%></li>
 							<li><strong>Email :</strong> <%=contact.getEmail()%></li>
@@ -64,7 +82,10 @@
 									<%
 										for (PhoneNumber p : contact.getPhones()) {
 									%>
-									<li><strong><%=p.getPhoneKind()%> : </strong><%=p.getPhoneNumber()%><a href="DeletePhoneServlet?id=<%=p.getId() %>" class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></a></li>
+									<li><strong><%=p.getPhoneKind()%> : </strong><%=p.getPhoneNumber()%><a
+										href="DeletePhoneServlet?id=<%=p.getId() %>"
+										class="btn btn-mini btn-danger"><i
+											class="icon-remove icon-white"></i></a></li>
 
 									<%
 										}
@@ -131,7 +152,7 @@
 	<div id="myModal7" class="modal hide fade" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="alert alert-error">
-			<form method="post" action="DeleteAccountServlet" >
+			<form method="post" action="DeleteAccountServlet">
 
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
@@ -141,8 +162,7 @@
 
 				<div class="control-group">
 					<input type="submit" class="btn btn-danger"
-						value="Delete my account" /> 
-						<a class="btn" data-dismiss="modal"
+						value="Delete my account" /> <a class="btn" data-dismiss="modal"
 						aria-hidden="true">Close</a>
 				</div>
 			</form>

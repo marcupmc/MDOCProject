@@ -75,6 +75,7 @@
 	<bean id="phonenumber_default" class="domain.PhoneNumber"></bean>
 	<bean id="address_default" class="domain.Address"></bean>
 	<bean id="contactgroup_default" class="domain.ContactGroup"></bean>
+	<bean id="enterprise_default" class="domain.Enterprise"></bean>
 
 	<!-- SETTERS WAY -->
 	<bean id="contact" class="domain.Contact">

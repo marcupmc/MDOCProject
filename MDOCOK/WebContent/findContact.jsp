@@ -12,6 +12,7 @@
 <body>
 
 	<%@page import="domain.Contact"%>
+	<%@page import="domain.Enterprise"%>
 	<%@page import="java.util.ArrayList"%>
 	<%
 		ArrayList<Contact> lcontact = new ArrayList<Contact>();
@@ -42,6 +43,7 @@
 					<th>Firstname</th>
 					<th>Lastname</th>
 					<th>Email</th>
+					<th>Status</th>
 					<th></th>
 					<th></th>
 					
@@ -49,12 +51,24 @@
 				<% for(int i =0; i<lcontact.size();i++)
 					{
 					Contact c = lcontact.get(i);
+					Boolean isCompany = (c instanceof Enterprise);
 					%>
 				<tr>
 					
 					<td><%= c.getFirstName() %></td>
 					<td><%= c.getLastName() %></td>
 					<td><%= c.getEmail() %></td>
+					<%
+					if(isCompany){
+					%>
+					<td>Enterprise</td>
+					<%
+					} else {
+					%>
+					<td>Person</td>
+					<%
+					}
+					%>
 					<td><a href="DetailsFriendServlet?id=<%= c.getId() %>" class="btn btn-info" type="buttons">Details</a></td>
 					<td><a href="AddFriendServlet?id=<%= c.getId() %>" class="btn btn-primary" type="button">Add to my Contacts</a></td>
 					

@@ -27,6 +27,8 @@ public interface IDAOContact {
 	
 	public ArrayList<Contact> getContactByEmail(String email);
 	
+	public ArrayList<Contact> getContactByRegex(String regex);
+	
 	public ArrayList<Contact> getAllContact();
 	
 	public boolean addFriend(Contact online, Contact friend);

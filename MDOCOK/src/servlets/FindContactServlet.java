@@ -41,12 +41,10 @@ public class FindContactServlet extends HttpServlet {
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		IDAOContact dao = (IDAOContact)context.getBean("daoContact");
 
-		Set<Contact> lcontact = new HashSet<Contact>();
+		List<Contact> lcontact = new ArrayList<Contact>();
 		String t = request.getParameter("type");
 
-		lcontact.addAll(dao.getContactByLastName(request.getParameter("search")));
-		lcontact.addAll( dao.getContactByFirstName(request.getParameter("search")));
-		lcontact.addAll( dao.getContactByEmail(request.getParameter("search")));
+		lcontact.addAll(dao.getContactByRegex(request.getParameter("search")));
 
 		long idOnline = (Long) request.getSession().getAttribute("id");
 		
@@ -66,7 +64,7 @@ public class FindContactServlet extends HttpServlet {
 	 * Enleve les doublons dans la liste et la personne connectée
 	 * @return
 	 */
-	public ArrayList<Contact> enleverOnline(Set<Contact> lc, long idOnline){
+	public ArrayList<Contact> enleverOnline(List<Contact> lc, long idOnline){
 		ArrayList<Contact> result = new ArrayList<Contact>();
 		for(Contact c : lc){
 			if(!(c.getId()== idOnline ))

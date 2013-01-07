@@ -7,11 +7,14 @@ var isEnterprise = true;
 function addEnterprise(){
 	if(isEnterprise){
 		document.getElementById("siret").innerHTML+=
-		"<input type=\"text\" id=\"numsiret\" placeholder=\"Num Siret\">";
+		"<div id=\"entreprise_div\">"+	
+		"<label class=\"control-label\" for=\"numsiret\">Siret</label>"+	
+		"<input type=\"text\" id=\"numsiret\" name=\"numsiret\" placeholder=\"Num Siret\">"+
+		"</div>";
 		isEnterprise=false;
 	}else{
 		
-		var toDele = document.getElementById("numsiret");
+		var toDele = document.getElementById("entreprise_div");
 		var parent = toDele.parentNode;
 		parent.removeChild(toDele);
 		isEnterprise =true;

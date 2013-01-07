@@ -18,6 +18,7 @@ import dao.IDAOContact;
 import dao.IDAOPhoneNumber;
 import domain.Address;
 import domain.Contact;
+import domain.Enterprise;
 import domain.PhoneNumber;
 
 /**
@@ -49,7 +50,6 @@ public class SignInServlet extends HttpServlet {
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 		IDAOPhoneNumber daoPhoneNumber = (IDAOPhoneNumber)context.getBean("daoPhoneNumber");
-		Contact c = (Contact)context.getBean("contact_default");
 		//Address add = (Address)context.getBean("address_default");
 		Address add= new Address();
 		
@@ -65,12 +65,51 @@ public class SignInServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String repassword = request.getParameter("repassword");
 		int nbTel = Integer.parseInt(request.getParameter("nbTel"));
+		
+		String numSiret = request.getParameter("numsiret");
 			 
 		if(!password.equals(repassword)){
 			
 			request.setAttribute("password", true);
 		}else if(daoContact.getContactByEmail(email).size()>0){
 			request.setAttribute("password", true);
+		} else if(numSiret != null){
+			System.out.println("le num de siret est :"+numSiret);
+			add.setCity(city);
+			add.setCountry(country);
+			add.setStreet(street);
+			add.setZip(zip);
+			
+			Enterprise e = (Enterprise)context.getBean("enterprise_default");//TODO le bean n'existe pas
+			
+			e.setAdd(add);
+			e.setFirstName(firstname);
+			e.setLastName(lastname);
+			e.setEmail(email);
+			e.setNumSiret(Integer.parseInt(numSiret));
+
+			try {
+				e.setPassword(CryptoTool.getEncodedPassword(password));
+			} catch (NoSuchAlgorithmException ex) {
+				// TODO Auto-generated catch block
+				ex.printStackTrace();
+			}
+			
+			for(int i = 0; i<nbTel;i++){
+				phoneNumber = request.getParameter("phoneNumber"+i);
+				typePhone = request.getParameter("type"+i);
+				PhoneNumber num = (PhoneNumber)context.getBean("phonenumber_default");
+				num.setPhoneNumber(phoneNumber);
+				num.setPhoneKind(typePhone);
+				num.setContact(e);
+				e.getPhones().add(num);
+			}
+			
+			daoContact.addContact(e);//TODO il n'y a pas de cas pour les entreprises
+			
+			request.setAttribute("signok", true);
+			request.setAttribute(password, false);
+			
 		}
 		else{
 
@@ -79,6 +118,8 @@ public class SignInServlet extends HttpServlet {
 			add.setStreet(street);
 			add.setZip(zip);
 			
+			Contact c = (Contact)context.getBean("contact_default");
+
 			c.setAdd(add);
 			c.setFirstName(firstname);
 			c.setLastName(lastname);

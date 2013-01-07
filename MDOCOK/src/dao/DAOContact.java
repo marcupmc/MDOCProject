@@ -21,6 +21,7 @@ import tools.HibernateUtil;
 import domain.Address;
 import domain.Contact;
 import domain.ContactGroup;
+import domain.Enterprise;
 import domain.Messages;
 import domain.PhoneNumber;
 
@@ -190,7 +191,25 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 	//		}
 
 
+	/**
+	 * Renvoit la liste des contacts correspondant a la regex
+	 * @param regex
+	 * @return
+	 */
+	public ArrayList<Contact> getContactByRegex(String s){
 
+		List<Contact> contacts = new ArrayList<Contact>();
+		String regex = "%"+s+"%";
+		try{
+			contacts = getHibernateTemplate().find("from Contact as c where c.lastName like '"+regex+"'" +
+					 " or c.firstName like '"+regex+"' " +
+					 " or c.email like '"+regex+"'" +
+					 " order by c.lastName");
+		}catch(Exception e){
+			return null;
+		}
+		return new ArrayList<Contact>(contacts);
+	}
 
 	//ok
 	/**
@@ -290,6 +309,7 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 		return c;
 
 	}
+
 
 
 

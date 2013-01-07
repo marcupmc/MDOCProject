@@ -15,20 +15,21 @@ import dao.IDAOContact;
 import dao.IDAOContactGroup;
 import domain.Contact;
 import domain.ContactGroup;
+import domain.Enterprise;
 
 /**
  * Servlet implementation class MyProfileServlet
  */
 public class MyProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MyProfileServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public MyProfileServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,17 +39,23 @@ public class MyProfileServlet extends HttpServlet {
 		ApplicationContext context =  WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		IDAOContact daoContact = (IDAOContact)context.getBean("daoContact");
 		IDAOContactGroup daoContactGroup = (IDAOContactGroup)context.getBean("daoContactGroup");
-		
+
 		long idOnline = Long.parseLong(request.getSession().getAttribute("id").toString());
 		ArrayList<ContactGroup> lgroupes = new ArrayList<ContactGroup>(daoContactGroup.getContactGroupByOwner(idOnline));
 
 		request.setAttribute("liste", lgroupes);
 		request.setAttribute("nbGroup", lgroupes.size());
-		
+
 		Contact c = daoContact.getContact(idOnline);
-		
+
+		if(c instanceof Enterprise){
+			Enterprise e = (Enterprise) c;
+			Integer num = e.getNumSiret();
+			request.setAttribute("numSiret", num);
+		}
 		request.setAttribute("contact", c);
-		
+
+
 		request.getRequestDispatcher("profile.jsp").forward(request, response);
 	}
 
