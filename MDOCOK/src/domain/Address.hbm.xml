@@ -4,6 +4,7 @@
 
 <hibernate-mapping>
     <class name="domain.Address" table="ADDRESS">
+    <cache usage="read-write"/>
         <id name="id" type="int">
             <column name="ID" />
             <generator class="increment" />

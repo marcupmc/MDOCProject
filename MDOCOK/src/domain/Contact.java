@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Contact {
+	
+	private long version;
 
 	private String firstName;
 	private String lastName;
@@ -126,6 +128,14 @@ public class Contact {
 
 	public void setImagePerso(String imagePerso) {
 		this.imagePerso = imagePerso;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 
 

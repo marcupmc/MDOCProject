@@ -128,7 +128,14 @@ public class DAOContactGroup extends HibernateDaoSupport implements IDAOContactG
 	@Override
 	public ArrayList<ContactGroup> getAllContactGroups() {
 		List<ContactGroup> lgroups =  new ArrayList<ContactGroup>();
-		Session session = null;
+		try{
+			lgroups = getHibernateTemplate().findByCriteria(DetachedCriteria.forClass(ContactGroup.class));
+		}catch(Exception e){
+			return null;
+		}
+		return (ArrayList<ContactGroup>) lgroups;
+		
+/*		Session session = null;
 		try{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession(); 
@@ -144,6 +151,8 @@ public class DAOContactGroup extends HibernateDaoSupport implements IDAOContactG
 		}	
 
 		return (ArrayList<ContactGroup>) lgroups;
+		*/
+		
 	}
 
 	@Override

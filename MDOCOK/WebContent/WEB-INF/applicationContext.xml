@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:ehcache="http://www.springframework.org/schema/ehcache"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager">
+			<ref bean="ehcache"></ref>
+		</property>
+	</bean>
 
+	<bean id="ehcache"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation">
+			<value>/WEB-INF/ehcache.xml</value>
+		</property>
+		<property name="shared">
+			<value>true</value>
+		</property>
+	</bean>
+	
 	<!-- Beans DAO -->
 	<bean id="daoContact" class="dao.DAOContact">
-		<property name="sessionFactory" ref="mySessionFactory"/>
+		<property name="sessionFactory" ref="mySessionFactory" />
 	</bean>
 	<bean id="daoContactGroup" class="dao.DAOContactGroup">
-		<property name="sessionFactory" ref="mySessionFactory"/>
+		<property name="sessionFactory" ref="mySessionFactory" />
 	</bean>
 	<bean id="daoPhoneNumber" class="dao.DAOPhoneNumber">
-<!-- 		<property name="sessionFactory" ref="mySessionFactory"/> -->
+		<!-- <property name="sessionFactory" ref="mySessionFactory"/> -->
 	</bean>
 	<bean id="daoAddress" class="dao.DAOAddress">
-<!-- 		<property name="sessionFactory" ref="mySessionFactory"/> -->
+		<!-- <property name="sessionFactory" ref="mySessionFactory"/> -->
 	</bean>
 
 	<!-- Data Source Configuration -->
@@ -46,6 +61,15 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.cache.provider_class">
+					org.hibernate.cache.EhCacheProvider
+				</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.region.factory_class">
+					net.sf.ehcache.hibernate.EhCacheRegionFactory
+				</prop>
 			</props>
 		</property>
 	</bean>
@@ -59,15 +83,16 @@
 	<!-- Transactional strategy -->
 	<tx:advice id="txAdvice">
 		<tx:attributes>
-			<tx:method name="get*" read-only="true" timeout="-1"/>
-			<tx:method name="sav*" propagation="REQUIRED"/>
-			<tx:method name="find*" read-only="true"/>
+			<tx:method name="get*" read-only="true" timeout="-1" />
+			<tx:method name="sav*" propagation="REQUIRED" />
+			<tx:method name="find*" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
-	
-	<!-- 	Application of this strategy -->
+
+	<!-- Application of this strategy -->
 	<aop:config>
-		<aop:advisor pointcut="execution(* dao.*.*(..))" advice-ref="txAdvice"/>
+		<aop:advisor pointcut="execution(* dao.*.*(..))"
+			advice-ref="txAdvice" />
 	</aop:config>
 
 	<!-- Default beans -->

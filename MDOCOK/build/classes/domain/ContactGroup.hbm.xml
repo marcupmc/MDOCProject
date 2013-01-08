@@ -4,6 +4,7 @@
 
 <hibernate-mapping>
 	<class name="domain.ContactGroup" table="CONTACTGROUP">
+	<cache usage="read-write"/>
 		<id name="groupId">
 			<column name="ID_CONTACTGROUP" />
 			<generator class="increment" />

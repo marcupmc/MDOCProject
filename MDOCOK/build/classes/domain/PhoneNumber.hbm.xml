@@ -4,6 +4,7 @@
 
 <hibernate-mapping>
     <class name="domain.PhoneNumber" table="PHONENUMBER">
+    <cache usage="read-write"/>
         <id name="id">
             <column name="ID_PHONENUMBER" />
             <generator class="increment" />

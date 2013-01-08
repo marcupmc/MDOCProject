@@ -202,9 +202,9 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 		String regex = "%"+s+"%";
 		try{
 			contacts = getHibernateTemplate().find("from Contact as c where c.lastName like '"+regex+"'" +
-					 " or c.firstName like '"+regex+"' " +
-					 " or c.email like '"+regex+"'" +
-					 " order by c.lastName");
+					" or c.firstName like '"+regex+"' " +
+					" or c.email like '"+regex+"'" +
+					" order by c.lastName");
 		}catch(Exception e){
 			return null;
 		}
@@ -278,24 +278,32 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 
 	//ok
 	public ArrayList<Contact> getAllContact() {
-		List<Contact> contacts = new ArrayList<Contact>();
-		Session session=null;
-		try{
-			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-			session = sessionFactory.openSession(); 
-			org.hibernate.Transaction tx = session.beginTransaction();
 
-			// Requete HQL
-			Query q =session.createQuery("from Contact" );
-			contacts = q.list();
-			tx.commit();
-			session.close();
-		} 
-		catch(Exception e){
-			System.out.println(e.getMessage());
+		try{
+			return (ArrayList<Contact>)getHibernateTemplate().find("from Contact as c");
+		}catch(Exception e){
+			return null;
 		}
 
-		return new ArrayList<Contact>(contacts);
+
+		//		List<Contact> contacts = new ArrayList<Contact>();
+		//		Session session=null;
+		//		try{
+		//			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		//			session = sessionFactory.openSession(); 
+		//			org.hibernate.Transaction tx = session.beginTransaction();
+		//
+		//			// Requete HQL
+		//			Query q =session.createQuery("from Contact" );
+		//			contacts = q.list();
+		//			tx.commit();
+		//			session.close();
+		//		} 
+		//		catch(Exception e){
+		//			System.out.println(e.getMessage());
+		//		}
+		//
+		//		return new ArrayList<Contact>(contacts);
 	}
 
 

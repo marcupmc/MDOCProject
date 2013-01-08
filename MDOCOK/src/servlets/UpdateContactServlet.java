@@ -46,6 +46,7 @@ public class UpdateContactServlet extends HttpServlet {
 		String country = request.getParameter("country");
 		String zip = request.getParameter("zip");
 		int nbTel = Integer.parseInt(request.getParameter("nbTel"));
+		long version = Long.parseLong(request.getParameter("version"));
 		
 		long idContact = Long.parseLong(request.getParameter("id"));
 		
@@ -57,14 +58,16 @@ public class UpdateContactServlet extends HttpServlet {
 		c.getAdd().setCountry(country);
 		c.getAdd().setStreet(street);
 		c.getAdd().setZip(zip);
+		c.setVersion(version);
 		
 		ArrayList<PhoneNumber> nums = new ArrayList<PhoneNumber>(c.getPhones());
 		for(int i = 0; i <nbTel;i++){
 			nums.get(i).setPhoneNumber(request.getParameter("tel"+i));
 		}
 		
-		daoContact.update(c);
+		boolean res = daoContact.update(c);
 		
+		if(!res) request.setAttribute("error", "update");
 		request.getRequestDispatcher("MyProfileServlet").forward(request, response);
 	}
 

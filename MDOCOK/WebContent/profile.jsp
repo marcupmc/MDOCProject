@@ -20,6 +20,14 @@
 		ArrayList<ContactGroup> lgroup = (ArrayList<ContactGroup>) request
 				.getAttribute("liste");
 	%>
+	<%
+		if(request.getAttribute("error") != null){
+	%>
+	<script type="text/javascript"> alert('Votre demande de modification n\'a pu être prise en compte car une autre modification a été éffectuée.')</script>
+	
+	<%
+		}
+	%>
 	<jsp:include page="menu_gauche.jsp" />
 
 	<div class="container">

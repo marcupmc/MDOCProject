@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -37,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 	}
 
 	/**
@@ -52,14 +53,14 @@ public class LoginServlet extends HttpServlet {
 		String name = null;
 		long id =0;
 		try {
-			 passHash = CryptoTool.getEncodedPassword(password);
+			passHash = CryptoTool.getEncodedPassword(password);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		boolean ok = true;
-		
+
 		ArrayList<Contact> c = daoContact.getContactByEmail(email);
 		System.out.println("taille de la liste c "+c.size());
 		if(c.size()==1){
@@ -75,6 +76,21 @@ public class LoginServlet extends HttpServlet {
 		}else{
 			ok=false;
 		}
+
+//TEST DU CACHE
+//		ArrayList<Contact> cTest;
+//		java.util.Date before, after;
+//		long duration;
+//		for( int i = 0; i< 5; i++)
+//		{
+//			before = new java.util.Date();
+//			cTest = daoContact.getAllContact();
+//			after = new java.util.Date();
+//			duration = after.getTime() - before.getTime();
+//			System.out.println("Duree du chargement "+i+" : "+duration+" ms");
+//		}
+
+//FIN DU TEST
 		
 		//On renvoit vers l'acceuil ou la connexion en fonction de ok
 		if(ok){
@@ -85,7 +101,7 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("failConnexion",true );
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
-			
+
 	}
 
 }
