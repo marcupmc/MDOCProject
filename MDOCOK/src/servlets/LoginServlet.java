@@ -78,18 +78,19 @@ public class LoginServlet extends HttpServlet {
 		}
 
 //TEST DU CACHE
-//		ArrayList<Contact> cTest;
-//		java.util.Date before, after;
-//		long duration;
-//		for( int i = 0; i< 5; i++)
-//		{
-//			before = new java.util.Date();
-//			cTest = daoContact.getAllContact();
-//			after = new java.util.Date();
-//			duration = after.getTime() - before.getTime();
-//			System.out.println("Duree du chargement "+i+" : "+duration+" ms");
-//		}
+		ArrayList<Contact> cTest;
+		java.util.Date before, after;
+		long duration;
+		for( int i = 0; i< 10; i++)
+		{
+			before = new java.util.Date();
+			cTest = daoContact.getAllContact();
+			after = new java.util.Date();
+			duration = after.getTime() - before.getTime();
+			System.out.println("Duree du chargement "+i+" : "+duration+" ms");
+		}
 
+		
 //FIN DU TEST
 		
 		//On renvoit vers l'acceuil ou la connexion en fonction de ok

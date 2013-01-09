@@ -61,7 +61,7 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.cache.provider_class">
 					org.hibernate.cache.EhCacheProvider
 				</prop>
@@ -187,5 +187,14 @@
 		</aop:aspect>
 	</aop:config>
 	<bean id="myLogger" class="domain.MyLogger" />
+	
+ <aop:config>
+ 	<aop:pointcut expression="execution (* getContact(..))" id="statAspect"/>
+ 	<aop:aspect id="secondLogger" ref="sLogger">
+ 		<aop:before pointcut-ref="statAspect" method="beforeLog"/>
+ 		<aop:after pointcut-ref="statAspect" method="afterLog"/>
+ 	</aop:aspect>
+ </aop:config>
+ <bean id="sLogger" class="domain.MyLogger"/>
 
 </beans>

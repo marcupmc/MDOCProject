@@ -121,8 +121,6 @@
 	</div>
 	<jsp:include page="footer.jsp" />
 </body>
-</html>
-
 <script  type="text/javascript">
 function valider ( )
 {
@@ -181,4 +179,7 @@ function valider ( )
 	return true;
     
 }
+
 </script>
+</html>
+
