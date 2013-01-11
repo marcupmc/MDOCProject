@@ -80,8 +80,7 @@ public class SignInServlet extends HttpServlet {
 			add.setStreet(street);
 			add.setZip(zip);
 			
-			Enterprise e = (Enterprise)context.getBean("enterprise_default");//TODO le bean n'existe pas
-			
+			Enterprise e = (Enterprise)context.getBean("enterprise_default");
 			e.setAdd(add);
 			e.setFirstName(firstname);
 			e.setLastName(lastname);
@@ -105,7 +104,7 @@ public class SignInServlet extends HttpServlet {
 				e.getPhones().add(num);
 			}
 			
-			daoContact.addContact(e);//TODO il n'y a pas de cas pour les entreprises
+			daoContact.addContact(e);
 			
 			request.setAttribute("signok", true);
 			request.setAttribute(password, false);
